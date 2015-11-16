@@ -84,49 +84,49 @@ namespace IsaRoGaMX.IO
                   switch(padre.LocalName) {
                      case "Comprobante":
                         cfdi = new Comprobante();
-                        cfdi.atributos = leerAtributos(padre);
+                        cfdi.Atributos = leerAtributos(padre);
                         break;
                      case "Emisor":
                         cfdi.Emisor = new Emisor();
-                        cfdi.Emisor.atributos = leerAtributos(padre);
+                        cfdi.Emisor.Atributos = leerAtributos(padre);
                         break;
                      case "DomicilioFiscal":
                         cfdi.Emisor.DomicilioFiscal = new DomicilioFiscal();
-                        cfdi.Emisor.DomicilioFiscal.atributos = leerAtributos(padre);
+                        cfdi.Emisor.DomicilioFiscal.Atributos = leerAtributos(padre);
                         break;
                      case "ExpedidoEn":
                         cfdi.Emisor.ExpedidoEn = new ExpedidoEn();
-                        cfdi.Emisor.ExpedidoEn.atributos = leerAtributos(padre);
+                        cfdi.Emisor.ExpedidoEn.Atributos = leerAtributos(padre);
                         break;
                      case "RegimenFiscal":
                         cfdi.Emisor.RegimenFiscal = padre.Attributes["Regimen"].Value;
                         break;
                      case "Receptor":
                         cfdi.Receptor = new Receptor();
-                        cfdi.Receptor.atributos = leerAtributos(padre);
+                        cfdi.Receptor.Atributos = leerAtributos(padre);
                         break;
                      case "Domicilio":
                         cfdi.Receptor.Domicilio = new Domicilio();
-                        cfdi.Receptor.Domicilio.atributos = leerAtributos(padre);
+                        cfdi.Receptor.Domicilio.Atributos = leerAtributos(padre);
                         break;
                      case "Conceptos":
                         cfdi.Conceptos = new Conceptos();
                         break;
                      case "Concepto":
                         Concepto concepto = new Concepto();
-                        concepto.atributos = leerAtributos(padre);
+                        concepto.Atributos = leerAtributos(padre);
                         cfdi.Conceptos.Agregar(concepto);
                         break;
                      case "Impuestos":
                         cfdi.Impuestos = new Impuestos();
-                        cfdi.Impuestos.atributos = leerAtributos(padre);
+                        cfdi.Impuestos.Atributos = leerAtributos(padre);
                         break;
                      case "Traslados":
                         cfdi.Impuestos.Traslados = new Traslados();
                         break;
                      case "Traslado":
                         Traslado traslado = new Traslado();
-                        traslado.atributos = leerAtributos(padre);
+                        traslado.Atributos = leerAtributos(padre);
                         cfdi.Impuestos.Traslados.Agregar(traslado);
                         break;
                      case "Retenciones":
@@ -134,7 +134,7 @@ namespace IsaRoGaMX.IO
                         break;
                      case "Retencion":
                         Retencion retencion = new Retencion();
-                        retencion.atributos = leerAtributos(padre);
+                        retencion.Atributos = leerAtributos(padre);
                         cfdi.Impuestos.Retenciones.Agregar(retencion);
                         break;
                      }
@@ -145,7 +145,7 @@ namespace IsaRoGaMX.IO
                   switch(padre.LocalName) {
                         case "TimbreFiscalDigital":
                         timbre = new TimbreFiscalDigital();
-                        timbre.atributos = leerAtributos(padre);
+                        timbre.Atributos = leerAtributos(padre);
                         cfdi.AgregarComplemento(timbre);
                         break;
                   }
@@ -156,26 +156,26 @@ namespace IsaRoGaMX.IO
                   switch(padre.LocalName) {
                         case "Nomina":
                         nomina = new Nomina();
-                        nomina.atributos = leerAtributos(padre);
+                        nomina.Atributos = leerAtributos(padre);
                         break;
                      case "Percepciones":
                         Percepciones percepciones = new Percepciones();
-                        percepciones.atributos = leerAtributos(padre);
+                        percepciones.Atributos = leerAtributos(padre);
                         nomina.Percepciones = new Percepciones();
                         break;
                      case "Percepcion":
                         Percepcion percepcion = new Percepcion();
-                        percepcion.atributos = leerAtributos(padre);
+                        percepcion.Atributos = leerAtributos(padre);
                         nomina.Percepciones.Agregar(percepcion);
                         break;
                      case "Deducciones":
                         Deducciones deducciones = new Deducciones();
-                        deducciones.atributos = leerAtributos(padre);
+                        deducciones.Atributos = leerAtributos(padre);
                         nomina.Deducciones = deducciones;
                         break;
                      case "Deduccion":
                         Deduccion deduccion = new Deduccion();
-                        deduccion.atributos = leerAtributos(padre);
+                        deduccion.Atributos = leerAtributos(padre);
                         nomina.Deducciones.Agregar(deduccion);
                         break;
                      case "Incapacidades":
@@ -183,7 +183,7 @@ namespace IsaRoGaMX.IO
                         break;
                      case "Incapacidad":
                         Incapacidad incapacidad = new Incapacidad();
-                        incapacidad.atributos = leerAtributos(padre);
+                        incapacidad.Atributos = leerAtributos(padre);
                         nomina.Incapacidades.Agregar(incapacidad);
                         break;
                      case "HorasExtras":
@@ -191,7 +191,7 @@ namespace IsaRoGaMX.IO
                         break;
                      case "HorasExtra":
                         HorasExtra horasExtra = new HorasExtra();
-                        horasExtra.atributos = leerAtributos(padre);
+                        horasExtra.Atributos = leerAtributos(padre);
                         nomina.HorasExtras.Agregar(horasExtra);
                         break;
                   }
@@ -203,14 +203,14 @@ namespace IsaRoGaMX.IO
                   switch(padre.LocalName) {
                         case "EstadoDeCuentaCombustible":
                         edoCta = new EstadoDeCuentaCombustible();
-                        edoCta.atributos = leerAtributos(padre);
+                        edoCta.Atributos = leerAtributos(padre);
                         break;
                      case "Conceptos":
                         edoCta.conceptos = new ConceptosEstadoDeCuentaCombustibles();
                         break;
                      case "ConceptoEstadoDeCuentaCombustible":
                         ConceptoEstadoDeCuenta concepto = new ConceptoEstadoDeCuenta();
-                        concepto.atributos = leerAtributos(padre);
+                        concepto.Atributos = leerAtributos(padre);
                         edoCta.Agregar(concepto);
                         break;
                      case "Traslados":
@@ -218,7 +218,7 @@ namespace IsaRoGaMX.IO
                         break;
                      case "Traslado":
                         TrasladoEstadoDeCuentaCombustible traslado = new TrasladoEstadoDeCuentaCombustible();
-                        traslado.atributos = leerAtributos(padre);
+                        traslado.Atributos = leerAtributos(padre);
                         edoCta.conceptos[edoCta.conceptos.Elementos - 1].AgregaTraslado(traslado);
                         break;
                   }
@@ -230,16 +230,16 @@ namespace IsaRoGaMX.IO
                   switch(padre.LocalName) {
                      case "ImpuestosLocales":
                         implocal = new ImpuestosLocales();
-                        implocal.atributos = leerAtributos(padre);
+                        implocal.Atributos = leerAtributos(padre);
                         break;
                      case "RetencionesLocales":
                         RetencionLocal retencion = new RetencionLocal();
-                        retencion.atributos = leerAtributos(padre);
+                        retencion.Atributos = leerAtributos(padre);
                         implocal.AgregarRetencion(retencion);
                         break;
                      case "TrasladosLocales":
                         TrasladoLocal traslado = new TrasladoLocal();
-                        traslado.atributos = leerAtributos(padre);
+                        traslado.Atributos = leerAtributos(padre);
                         implocal.AgregarTraslado(traslado);
                         break;
                   }
@@ -249,14 +249,14 @@ namespace IsaRoGaMX.IO
                // DONATORIAS
                case "donat": {
                   donat = new Donatorias();
-                  donat.atributos = leerAtributos(padre);
+                  donat.Atributos = leerAtributos(padre);
                   cfdi.AgregarComplemento(donat);
                   break;
                }
                // DIVISAS
                case "divisas": {
                   divisas = new Divisas();
-                  divisas.atributos = leerAtributos(padre);
+                  divisas.Atributos = leerAtributos(padre);
                   cfdi.AgregarComplemento(divisas);
                   break;
                }
@@ -265,11 +265,11 @@ namespace IsaRoGaMX.IO
                   switch(padre.LocalName) {
                      case "LeyendasFiscales":
                         leyendas = new LeyendasFiscales();
-                        leyendas.atributos = leerAtributos(padre);
+                        leyendas.Atributos = leerAtributos(padre);
                         break;
                      case "Leyenda":
                         Leyenda leyenda = new Leyenda();
-                        leyenda.atributos = leerAtributos(padre);
+                        leyenda.Atributos = leerAtributos(padre);
                         leyendas.Agregar(leyenda);
                         break;
                   }

@@ -18,15 +18,15 @@ namespace IsaRoGaMX.CFDI
       /// <summary>
       /// Diccionario de atributos del Nodo XML
       /// </summary>
-      internal protected Dictionary<string, string> atributos;
+      protected Dictionary<string, string> atributos;
       /// <summary>
       /// Espacio de nombres al que pertenece el Nodo XML
       /// </summary>
-      internal protected string @namespace = string.Empty;
+      protected string @namespace = string.Empty;
       /// <summary>
       /// Prefijo del espacio de nombres al que pertence el Nodo XML
       /// </summary>
-      internal protected string prefix = string.Empty;
+      protected string prefix = string.Empty;
       
       protected baseObject(string ns, string prfx) {
          atributos = new Dictionary<string, string>();
@@ -56,6 +56,14 @@ namespace IsaRoGaMX.CFDI
          
          // Se retorna el elemento
          return elemento;
+      }
+      
+      /// <summary>
+      /// Devuelve el conjunto de atributos utilizados por el elemento actual
+      /// </summary>
+      public Dictionary<string, string> Atributos {
+         get { return this.atributos; }
+         set { this.atributos = value; }
       }
    }
 }

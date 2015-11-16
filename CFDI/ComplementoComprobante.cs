@@ -760,7 +760,7 @@ namespace IsaRoGaMX.CFDI
             retencion = (XmlElement)documento.CreateNode(XmlNodeType.Element, prefijo, "RetencionesLocales", namespaceURI);
             
             // Se agregan los atributos
-            foreach(KeyValuePair<string, string> atributo in retencionesLocales[i].atributos) {
+            foreach(KeyValuePair<string, string> atributo in retencionesLocales[i].Atributos) {
                   retencion.SetAttribute(atributo.Key, atributo.Value);
             }
             
@@ -775,7 +775,7 @@ namespace IsaRoGaMX.CFDI
             traslado = (XmlElement)documento.CreateNode(XmlNodeType.Element, prefijo, "TrasladosLocales", namespaceURI);
             
             // Se agregan los atributos
-            foreach(KeyValuePair<string, string> atributo in trasladosLocales[i].atributos) {
+            foreach(KeyValuePair<string, string> atributo in trasladosLocales[i].Atributos) {
                   traslado.SetAttribute(atributo.Key, atributo.Value);
             }
             
