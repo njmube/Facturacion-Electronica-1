@@ -27,3 +27,7 @@ Complementos Soportados
 Documentación
 --
 - http://cfdi.isaacrobles.com/
+Un poquito de Ayuda
+--
+Si te ha servido esta librería agradecería mucho que pudieras hacerme una donación que me ayude a mantener el sitio web y a seguir liberando parte de mi trabajo como Open Source.
+[Donativo por PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=28RJATB2U3W7Y)
