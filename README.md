@@ -14,6 +14,16 @@ Agradecimientos
 --
 - Ing. Ruben Rodriguez Olvera
 
+Complementos Soportados para el Nodo Comprobante
+--
+- Divisas
+- Donatorias
+- Estado de Cuenta de Combustible
+- Nómina
+- Impuestos Locales
+- Leyendas Fiscales
+- Timbre Fiscal Digital
+
 Documentación
 --
 - http://cfdi.isaacrobles.com/
