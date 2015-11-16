@@ -14,7 +14,7 @@ Agradecimientos
 --
 - Ing. Ruben Rodriguez Olvera
 
-Complementos Soportados para el Nodo Comprobante
+Complementos Soportados
 --
 - Divisas
 - Donatorias
