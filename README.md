@@ -26,7 +26,7 @@ Complementos Soportados
 
 Documentación
 --
-- http://cfdi.isaacrobles.com/
+- [http://cfdi.isaacrobles.com](http://adf.ly/11625185/documentacin-cfdi)
 
 Un poquito de Ayuda
 --
