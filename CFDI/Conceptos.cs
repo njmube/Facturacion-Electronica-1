@@ -105,9 +105,16 @@ namespace IsaRoGaMX.CFDI
         /// <param name="infoAduanera"></param>
         public void AgregaInformacionAduanera(InformacionAduanera infoAduanera)
         {
-            if (this.infoAduanera == null)
-                this.infoAduanera = new InformacionAduaneraConcepto();
-            this.infoAduanera.AgregaInformacionAduanera(infoAduanera);
+            if (cuentaPredial != null || parte != null || complementos != null)
+            {
+                throw new Exception("Concepto::AgregaInformacionAduanera. No se puede agregar este nodo.");
+            }
+            else
+            {
+                if (this.infoAduanera == null)
+                    this.infoAduanera = new InformacionAduaneraConcepto();
+                this.infoAduanera.AgregaInformacionAduanera(infoAduanera);
+            }
         }
 
         /// <summary>
@@ -141,10 +148,17 @@ namespace IsaRoGaMX.CFDI
         /// <param name="ctaPredial">Cuenta predial a agregar</param>
         public void AgregaCuentaPredial(CuentaPredial ctaPredial)
         {
-            if (ctaPredial != null)
-                cuentaPredial = ctaPredial;
+            if (infoAduanera != null || parte != null || complementos != null)
+            {
+                throw new Exception("Concepto::AgregaCuentaPredial. No se puede agregar este nodo.");
+            }
             else
-                throw new Exception("Concepto::AgregaCuentaPredial. Parametro nulo");
+            {
+                if (ctaPredial != null)
+                    cuentaPredial = ctaPredial;
+                else
+                    throw new Exception("Concepto::AgregaCuentaPredial. Parametro nulo");
+            }
         }
 
         /// <summary>
@@ -161,14 +175,21 @@ namespace IsaRoGaMX.CFDI
         /// <param name="complemento">Complemento a agregar</param>
         public void AgregaComplemento(ComplementoConcepto complemento)
         {
-            if (complemento != null)
+            if (parte != null || infoAduanera != null || cuentaPredial != null)
             {
-                if (complementos == null)
-                    complementos = new List<ComplementoConcepto>();
-                complementos.Add(complemento);
+                throw new Exception("Concepto::AgregarComplemento. No se puede agregar este nodo.");
             }
             else
-                throw new Exception("Concepto::AgregaComplemento. Parametro nulo");
+            {
+                if (complemento != null)
+                {
+                    if (complementos == null)
+                        complementos = new List<ComplementoConcepto>();
+                    complementos.Add(complemento);
+                }
+                else
+                    throw new Exception("Concepto::AgregaComplemento. Parametro nulo");
+            }
         }
 
         /// <summary>
@@ -186,12 +207,16 @@ namespace IsaRoGaMX.CFDI
         public void AgregaParte(Parte parte)
         {
             if (infoAduanera != null && cuentaPredial != null && complementos != null)
+            {
+                throw new Exception("Concepto::AgregaParte. No se puede agregar la parte");
+            }
+            else
+            {
                 if (parte != null)
                     this.parte = parte;
                 else
                     throw new Exception("Concepto::AgregaParte. Parametro nulo");
-            else
-                throw new Exception("Concepto::AgregaParte. No se puede agregar la parte");
+            }
         }
 
         /// <summary>
