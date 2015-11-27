@@ -14,7 +14,7 @@ Agradecimientos
 --
 - Ing. Ruben Rodriguez Olvera
 
-Complementos Soportados
+Complementos para Comprobante
 --
 - Divisas
 - Donatorias
@@ -23,6 +23,10 @@ Complementos Soportados
 - Impuestos Locales
 - Leyendas Fiscales
 - Timbre Fiscal Digital
+
+Complementos para Conceptos
+--
+- Instituciones Educativas
 
 Documentación
 --
