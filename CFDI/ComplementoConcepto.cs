@@ -3,22 +3,24 @@
  * Autor: IsaRoGaMX
  * Fecha: 16/09/2015
  * Hora: 01:48 a.m.
- * 
+ *
  */
+
 using System;
 
 namespace IsaRoGaMX.CFDI
 {
-   public abstract class ComplementoConcepto
-        : baseObject
-   {
+    public abstract class ComplementoConcepto
+         : baseObject
+    {
         protected ComplementoConcepto(string prefijo, string nspace)
             : base(nspace, prefijo)
         { }
-   }
+    }
 
     public class InstEducativas
-        : ComplementoConcepto {
+        : ComplementoConcepto
+    {
         public InstEducativas()
             : base("iedu", "http://www.sat.gob.mx/iedu")
         {

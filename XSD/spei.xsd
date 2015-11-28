@@ -23,8 +23,8 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:string">
-												<xs:minLength value="1"/>
-												<xs:maxLength value="40"/>
+												<xs:minLength value="1" />
+												<xs:maxLength value="40" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -34,7 +34,7 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:string">
-												<xs:maxLength value="40"/>
+												<xs:maxLength value="40" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -44,7 +44,7 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:decimal">
-												<xs:totalDigits value="2"/>
+												<xs:totalDigits value="2" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -54,7 +54,7 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:decimal">
-												<xs:totalDigits value="20"/>
+												<xs:totalDigits value="20" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -76,8 +76,8 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:string">
-												<xs:minLength value="1"/>
-												<xs:maxLength value="40"/>
+												<xs:minLength value="1" />
+												<xs:maxLength value="40" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -87,7 +87,7 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:string">
-												<xs:maxLength value="40"/>
+												<xs:maxLength value="40" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -97,7 +97,7 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:decimal">
-												<xs:totalDigits value="2"/>
+												<xs:totalDigits value="2" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -107,7 +107,7 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:decimal">
-												<xs:totalDigits value="20"/>
+												<xs:totalDigits value="20" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -122,7 +122,7 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:string">
-												<xs:maxLength value="40"/>
+												<xs:maxLength value="40" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -132,8 +132,8 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:decimal">
-												<xs:fractionDigits value="2"/>
-												<xs:totalDigits value="19"/>
+												<xs:fractionDigits value="2" />
+												<xs:totalDigits value="19" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -143,9 +143,9 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:decimal">
-												<xs:minInclusive value="1"/>
-												<xs:totalDigits value="19"/>
-												<xs:fractionDigits value="2"/>
+												<xs:minInclusive value="1" />
+												<xs:totalDigits value="19" />
+												<xs:fractionDigits value="2" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -158,9 +158,9 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:date">
-									<xs:maxInclusive value="9999-12-31"/>
-									<xs:minInclusive value="0001-01-01"/>
-									<xs:pattern value="((000[1-9])|(00[1-9][0-9])|(0[1-9][0-9]{2})|([1-9][0-9]{3}))-((0[1-9])|(1[012]))-((0[1-9])|([12][0-9])|(3[01]))"/>
+									<xs:maxInclusive value="9999-12-31" />
+									<xs:minInclusive value="0001-01-01" />
+									<xs:pattern value="((000[1-9])|(00[1-9][0-9])|(0[1-9][0-9]{2})|([1-9][0-9]{3}))-((0[1-9])|(1[012]))-((0[1-9])|([12][0-9])|(3[01]))" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -170,7 +170,7 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:time">
-									<xs:pattern value="(([01][0-9])|(2[0-3]))(:[0-5][0-9]){2}(\.[0-9]+)?"/>
+									<xs:pattern value="(([01][0-9])|(2[0-3]))(:[0-5][0-9]){2}(\.[0-9]+)?" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -180,7 +180,7 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:integer">
-									<xs:totalDigits value="5"/>
+									<xs:totalDigits value="5" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -190,7 +190,7 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:whiteSpace value="collapse"/>
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -200,8 +200,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:maxLength value="20"/>
-									<xs:whiteSpace value="collapse"/>
+									<xs:maxLength value="20" />
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -211,7 +211,7 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:maxLength value="841"/>
+									<xs:maxLength value="841" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -225,9 +225,9 @@
 			<xs:documentation>Tipo definido para la expresión de RFC's de contribuyentes. Cabe hacer la mención que debido a las reglas definidas por el estándar XML en el caso de que un RFC dado incluya un carácter ampersand, dicho carácter deberá ser expresado mediante la secuencia de escape especificado como parte del estándar. En la definición del tipo se expresa una longitud mínima y máxima, sin embargo la longitud puede ser redefinida como una extensión según se determina el uso particular</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:minLength value="2"/>
-			<xs:maxLength value="18"/>
-			<xs:whiteSpace value="collapse"/>
+			<xs:minLength value="2" />
+			<xs:maxLength value="18" />
+			<xs:whiteSpace value="collapse" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

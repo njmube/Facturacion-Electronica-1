@@ -22,7 +22,7 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:decimal">
-									<xs:fractionDigits value="2"/>
+									<xs:fractionDigits value="2" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -32,8 +32,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:decimal">
-									<xs:fractionDigits value="2"/>
-									<xs:whiteSpace value="collapse"/>
+									<xs:fractionDigits value="2" />
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -55,7 +55,7 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:decimal">
-									<xs:fractionDigits value="2"/>
+									<xs:fractionDigits value="2" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -65,8 +65,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:decimal">
-									<xs:fractionDigits value="2"/>
-									<xs:whiteSpace value="collapse"/>
+									<xs:fractionDigits value="2" />
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -84,7 +84,7 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:decimal">
-						<xs:fractionDigits value="2"/>
+						<xs:fractionDigits value="2" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
@@ -94,7 +94,7 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:decimal">
-						<xs:fractionDigits value="2"/>
+						<xs:fractionDigits value="2" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>

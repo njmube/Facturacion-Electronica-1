@@ -16,8 +16,8 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:enumeration value="compra"/>
-						<xs:enumeration value="venta"/>
+						<xs:enumeration value="compra" />
+						<xs:enumeration value="venta" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>

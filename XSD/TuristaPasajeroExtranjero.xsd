@@ -17,9 +17,9 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:enumeration value="Aérea"/>
-									<xs:enumeration value="Marítima"/>
-									<xs:enumeration value="Terrestre"/>
+									<xs:enumeration value="Aérea" />
+									<xs:enumeration value="Marítima" />
+									<xs:enumeration value="Terrestre" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -29,8 +29,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:minLength value="1"/>
-									<xs:whiteSpace value="collapse"/>
+									<xs:minLength value="1" />
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -40,8 +40,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:minLength value="1"/>
-									<xs:whiteSpace value="collapse"/>
+									<xs:minLength value="1" />
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -51,8 +51,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:minLength value="1"/>
-									<xs:whiteSpace value="collapse"/>
+									<xs:minLength value="1" />
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -62,7 +62,7 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:whiteSpace value="collapse"/>
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -85,7 +85,7 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:dateTime">
-						<xs:whiteSpace value="collapse"/>
+						<xs:whiteSpace value="collapse" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
@@ -95,8 +95,8 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:enumeration value="Arribo"/>
-						<xs:enumeration value="Salida"/>
+						<xs:enumeration value="Arribo" />
+						<xs:enumeration value="Salida" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>

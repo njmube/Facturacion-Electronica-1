@@ -19,14 +19,14 @@
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:NMTOKEN">
-										<xs:enumeration value="INVOICE"/>
-										<xs:enumeration value="DEBIT_NOTE"/>
-										<xs:enumeration value="CREDIT_NOTE"/>
-										<xs:enumeration value="LEASE_RECEIPT"/>
-										<xs:enumeration value="HONORARY_RECEIPT"/>
-										<xs:enumeration value="PARTIAL_INVOICE"/>
-										<xs:enumeration value="TRANSPORT_DOCUMENT"/>
-										<xs:enumeration value="AUTO_INVOICE"/>
+										<xs:enumeration value="INVOICE" />
+										<xs:enumeration value="DEBIT_NOTE" />
+										<xs:enumeration value="CREDIT_NOTE" />
+										<xs:enumeration value="LEASE_RECEIPT" />
+										<xs:enumeration value="HONORARY_RECEIPT" />
+										<xs:enumeration value="PARTIAL_INVOICE" />
+										<xs:enumeration value="TRANSPORT_DOCUMENT" />
+										<xs:enumeration value="AUTO_INVOICE" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -45,8 +45,8 @@
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:string">
-										<xs:minLength value="1"/>
-										<xs:maxLength value="255"/>
+										<xs:minLength value="1" />
+										<xs:maxLength value="255" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -57,12 +57,12 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:NMTOKEN">
-									<xs:maxLength value="3"/>
-									<xs:minLength value="1"/>
-									<xs:enumeration value="AAB"/>
-									<xs:enumeration value="DUT"/>
-									<xs:enumeration value="PUR"/>
-									<xs:enumeration value="ZZZ"/>
+									<xs:maxLength value="3" />
+									<xs:minLength value="1" />
+									<xs:enumeration value="AAB" />
+									<xs:enumeration value="DUT" />
+									<xs:enumeration value="PUR" />
+									<xs:enumeration value="ZZZ" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -83,12 +83,12 @@
 										<xs:extension base="xs:string">
 											<xs:attribute name="type" use="required" fixed="ON">
 												<xs:annotation>
-													<xs:appinfo source="ON"/>
+													<xs:appinfo source="ON" />
 													<xs:documentation>Atributo para especificar el codigo para identificar la orden de compra</xs:documentation>
 												</xs:annotation>
 												<xs:simpleType>
 													<xs:restriction base="xs:NMTOKEN">
-														<xs:enumeration value="ON"/>
+														<xs:enumeration value="ON" />
 													</xs:restriction>
 												</xs:simpleType>
 											</xs:attribute>
@@ -123,14 +123,14 @@
 												</xs:annotation>
 												<xs:simpleType>
 													<xs:restriction base="xs:NMTOKEN">
-														<xs:enumeration value="AAE"/>
-														<xs:enumeration value="CK"/>
-														<xs:enumeration value="ACE"/>
-														<xs:enumeration value="ATZ"/>
-														<xs:enumeration value="DQ"/>
-														<xs:enumeration value="IV"/>
-														<xs:enumeration value="ON"/>
-														<xs:enumeration value="AWR"/>
+														<xs:enumeration value="AAE" />
+														<xs:enumeration value="CK" />
+														<xs:enumeration value="ACE" />
+														<xs:enumeration value="ATZ" />
+														<xs:enumeration value="DQ" />
+														<xs:enumeration value="IV" />
+														<xs:enumeration value="ON" />
+														<xs:enumeration value="AWR" />
 													</xs:restriction>
 												</xs:simpleType>
 											</xs:attribute>
@@ -153,8 +153,8 @@
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:string">
-										<xs:minLength value="1"/>
-										<xs:maxLength value="35"/>
+										<xs:minLength value="1" />
+										<xs:maxLength value="35" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -178,7 +178,7 @@
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:string">
-										<xs:length value="13"/>
+										<xs:length value="13" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -200,8 +200,8 @@
 														</xs:annotation>
 														<xs:simpleType>
 															<xs:restriction base="xs:string">
-																<xs:minLength value="1"/>
-																<xs:maxLength value="35"/>
+																<xs:minLength value="1" />
+																<xs:maxLength value="35" />
 															</xs:restriction>
 														</xs:simpleType>
 													</xs:element>
@@ -226,7 +226,7 @@
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:string">
-										<xs:length value="13"/>
+										<xs:length value="13" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -243,10 +243,10 @@
 												</xs:annotation>
 												<xs:simpleType>
 													<xs:restriction base="xs:NMTOKEN">
-														<xs:minLength value="1"/>
-														<xs:maxLength value="40"/>
-														<xs:enumeration value="SELLER_ASSIGNED_IDENTIFIER_FOR_A_PARTY"/>
-														<xs:enumeration value="IEPS_REFERENCE"/>
+														<xs:minLength value="1" />
+														<xs:maxLength value="40" />
+														<xs:enumeration value="SELLER_ASSIGNED_IDENTIFIER_FOR_A_PARTY" />
+														<xs:enumeration value="IEPS_REFERENCE" />
 													</xs:restriction>
 												</xs:simpleType>
 											</xs:attribute>
@@ -269,7 +269,7 @@
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:string">
-										<xs:length value="13"/>
+										<xs:length value="13" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -285,8 +285,8 @@
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="35"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="35" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -296,8 +296,8 @@
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="35"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="35" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -307,8 +307,8 @@
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="35"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="35" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -318,8 +318,8 @@
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="9"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="9" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -341,7 +341,7 @@
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:string">
-										<xs:length value="13"/>
+										<xs:length value="13" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -358,9 +358,9 @@
 												</xs:annotation>
 												<xs:simpleType>
 													<xs:restriction base="xs:NMTOKEN">
-														<xs:length value="2"/>
-														<xs:enumeration value="VA"/>
-														<xs:enumeration value="IA"/>
+														<xs:length value="2" />
+														<xs:enumeration value="VA" />
+														<xs:enumeration value="IA" />
 													</xs:restriction>
 												</xs:simpleType>
 											</xs:attribute>
@@ -377,8 +377,8 @@
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="35"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="35" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -388,8 +388,8 @@
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="35"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="35" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -399,8 +399,8 @@
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="35"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="35" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -410,8 +410,8 @@
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="9"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="9" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -433,7 +433,7 @@
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:string">
-										<xs:length value="13"/>
+										<xs:length value="13" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -452,11 +452,11 @@
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:NMTOKEN">
-										<xs:maxLength value="16"/>
-										<xs:minLength value="1"/>
-										<xs:enumeration value="BILLING_CURRENCY"/>
-										<xs:enumeration value="PRICE_CURRENCY"/>
-										<xs:enumeration value="PAYMENT_CURRENCY"/>
+										<xs:maxLength value="16" />
+										<xs:minLength value="1" />
+										<xs:enumeration value="BILLING_CURRENCY" />
+										<xs:enumeration value="PRICE_CURRENCY" />
+										<xs:enumeration value="PAYMENT_CURRENCY" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -474,10 +474,10 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:NMTOKEN">
-									<xs:length value="3"/>
-									<xs:enumeration value="MXN"/>
-									<xs:enumeration value="XEU"/>
-									<xs:enumeration value="USD"/>
+									<xs:length value="3" />
+									<xs:enumeration value="MXN" />
+									<xs:enumeration value="XEU" />
+									<xs:enumeration value="USD" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -513,8 +513,8 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 																	</xs:annotation>
 																	<xs:simpleType>
 																		<xs:restriction base="xs:string">
-																			<xs:minLength value="1"/>
-																			<xs:maxLength value="5"/>
+																			<xs:minLength value="1" />
+																			<xs:maxLength value="5" />
 																		</xs:restriction>
 																	</xs:simpleType>
 																</xs:element>
@@ -525,9 +525,9 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 																</xs:annotation>
 																<xs:simpleType>
 																	<xs:restriction base="xs:NMTOKEN">
-																		<xs:minLength value="1"/>
-																		<xs:maxLength value="6"/>
-																		<xs:enumeration value="DAYS"/>
+																		<xs:minLength value="1" />
+																		<xs:maxLength value="6" />
+																		<xs:enumeration value="DAYS" />
 																	</xs:restriction>
 																</xs:simpleType>
 															</xs:attribute>
@@ -543,11 +543,11 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:NMTOKEN">
-												<xs:maxLength value="22"/>
-												<xs:minLength value="1"/>
-												<xs:enumeration value="BASIC_NET"/>
-												<xs:enumeration value="END_OF_MONTH"/>
-												<xs:enumeration value="BASIC_DISCOUNT_OFFERED"/>
+												<xs:maxLength value="22" />
+												<xs:minLength value="1" />
+												<xs:enumeration value="BASIC_NET" />
+												<xs:enumeration value="END_OF_MONTH" />
+												<xs:enumeration value="BASIC_DISCOUNT_OFFERED" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -565,8 +565,8 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="5"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="5" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -577,10 +577,10 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:NMTOKEN">
-												<xs:maxLength value="28"/>
-												<xs:minLength value="1"/>
-												<xs:enumeration value="ALLOWANCE_BY_PAYMENT_ON_TIME"/>
-												<xs:enumeration value="SANCTION"/>
+												<xs:maxLength value="28" />
+												<xs:minLength value="1" />
+												<xs:enumeration value="ALLOWANCE_BY_PAYMENT_ON_TIME" />
+												<xs:enumeration value="SANCTION" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -593,10 +593,10 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:NMTOKEN">
-									<xs:maxLength value="15"/>
-									<xs:minLength value="1"/>
-									<xs:enumeration value="DATE_OF_INVOICE"/>
-									<xs:enumeration value="EFFECTIVE_DATE"/>
+									<xs:maxLength value="15" />
+									<xs:minLength value="1" />
+									<xs:enumeration value="DATE_OF_INVOICE" />
+									<xs:enumeration value="EFFECTIVE_DATE" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -606,9 +606,9 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:NMTOKEN">
-									<xs:minLength value="1"/>
-									<xs:maxLength value="15"/>
-									<xs:enumeration value="REFERENCE_AFTER"/>
+									<xs:minLength value="1" />
+									<xs:maxLength value="15" />
+									<xs:enumeration value="REFERENCE_AFTER" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -618,7 +618,7 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 					<xs:annotation>
 						<xs:documentation>Nodo opcional que especifica la información pertinente para el embarque de la mercancía.</xs:documentation>
 					</xs:annotation>
-					<xs:complexType/>
+					<xs:complexType />
 				</xs:element>
 				<xs:element name="allowanceCharge" minOccurs="0" maxOccurs="99">
 					<xs:annotation>
@@ -632,39 +632,39 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:NMTOKEN">
-										<xs:minLength value="1"/>
-										<xs:maxLength value="3"/>
-										<xs:enumeration value="AA"/>
-										<xs:enumeration value="AJ"/>
-										<xs:enumeration value="ADO"/>
-										<xs:enumeration value="ADT"/>
-										<xs:enumeration value="ADS"/>
-										<xs:enumeration value="ABZ"/>
-										<xs:enumeration value="DA"/>
-										<xs:enumeration value="EAA"/>
-										<xs:enumeration value="EAB"/>
-										<xs:enumeration value="PI"/>
-										<xs:enumeration value="TAE"/>
-										<xs:enumeration value="SAB"/>
-										<xs:enumeration value="RAA"/>
-										<xs:enumeration value="PAD"/>
-										<xs:enumeration value="FG"/>
-										<xs:enumeration value="FA"/>
-										<xs:enumeration value="TD"/>
-										<xs:enumeration value="TS"/>
-										<xs:enumeration value="TX"/>
-										<xs:enumeration value="TZ"/>
-										<xs:enumeration value="ZZZ"/>
-										<xs:enumeration value="VAB"/>
-										<xs:enumeration value="UM"/>
-										<xs:enumeration value="DI"/>
-										<xs:enumeration value="CAC"/>
-										<xs:enumeration value="COD"/>
-										<xs:enumeration value="EAB"/>
-										<xs:enumeration value="FC"/>
-										<xs:enumeration value="FI"/>
-										<xs:enumeration value="HD"/>
-										<xs:enumeration value="QD"/>
+										<xs:minLength value="1" />
+										<xs:maxLength value="3" />
+										<xs:enumeration value="AA" />
+										<xs:enumeration value="AJ" />
+										<xs:enumeration value="ADO" />
+										<xs:enumeration value="ADT" />
+										<xs:enumeration value="ADS" />
+										<xs:enumeration value="ABZ" />
+										<xs:enumeration value="DA" />
+										<xs:enumeration value="EAA" />
+										<xs:enumeration value="EAB" />
+										<xs:enumeration value="PI" />
+										<xs:enumeration value="TAE" />
+										<xs:enumeration value="SAB" />
+										<xs:enumeration value="RAA" />
+										<xs:enumeration value="PAD" />
+										<xs:enumeration value="FG" />
+										<xs:enumeration value="FA" />
+										<xs:enumeration value="TD" />
+										<xs:enumeration value="TS" />
+										<xs:enumeration value="TX" />
+										<xs:enumeration value="TZ" />
+										<xs:enumeration value="ZZZ" />
+										<xs:enumeration value="VAB" />
+										<xs:enumeration value="UM" />
+										<xs:enumeration value="DI" />
+										<xs:enumeration value="CAC" />
+										<xs:enumeration value="COD" />
+										<xs:enumeration value="EAB" />
+										<xs:enumeration value="FC" />
+										<xs:enumeration value="FI" />
+										<xs:enumeration value="HD" />
+										<xs:enumeration value="QD" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -692,8 +692,8 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 													</xs:annotation>
 													<xs:simpleType>
 														<xs:restriction base="xs:NMTOKEN">
-															<xs:length value="13"/>
-															<xs:enumeration value="INVOICE_VALUE"/>
+															<xs:length value="13" />
+															<xs:enumeration value="INVOICE_VALUE" />
 														</xs:restriction>
 													</xs:simpleType>
 												</xs:attribute>
@@ -709,10 +709,10 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:NMTOKEN">
-									<xs:minLength value="1"/>
-									<xs:maxLength value="16"/>
-									<xs:enumeration value="ALLOWANCE_GLOBAL"/>
-									<xs:enumeration value="CHARGE_GLOBAL"/>
+									<xs:minLength value="1" />
+									<xs:maxLength value="16" />
+									<xs:enumeration value="ALLOWANCE_GLOBAL" />
+									<xs:enumeration value="CHARGE_GLOBAL" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -722,10 +722,10 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:NMTOKEN">
-									<xs:minLength value="1"/>
-									<xs:maxLength value="11"/>
-									<xs:enumeration value="BILL_BACK"/>
-									<xs:enumeration value="OFF_INVOICE"/>
+									<xs:minLength value="1" />
+									<xs:maxLength value="11" />
+									<xs:enumeration value="BILL_BACK" />
+									<xs:enumeration value="OFF_INVOICE" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -735,8 +735,8 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:minLength value="1"/>
-									<xs:maxLength value="15"/>
+									<xs:minLength value="1" />
+									<xs:maxLength value="15" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -760,8 +760,8 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="14"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="14" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -781,12 +781,12 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 												</xs:annotation>
 												<xs:simpleType>
 													<xs:restriction base="xs:NMTOKEN">
-														<xs:minLength value="1"/>
-														<xs:maxLength value="35"/>
-														<xs:enumeration value="BUYER_ASSIGNED"/>
-														<xs:enumeration value="SUPPLIER_ASSIGNED"/>
-														<xs:enumeration value="SERIAL_NUMBER"/>
-														<xs:enumeration value="GLOBAL_TRADE_ITEM_IDENTIFICATION"/>
+														<xs:minLength value="1" />
+														<xs:maxLength value="35" />
+														<xs:enumeration value="BUYER_ASSIGNED" />
+														<xs:enumeration value="SUPPLIER_ASSIGNED" />
+														<xs:enumeration value="SERIAL_NUMBER" />
+														<xs:enumeration value="GLOBAL_TRADE_ITEM_IDENTIFICATION" />
 													</xs:restriction>
 												</xs:simpleType>
 											</xs:attribute>
@@ -806,8 +806,8 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="35"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="35" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -818,9 +818,9 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:NMTOKEN">
-												<xs:length value="2"/>
-												<xs:enumeration value="ES"/>
-												<xs:enumeration value="EN"/>
+												<xs:length value="2" />
+												<xs:enumeration value="ES" />
+												<xs:enumeration value="EN" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -855,10 +855,10 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 												</xs:annotation>
 												<xs:simpleType>
 													<xs:restriction base="xs:NMTOKEN">
-														<xs:minLength value="1"/>
-														<xs:maxLength value="18"/>
-														<xs:enumeration value="NUM_CONSUMER_UNITS"/>
-														<xs:enumeration value="FREE_GOODS"/>
+														<xs:minLength value="1" />
+														<xs:maxLength value="18" />
+														<xs:enumeration value="NUM_CONSUMER_UNITS" />
+														<xs:enumeration value="FREE_GOODS" />
 													</xs:restriction>
 												</xs:simpleType>
 											</xs:attribute>
@@ -913,8 +913,8 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 															</xs:annotation>
 															<xs:simpleType>
 																<xs:restriction base="xs:NMTOKEN">
-																	<xs:length value="2"/>
-																	<xs:enumeration value="ON"/>
+																	<xs:length value="2" />
+																	<xs:enumeration value="ON" />
 																</xs:restriction>
 															</xs:simpleType>
 														</xs:attribute>
@@ -937,7 +937,7 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:length value="13"/>
+													<xs:length value="13" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -954,8 +954,8 @@ Divisa de Referencia multiplicada por la Tasa =  Divisa Objetivo
 															</xs:annotation>
 															<xs:simpleType>
 																<xs:restriction base="xs:NMTOKEN">
-																	<xs:length value="2"/>
-																	<xs:enumeration value="TN"/>
+																	<xs:length value="2" />
+																	<xs:enumeration value="TN" />
 																</xs:restriction>
 															</xs:simpleType>
 														</xs:attribute>
@@ -982,8 +982,8 @@ YYYYMMDD
 														</xs:annotation>
 														<xs:simpleType>
 															<xs:restriction base="xs:string">
-																<xs:minLength value="1"/>
-																<xs:maxLength value="35"/>
+																<xs:minLength value="1" />
+																<xs:maxLength value="35" />
 															</xs:restriction>
 														</xs:simpleType>
 													</xs:element>
@@ -1012,10 +1012,10 @@ YYYYMMDD
 															</xs:annotation>
 															<xs:simpleType>
 																<xs:restriction base="xs:NMTOKEN">
-																	<xs:minLength value="1"/>
-																	<xs:maxLength value="3"/>
-																	<xs:enumeration value="BJ"/>
-																	<xs:enumeration value="SRV"/>
+																	<xs:minLength value="1" />
+																	<xs:maxLength value="3" />
+																	<xs:enumeration value="BJ" />
+																	<xs:enumeration value="SRV" />
 																</xs:restriction>
 															</xs:simpleType>
 														</xs:attribute>
@@ -1038,8 +1038,8 @@ YYYYMMDD
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="15"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="15" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -1056,13 +1056,13 @@ YYYYMMDD
 															</xs:annotation>
 															<xs:simpleType>
 																<xs:restriction base="xs:NMTOKEN">
-																	<xs:maxLength value="35"/>
-																	<xs:minLength value="1"/>
-																	<xs:enumeration value="EXCHANGE_PALLETS"/>
-																	<xs:enumeration value="RETURN_PALLETS"/>
-																	<xs:enumeration value="PALLET_80x100"/>
-																	<xs:enumeration value="CASE"/>
-																	<xs:enumeration value="BOX"/>
+																	<xs:maxLength value="35" />
+																	<xs:minLength value="1" />
+																	<xs:enumeration value="EXCHANGE_PALLETS" />
+																	<xs:enumeration value="RETURN_PALLETS" />
+																	<xs:enumeration value="PALLET_80x100" />
+																	<xs:enumeration value="CASE" />
+																	<xs:enumeration value="BOX" />
 																</xs:restriction>
 															</xs:simpleType>
 														</xs:attribute>
@@ -1082,10 +1082,10 @@ YYYYMMDD
 														</xs:annotation>
 														<xs:simpleType>
 															<xs:restriction base="xs:NMTOKEN">
-																<xs:maxLength value="17"/>
-																<xs:minLength value="1"/>
-																<xs:enumeration value="PREPAID_BY_SELLER"/>
-																<xs:enumeration value="PAID_BY_BUYER"/>
+																<xs:maxLength value="17" />
+																<xs:minLength value="1" />
+																<xs:enumeration value="PREPAID_BY_SELLER" />
+																<xs:enumeration value="PAID_BY_BUYER" />
 															</xs:restriction>
 														</xs:simpleType>
 													</xs:element>
@@ -1132,37 +1132,37 @@ YYYYMMDD
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:NMTOKEN">
-													<xs:maxLength value="3"/>
-													<xs:minLength value="1"/>
-													<xs:enumeration value="AA"/>
-													<xs:enumeration value="ADS"/>
-													<xs:enumeration value="ADO"/>
-													<xs:enumeration value="ABZ"/>
-													<xs:enumeration value="DA"/>
-													<xs:enumeration value="EAA"/>
-													<xs:enumeration value="PI"/>
-													<xs:enumeration value="TAE"/>
-													<xs:enumeration value="SAB"/>
-													<xs:enumeration value="RAA"/>
-													<xs:enumeration value="PAD"/>
-													<xs:enumeration value="FG"/>
-													<xs:enumeration value="FA"/>
-													<xs:enumeration value="TD"/>
-													<xs:enumeration value="TS"/>
-													<xs:enumeration value="TX"/>
-													<xs:enumeration value="ZZZ"/>
-													<xs:enumeration value="VAB"/>
-													<xs:enumeration value="UM"/>
-													<xs:enumeration value="DI"/>
-													<xs:enumeration value="ADT"/>
-													<xs:enumeration value="AJ"/>
-													<xs:enumeration value="CAC"/>
-													<xs:enumeration value="COD"/>
-													<xs:enumeration value="EAB"/>
-													<xs:enumeration value="FC"/>
-													<xs:enumeration value="FI"/>
-													<xs:enumeration value="HD"/>
-													<xs:enumeration value="QD"/>
+													<xs:maxLength value="3" />
+													<xs:minLength value="1" />
+													<xs:enumeration value="AA" />
+													<xs:enumeration value="ADS" />
+													<xs:enumeration value="ADO" />
+													<xs:enumeration value="ABZ" />
+													<xs:enumeration value="DA" />
+													<xs:enumeration value="EAA" />
+													<xs:enumeration value="PI" />
+													<xs:enumeration value="TAE" />
+													<xs:enumeration value="SAB" />
+													<xs:enumeration value="RAA" />
+													<xs:enumeration value="PAD" />
+													<xs:enumeration value="FG" />
+													<xs:enumeration value="FA" />
+													<xs:enumeration value="TD" />
+													<xs:enumeration value="TS" />
+													<xs:enumeration value="TX" />
+													<xs:enumeration value="ZZZ" />
+													<xs:enumeration value="VAB" />
+													<xs:enumeration value="UM" />
+													<xs:enumeration value="DI" />
+													<xs:enumeration value="ADT" />
+													<xs:enumeration value="AJ" />
+													<xs:enumeration value="CAC" />
+													<xs:enumeration value="COD" />
+													<xs:enumeration value="EAB" />
+													<xs:enumeration value="FC" />
+													<xs:enumeration value="FI" />
+													<xs:enumeration value="HD" />
+													<xs:enumeration value="QD" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -1178,8 +1178,8 @@ YYYYMMDD
 														</xs:annotation>
 														<xs:simpleType>
 															<xs:restriction base="xs:string">
-																<xs:minLength value="1"/>
-																<xs:maxLength value="5"/>
+																<xs:minLength value="1" />
+																<xs:maxLength value="5" />
 															</xs:restriction>
 														</xs:simpleType>
 													</xs:element>
@@ -1195,8 +1195,8 @@ YYYYMMDD
 																	</xs:annotation>
 																	<xs:simpleType>
 																		<xs:restriction base="xs:string">
-																			<xs:minLength value="1"/>
-																			<xs:maxLength value="5"/>
+																			<xs:minLength value="1" />
+																			<xs:maxLength value="5" />
 																		</xs:restriction>
 																	</xs:simpleType>
 																</xs:element>
@@ -1213,10 +1213,10 @@ YYYYMMDD
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:NMTOKEN">
-												<xs:minLength value="1"/>
-												<xs:maxLength value="16"/>
-												<xs:enumeration value="ALLOWANCE_GLOBAL"/>
-												<xs:enumeration value="CHARGE_GLOBAL"/>
+												<xs:minLength value="1" />
+												<xs:maxLength value="16" />
+												<xs:enumeration value="ALLOWANCE_GLOBAL" />
+												<xs:enumeration value="CHARGE_GLOBAL" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -1226,11 +1226,11 @@ YYYYMMDD
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:NMTOKEN">
-												<xs:minLength value="1"/>
-												<xs:maxLength value="29"/>
-												<xs:enumeration value="OFF_INVOICE"/>
-												<xs:enumeration value="CHARGE_TO_BE_PAID_BY_VENDOR"/>
-												<xs:enumeration value="CHARGE_TO_BE_PAID_BY_CUSTOMER"/>
+												<xs:minLength value="1" />
+												<xs:maxLength value="29" />
+												<xs:enumeration value="OFF_INVOICE" />
+												<xs:enumeration value="CHARGE_TO_BE_PAID_BY_VENDOR" />
+												<xs:enumeration value="CHARGE_TO_BE_PAID_BY_CUSTOMER" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -1240,8 +1240,8 @@ YYYYMMDD
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:string">
-												<xs:minLength value="1"/>
-												<xs:maxLength value="15"/>
+												<xs:minLength value="1" />
+												<xs:maxLength value="15" />
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:attribute>
@@ -1259,16 +1259,16 @@ YYYYMMDD
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:NMTOKEN">
-													<xs:length value="3"/>
-													<xs:enumeration value="GST"/>
-													<xs:enumeration value="VAT"/>
-													<xs:enumeration value="LAC"/>
-													<xs:enumeration value="AAA"/>
-													<xs:enumeration value="ADD"/>
-													<xs:enumeration value="FRE"/>
-													<xs:enumeration value="LOC"/>
-													<xs:enumeration value="STT"/>
-													<xs:enumeration value="OTH"/>
+													<xs:length value="3" />
+													<xs:enumeration value="GST" />
+													<xs:enumeration value="VAT" />
+													<xs:enumeration value="LAC" />
+													<xs:enumeration value="AAA" />
+													<xs:enumeration value="ADD" />
+													<xs:enumeration value="FRE" />
+													<xs:enumeration value="LOC" />
+													<xs:enumeration value="STT" />
+													<xs:enumeration value="OTH" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -1278,8 +1278,8 @@ YYYYMMDD
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:minLength value="1"/>
-													<xs:maxLength value="20"/>
+													<xs:minLength value="1" />
+													<xs:maxLength value="20" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -1308,10 +1308,10 @@ YYYYMMDD
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:NMTOKEN">
-													<xs:minLength value="0"/>
-													<xs:maxLength value="11"/>
-													<xs:enumeration value="TRANSFERIDO"/>
-													<xs:enumeration value="RETENIDO"/>
+													<xs:minLength value="0" />
+													<xs:maxLength value="11" />
+													<xs:enumeration value="TRANSFERIDO" />
+													<xs:enumeration value="RETENIDO" />
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -1362,8 +1362,8 @@ YYYYMMDD
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:minLength value="1"/>
-									<xs:maxLength value="32"/>
+									<xs:minLength value="1" />
+									<xs:maxLength value="32" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -1373,8 +1373,8 @@ YYYYMMDD
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:integer">
-									<xs:totalDigits value="5"/>
-									<xs:fractionDigits value="0"/>
+									<xs:totalDigits value="5" />
+									<xs:fractionDigits value="0" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -1406,37 +1406,37 @@ YYYYMMDD
 								</xs:annotation>
 								<xs:simpleType>
 									<xs:restriction base="xs:NMTOKEN">
-										<xs:minLength value="1"/>
-										<xs:maxLength value="3"/>
-										<xs:enumeration value="AA"/>
-										<xs:enumeration value="ADS"/>
-										<xs:enumeration value="ADO"/>
-										<xs:enumeration value="ABZ"/>
-										<xs:enumeration value="DA"/>
-										<xs:enumeration value="EAA"/>
-										<xs:enumeration value="PI"/>
-										<xs:enumeration value="TAE"/>
-										<xs:enumeration value="SAB"/>
-										<xs:enumeration value="RAA"/>
-										<xs:enumeration value="PAD"/>
-										<xs:enumeration value="FG"/>
-										<xs:enumeration value="FA"/>
-										<xs:enumeration value="TD"/>
-										<xs:enumeration value="TS"/>
-										<xs:enumeration value="TX"/>
-										<xs:enumeration value="ZZZ"/>
-										<xs:enumeration value="VAB"/>
-										<xs:enumeration value="UM"/>
-										<xs:enumeration value="DI"/>
-										<xs:enumeration value="ADT"/>
-										<xs:enumeration value="AJ"/>
-										<xs:enumeration value="CAC"/>
-										<xs:enumeration value="COD"/>
-										<xs:enumeration value="EAB"/>
-										<xs:enumeration value="FC"/>
-										<xs:enumeration value="FI"/>
-										<xs:enumeration value="HD"/>
-										<xs:enumeration value="QD"/>
+										<xs:minLength value="1" />
+										<xs:maxLength value="3" />
+										<xs:enumeration value="AA" />
+										<xs:enumeration value="ADS" />
+										<xs:enumeration value="ADO" />
+										<xs:enumeration value="ABZ" />
+										<xs:enumeration value="DA" />
+										<xs:enumeration value="EAA" />
+										<xs:enumeration value="PI" />
+										<xs:enumeration value="TAE" />
+										<xs:enumeration value="SAB" />
+										<xs:enumeration value="RAA" />
+										<xs:enumeration value="PAD" />
+										<xs:enumeration value="FG" />
+										<xs:enumeration value="FA" />
+										<xs:enumeration value="TD" />
+										<xs:enumeration value="TS" />
+										<xs:enumeration value="TX" />
+										<xs:enumeration value="ZZZ" />
+										<xs:enumeration value="VAB" />
+										<xs:enumeration value="UM" />
+										<xs:enumeration value="DI" />
+										<xs:enumeration value="ADT" />
+										<xs:enumeration value="AJ" />
+										<xs:enumeration value="CAC" />
+										<xs:enumeration value="COD" />
+										<xs:enumeration value="EAB" />
+										<xs:enumeration value="FC" />
+										<xs:enumeration value="FI" />
+										<xs:enumeration value="HD" />
+										<xs:enumeration value="QD" />
 									</xs:restriction>
 								</xs:simpleType>
 							</xs:element>
@@ -1452,10 +1452,10 @@ YYYYMMDD
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:NMTOKEN">
-									<xs:minLength value="1"/>
-									<xs:maxLength value="9"/>
-									<xs:enumeration value="ALLOWANCE"/>
-									<xs:enumeration value="CHARGE"/>
+									<xs:minLength value="1" />
+									<xs:maxLength value="9" />
+									<xs:enumeration value="ALLOWANCE" />
+									<xs:enumeration value="CHARGE" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -1483,10 +1483,10 @@ YYYYMMDD
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:NMTOKEN">
-						<xs:enumeration value="ORIGINAL"/>
-						<xs:enumeration value="COPY"/>
-						<xs:enumeration value="REEMPLAZA"/>
-						<xs:enumeration value="DELETE"/>
+						<xs:enumeration value="ORIGINAL" />
+						<xs:enumeration value="COPY" />
+						<xs:enumeration value="REEMPLAZA" />
+						<xs:enumeration value="DELETE" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>

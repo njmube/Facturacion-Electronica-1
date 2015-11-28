@@ -21,12 +21,11 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
-                  <xs:maxLength value="50"/>
-                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1" />
+                  <xs:maxLength value="50" />
+                  <xs:whiteSpace value="collapse" />
                 </xs:restriction>
               </xs:simpleType>
-
             </xs:attribute>
             <xs:attribute name="TipooClase" use="required">
               <xs:annotation>
@@ -34,9 +33,9 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
-                  <xs:maxLength value="50"/>
-                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1" />
+                  <xs:maxLength value="50" />
+                  <xs:whiteSpace value="collapse" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
@@ -46,7 +45,7 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:int">
-                  <xs:minInclusive value="1900"/>
+                  <xs:minInclusive value="1900" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
@@ -56,7 +55,7 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:string">
-                  <xs:whiteSpace value="collapse"/>
+                  <xs:whiteSpace value="collapse" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
@@ -66,9 +65,9 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
-                  <xs:maxLength value="17"/>
-                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1" />
+                  <xs:maxLength value="17" />
+                  <xs:whiteSpace value="collapse" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
@@ -78,9 +77,9 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
-                  <xs:maxLength value="17"/>
-                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1" />
+                  <xs:maxLength value="17" />
+                  <xs:whiteSpace value="collapse" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
@@ -90,9 +89,9 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
-                  <xs:maxLength value="10"/>
-                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1" />
+                  <xs:maxLength value="10" />
+                  <xs:whiteSpace value="collapse" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
@@ -102,9 +101,9 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
-                  <xs:maxLength value="17"/>
-                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1" />
+                  <xs:maxLength value="17" />
+                  <xs:whiteSpace value="collapse" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
@@ -114,9 +113,9 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
-                  <xs:maxLength value="40"/>
-                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1" />
+                  <xs:maxLength value="40" />
+                  <xs:whiteSpace value="collapse" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
@@ -133,9 +132,9 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
-                  <xs:maxLength value="40"/>
-                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1" />
+                  <xs:maxLength value="40" />
+                  <xs:whiteSpace value="collapse" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
@@ -150,8 +149,8 @@
               </xs:annotation>
               <xs:simpleType>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
-                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1" />
+                  <xs:whiteSpace value="collapse" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
@@ -164,7 +163,7 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="collapse"/>
+            <xs:whiteSpace value="collapse" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -180,8 +179,8 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
-            <xs:maxLength value="20"/>
+            <xs:minLength value="1" />
+            <xs:maxLength value="20" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -189,11 +188,11 @@
   </xs:element>
   <xs:simpleType name="c_TipoSerie">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="SERIE A"/>
-      <xs:enumeration value="SERIE B"/>
-      <xs:enumeration value="SERIE C"/>
-      <xs:enumeration value="SERIE D"/>
-      <xs:enumeration value="SERIE E"/>
+      <xs:enumeration value="SERIE A" />
+      <xs:enumeration value="SERIE B" />
+      <xs:enumeration value="SERIE C" />
+      <xs:enumeration value="SERIE D" />
+      <xs:enumeration value="SERIE E" />
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

@@ -18,8 +18,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:whiteSpace value="collapse"/>
-									<xs:minLength value="1"/>
+									<xs:whiteSpace value="collapse" />
+									<xs:minLength value="1" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -29,8 +29,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:whiteSpace value="collapse"/>
-									<xs:minLength value="1"/>
+									<xs:whiteSpace value="collapse" />
+									<xs:minLength value="1" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -40,8 +40,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:minLength value="1"/>
-									<xs:whiteSpace value="collapse"/>
+									<xs:minLength value="1" />
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>

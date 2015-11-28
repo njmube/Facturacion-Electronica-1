@@ -4,10 +4,10 @@
 	<xsl:template match="divisas:Divisas">
 		<!-- Iniciamos el tratamiento de los atributos de divisas:Divisas -->
 		<xsl:call-template name="Requerido">
-			<xsl:with-param name="valor" select="./@version"/>
+			<xsl:with-param name="valor" select="./@version" />
 		</xsl:call-template>
 		<xsl:call-template name="Requerido">
-			<xsl:with-param name="valor" select="./@tipoOperacion"/>
+			<xsl:with-param name="valor" select="./@tipoOperacion" />
 		</xsl:call-template>
 	</xsl:template>
 </xsl:stylesheet>

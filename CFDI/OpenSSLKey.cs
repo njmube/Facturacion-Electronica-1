@@ -1,6 +1,6 @@
 ﻿//**********************************************************************************
 //Implementacion de librerias para sellar la cadena original SAT factura electronica CFDI
-//Son necesarios los archivo .key, .cer y el password proporcionados por el SAT 
+//Son necesarios los archivo .key, .cer y el password proporcionados por el SAT
 //al contribuyente, que en su conjunto se conoce como FIEL.
 //
 //Juan Antonio Lopez
@@ -15,24 +15,22 @@
 // Copyright (C) 2008  	JavaScience Consulting
 //
 //***********************************************************************************
-//  http://www.openssl.org/docs/crypto/pem.html#PEM_ENCRYPTION_FORMAT 
+//  http://www.openssl.org/docs/crypto/pem.html#PEM_ENCRYPTION_FORMAT
 //**************************************************************************************
 
 using System;
 using System.IO;
-using System.Text;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 using System.Runtime.InteropServices;
 using System.Security;
-
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace IsaRoGaMX.CFDI
 {
-     internal class opensslkey
+    internal class opensslkey
     {
-        
-        public string SignString(string pKeyFile,string pPassword,string OriginalString)
+        public string SignString(string pKeyFile, string pPassword, string OriginalString)
         {
             string SignedString = "";
             string filename = pKeyFile;
@@ -41,17 +39,17 @@ namespace IsaRoGaMX.CFDI
                 return ".key file does not exist " + pKeyFile;
             }
 
-            RSACryptoServiceProvider rsa=OpenKeyFile(filename, pPassword);
+            RSACryptoServiceProvider rsa = OpenKeyFile(filename, pPassword);
             if (rsa != null)
             {
-                byte[] CO=Encoding.UTF8.GetBytes(OriginalString);
-                byte[] SignedBytes=rsa.SignData(CO, new SHA1CryptoServiceProvider());
+                byte[] CO = Encoding.UTF8.GetBytes(OriginalString);
+                byte[] SignedBytes = rsa.SignData(CO, new SHA1CryptoServiceProvider());
                 SignedString = Convert.ToBase64String(SignedBytes);
             }
             return SignedString;
         }
 
-        public RSACryptoServiceProvider OpenKeyFile(String filename,string pPassword)
+        public RSACryptoServiceProvider OpenKeyFile(String filename, string pPassword)
         {
             RSACryptoServiceProvider rsa = null;
             byte[] keyblob = GetFileBytes(filename);
@@ -66,11 +64,11 @@ namespace IsaRoGaMX.CFDI
             return null;
         }
 
-        public static RSACryptoServiceProvider 
-                  DecodePrivateKeyInfo(byte[] encpkcs8,string pPassword)
+        public static RSACryptoServiceProvider
+                  DecodePrivateKeyInfo(byte[] encpkcs8, string pPassword)
         {
             // encoded OID sequence for  PKCS #1 rsaEncryption szOID_RSA_RSA = "1.2.840.113549.1.1.1"
-            // this byte[] includes the sequence byte and terminal encoded null 
+            // this byte[] includes the sequence byte and terminal encoded null
             byte[] OIDpkcs5PBES2 = { 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x05, 0x0D };
             byte[] OIDpkcs5PBKDF2 = { 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x05, 0x0C };
             byte[] OIDdesEDE3CBC = { 0x06, 0x08, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x03, 0x07 };
@@ -93,10 +91,9 @@ namespace IsaRoGaMX.CFDI
 
             try
             {
-
                 twobytes = binr.ReadUInt16();
                 if (twobytes == 0x8130)
-                //data read as little endian order (actual data order for Sequence is 30 81)
+                    //data read as little endian order (actual data order for Sequence is 30 81)
                     binr.ReadByte();	//advance 1 byte
                 else if (twobytes == 0x8230)
                     binr.ReadInt16();	//advance 2 bytes
@@ -108,7 +105,6 @@ namespace IsaRoGaMX.CFDI
                     binr.ReadByte();
                 else if (twobytes == 0x8230)
                     binr.ReadInt16();
-
 
                 seq = binr.ReadBytes(11);		//read the Sequence OID
                 if (!CompareBytearrays(seq, OIDpkcs5PBES2))	//is it a OIDpkcs5PBES2 ?
@@ -160,7 +156,6 @@ namespace IsaRoGaMX.CFDI
                 else if (twobytes == 0x8230)
                     binr.ReadInt16();
 
-
                 seqdes = binr.ReadBytes(10);		//read the Sequence OID
                 if (!CompareBytearrays(seqdes, OIDdesEDE3CBC))	//is it a OIDdes-EDE3-CBC ?
                     return null;
@@ -175,7 +170,6 @@ namespace IsaRoGaMX.CFDI
                 if (bt != 0x04)		// expect octet string for encrypted PKCS8 data
                     return null;
 
-
                 bt = binr.ReadByte();
 
                 if (bt == 0x81)
@@ -184,7 +178,6 @@ namespace IsaRoGaMX.CFDI
                     encblobsize = 256 * binr.ReadByte() + binr.ReadByte();
                 else
                     encblobsize = bt;		// we already have the data size
-
 
                 encryptedpkcs8 = binr.ReadBytes(encblobsize);
                 SecureString secpswd = new SecureString();
@@ -198,15 +191,11 @@ namespace IsaRoGaMX.CFDI
                 RSACryptoServiceProvider rsa = DecodePrivateKeyInfo(pkcs8);
                 return rsa;
             }
-
             catch (Exception)
             {
                 return null;
             }
-
             finally { binr.Close(); }
-
-
         }
 
         public void CertificateData(string pCerFile, out string Certificate, out string CertificateNumber)
@@ -254,7 +243,7 @@ namespace IsaRoGaMX.CFDI
             return true;
         }
 
-        public static byte[] DecryptPBDK2(byte[] edata, byte[] salt, 
+        public static byte[] DecryptPBDK2(byte[] edata, byte[] salt,
                   byte[] IV, SecureString secpswd, int iterations)
         {
             CryptoStream decrypt = null;
@@ -289,7 +278,7 @@ namespace IsaRoGaMX.CFDI
         public static RSACryptoServiceProvider DecodePrivateKeyInfo(byte[] pkcs8)
         {
             // encoded OID sequence for  PKCS #1 rsaEncryption szOID_RSA_RSA = "1.2.840.113549.1.1.1"
-            // this byte[] includes the sequence byte and terminal encoded null 
+            // this byte[] includes the sequence byte and terminal encoded null
             byte[] SeqOID = { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
             byte[] seq = new byte[15];
             // ---------  Set up stream to read the asn.1 encoded SubjectPublicKeyInfo blob  ------
@@ -301,7 +290,6 @@ namespace IsaRoGaMX.CFDI
 
             try
             {
-
                 twobytes = binr.ReadUInt16();
                 if (twobytes == 0x8130)	//data read as little endian order (actual data order for Sequence is 30 81)
                     binr.ReadByte();	//advance 1 byte
@@ -309,7 +297,6 @@ namespace IsaRoGaMX.CFDI
                     binr.ReadInt16();	//advance 2 bytes
                 else
                     return null;
-
 
                 bt = binr.ReadByte();
                 if (bt != 0x02)
@@ -325,7 +312,7 @@ namespace IsaRoGaMX.CFDI
                     return null;
 
                 bt = binr.ReadByte();
-                if (bt != 0x04)	//expect an Octet string 
+                if (bt != 0x04)	//expect an Octet string
                     return null;
 
                 bt = binr.ReadByte();		//read next byte, or next 2 bytes is  0x81 or 0x82; otherwise bt is the byte count
@@ -333,19 +320,17 @@ namespace IsaRoGaMX.CFDI
                     binr.ReadByte();
                 else
                     if (bt == 0x82)
-                        binr.ReadUInt16();
+                    binr.ReadUInt16();
                 //------ at this stage, the remaining sequence should be the RSA private key
 
                 byte[] rsaprivkey = binr.ReadBytes((int)(lenstream - mem.Position));
                 RSACryptoServiceProvider rsacsp = DecodeRSAPrivateKey(rsaprivkey);
                 return rsacsp;
             }
-
             catch (Exception)
             {
                 return null;
             }
-
             finally { binr.Close(); }
         }
 
@@ -375,7 +360,6 @@ namespace IsaRoGaMX.CFDI
                 bt = binr.ReadByte();
                 if (bt != 0x00)
                     return null;
-
 
                 //------  all private key components are Integer sequences ----
                 elems = GetIntegerSize(binr);
@@ -440,16 +424,16 @@ namespace IsaRoGaMX.CFDI
                 count = binr.ReadByte();	// data size in next byte
             else
                 if (bt == 0x82)
-                {
-                    highbyte = binr.ReadByte();	// data size in next 2 bytes
-                    lowbyte = binr.ReadByte();
-                    byte[] modint = { lowbyte, highbyte, 0x00, 0x00 };
-                    count = BitConverter.ToInt32(modint, 0);
-                }
-                else
-                {
-                    count = bt;		// we already have the data size
-                }
+            {
+                highbyte = binr.ReadByte(); // data size in next 2 bytes
+                lowbyte = binr.ReadByte();
+                byte[] modint = { lowbyte, highbyte, 0x00, 0x00 };
+                count = BitConverter.ToInt32(modint, 0);
+            }
+            else
+            {
+                count = bt;     // we already have the data size
+            }
             while (binr.ReadByte() == 0x00)
             {	//remove high order zeros in data
                 count -= 1;
@@ -458,6 +442,5 @@ namespace IsaRoGaMX.CFDI
             //last ReadByte wasn't a removed zero, so back up a byte
             return count;
         }
-
     }
 }

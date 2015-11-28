@@ -16,7 +16,7 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:pattern value="[0-9]{16}"/>
+						<xs:pattern value="[0-9]{16}" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>

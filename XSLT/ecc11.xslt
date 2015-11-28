@@ -23,23 +23,20 @@
     <xsl:apply-templates select="./ecc11:Conceptos" />
   </xsl:template>
 
-
   <xsl:template match="ecc11:Conceptos">
     <!--  Iniciamos el tratamiento de los atributos de ecc11:ConceptoEstadoDeCuentaCombustible-->
     <xsl:for-each select="./ecc11:ConceptoEstadoDeCuentaCombustible">
-      <xsl:apply-templates select="."/>
+      <xsl:apply-templates select="." />
     </xsl:for-each>
-    
   </xsl:template>
 
   <xsl:template match="ecc11:Traslados">
     <!--  Iniciamos el tratamiento de los atributos de ecc11:Traslado-->
     <xsl:for-each select="./ecc11:Traslado">
-      <xsl:apply-templates select="."/>
+      <xsl:apply-templates select="." />
     </xsl:for-each>
   </xsl:template>
-  
-  
+
   <!--  Iniciamos el manejo de los elementos hijo en la secuencia ConceptoEstadoDeCuentaCombustible-->
   <xsl:template match="ecc11:ConceptoEstadoDeCuentaCombustible">
     <!--  Iniciamos el manejo de los nodos dependientes -->
@@ -82,7 +79,6 @@
 
     <!--  Iniciamos el manejo de los elementos hijo en la secuencia -->
     <xsl:apply-templates select="./ecc11:Traslados" />
-
   </xsl:template>
 
   <!--  Iniciamos el manejo de los elementos hijo en la secuencia Traslado-->
@@ -97,6 +93,4 @@
       <xsl:with-param name="valor" select="./@Importe" />
     </xsl:call-template>
   </xsl:template>
-
-  
 </xsl:stylesheet>

@@ -26,11 +26,10 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="collapse"/>
+            <xs:whiteSpace value="collapse" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
     </xs:complexType>
   </xs:element>
 </xs:schema>
-

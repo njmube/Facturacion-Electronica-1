@@ -3,26 +3,29 @@
  * Autor: IsaRoGaMX
  * Fecha: 16/09/2015
  * Hora: 12:52 a.m.
- * 
+ *
  */
+
 using System.Collections.Generic;
 using System.Xml;
 
 namespace IsaRoGaMX.CFDI
 {
-   /// <summary>
-   /// Clase base que representa un Nodo XML
-   /// </summary>
-   public abstract class baseObject
-   {
+    /// <summary>
+    /// Clase base que representa un Nodo XML
+    /// </summary>
+    public abstract class baseObject
+    {
         /// <summary>
         /// Diccionario de atributos del Nodo XML
         /// </summary>
         protected Dictionary<string, string> atributos;
+
         /// <summary>
         /// Espacio de nombres al que pertenece el Nodo XML
         /// </summary>
         protected string @namespace = string.Empty;
+
         /// <summary>
         /// Prefijo del espacio de nombres al que pertence el Nodo XML
         /// </summary>
@@ -35,8 +38,6 @@ namespace IsaRoGaMX.CFDI
             this.prefix = prfx;
         }
 
-
-
         /// <summary>
         /// Crea la representación en XML del objeto actual
         /// </summary>
@@ -44,7 +45,8 @@ namespace IsaRoGaMX.CFDI
         /// <param name="namespaceURI">Espacio de nombres al que pertenede el nodo XML</param>
         /// <param name="documento">Documento XML al que pertenece este nodo</param>
         /// <returns>XmlElement</returns>
-        public virtual XmlElement NodoXML(string prefijo, string namespaceURI, XmlDocument documento) {
+        public virtual XmlElement NodoXML(string prefijo, string namespaceURI, XmlDocument documento)
+        {
             // Elemento a retornar
             XmlElement elemento = (XmlElement)documento.CreateNode(XmlNodeType.Element, prefijo, GetType().Name, namespaceURI);
 
@@ -57,7 +59,7 @@ namespace IsaRoGaMX.CFDI
             // Se retorna el elemento
             return elemento;
         }
-      
+
         /// <summary>
         /// Devuelve el conjunto de atributos utilizados por el elemento actual
         /// </summary>
@@ -76,5 +78,5 @@ namespace IsaRoGaMX.CFDI
         {
             get { return this.@namespace; }
         }
-   }
+    }
 }

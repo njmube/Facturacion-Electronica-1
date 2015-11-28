@@ -3,7 +3,7 @@
  * Autor: IsaRoGaMX
  * Fecha: 16/09/2015
  * Hora: 11:09 a.m.
- * 
+ *
  */
 
 using System;
@@ -12,49 +12,57 @@ using System.Xml;
 
 namespace IsaRoGaMX.CFDI
 {
-   internal class InformacionAduaneraConcepto : baseObject {
-      List<InformacionAduanera> infoAduanera;
-      
-      public InformacionAduaneraConcepto()
-          : base("http://www.sat.gob.mx/cfd/3", "cfdi") {
-         infoAduanera = new List<InformacionAduanera>();
-      }
-      
-      public InformacionAduanera this[int indice] {
-         get {
-            if(indice >= 0 && indice < infoAduanera.Count)
-               return infoAduanera[indice];
+    public class InformacionAduaneraConcepto : baseObject
+    {
+        private List<InformacionAduanera> infoAduanera;
+
+        public InformacionAduaneraConcepto()
+            : base("http://www.sat.gob.mx/cfd/3", "cfdi")
+        {
+            infoAduanera = new List<InformacionAduanera>();
+        }
+
+        public InformacionAduanera this[int indice]
+        {
+            get
+            {
+                if (indice >= 0 && indice < infoAduanera.Count)
+                    return infoAduanera[indice];
+                else
+                    throw new Exception("InformacionAduaneraConcepto::[indice]. Indice fuera de rango");
+            }
+        }
+
+        public void Vaciar()
+        {
+            infoAduanera = new List<InformacionAduanera>();
+        }
+
+        public int Elementos
+        {
+            get { return infoAduanera.Count; }
+        }
+
+        public void AgregaInformacionAduanera(InformacionAduanera infoAduanera)
+        {
+            this.infoAduanera.Add(infoAduanera);
+        }
+
+        public void EliminaInformacionAduanera(int indice)
+        {
+            if (indice >= 0 && indice < infoAduanera.Count)
+                this.infoAduanera.RemoveAt(indice);
             else
-               throw new Exception("InformacionAduaneraConcepto::[indice]. Indice fuera de rango");
-         }
-      }
-      
-      public void Vaciar() {
-         infoAduanera = new List<InformacionAduanera>();
-      }
-      
-      public int Elementos {
-         get { return infoAduanera.Count; }
-      }
-      
-      public void AgregaInformacionAduanera(InformacionAduanera infoAduanera) {
-         this.infoAduanera.Add(infoAduanera);
-      }
-      
-      public void EliminaInformacionAduanera(int indice) {
-         if(indice >= 0 && indice < infoAduanera.Count)
-            this.infoAduanera.RemoveAt(indice);
-         else
-               throw new Exception("InformacionAduaneraConcepto::EliminaInformacionAduanera. Indice fuera de rango");
-      }
-   }
+                throw new Exception("InformacionAduaneraConcepto::EliminaInformacionAduanera. Indice fuera de rango");
+        }
+    }
 
     public class Concepto : baseObject
     {
-        InformacionAduaneraConcepto infoAduanera;
-        CuentaPredial cuentaPredial;
-        List<ComplementoConcepto> complementos;
-        Parte parte;
+        private InformacionAduaneraConcepto infoAduanera;
+        private CuentaPredial cuentaPredial;
+        private List<ComplementoConcepto> complementos;
+        private Parte parte;
 
         /// <summary>
         /// Crea una instancia de un <see cref="Concepto"/> en blanco
@@ -359,9 +367,9 @@ namespace IsaRoGaMX.CFDI
             XmlElement concepto = base.NodoXML(prefijo, namespaceURI, documento);
 
             // Se agregan los complementos al concepto
-            if(complementos != null && complementos.Count > 0)
+            if (complementos != null && complementos.Count > 0)
             {
-                for(int i=0;i<complementos.Count;i++)
+                for (int i = 0; i < complementos.Count; i++)
                 {
                     XmlElement comp = complementos[i].NodoXML(complementos[i].Prefijo, complementos[i].Namespace, documento);
                     concepto.AppendChild(comp);
@@ -371,60 +379,68 @@ namespace IsaRoGaMX.CFDI
             return concepto;
         }
     }
-   
-   public class Conceptos {
-      List<Concepto> conceptos;
-      
-      /// <summary>
-      /// Crea una instancia de <see cref="Conceptos"/> vacia
-      /// </summary>
-      public Conceptos() {
-         conceptos = new List<Concepto>();
-      }
-      
-      /// <summary>
-      /// Devuelve el concepto en el indice extablecido
-      /// </summary>
-      public Concepto this[int indice] {
-         get {
-            if(indice >= 0 && indice < conceptos.Count)
-               return conceptos[indice];
+
+    public class Conceptos
+    {
+        private List<Concepto> conceptos;
+
+        /// <summary>
+        /// Crea una instancia de <see cref="Conceptos"/> vacia
+        /// </summary>
+        public Conceptos()
+        {
+            conceptos = new List<Concepto>();
+        }
+
+        /// <summary>
+        /// Devuelve el concepto en el indice extablecido
+        /// </summary>
+        public Concepto this[int indice]
+        {
+            get
+            {
+                if (indice >= 0 && indice < conceptos.Count)
+                    return conceptos[indice];
+                else
+                    throw new Exception("Conceptos::[indice]. Indice fuera de rango");
+            }
+        }
+
+        /// <summary>
+        /// Agrega un concepto
+        /// </summary>
+        /// <param name="concepto">Concepto a agregar</param>
+        public void Agregar(Concepto concepto)
+        {
+            conceptos.Add(concepto);
+        }
+
+        /// <summary>
+        /// Elimina un concepto
+        /// </summary>
+        /// <param name="indice">Indice del concepto a eliminar</param>
+        public void Eliminar(int indice)
+        {
+            if (indice >= 0 && indice < conceptos.Count)
+                conceptos.RemoveAt(indice);
             else
-               throw new Exception("Conceptos::[indice]. Indice fuera de rango");
-         }
-      }
-      
-      /// <summary>
-      /// Agrega un concepto
-      /// </summary>
-      /// <param name="concepto">Concepto a agregar</param>
-      public void Agregar(Concepto concepto) {
-         conceptos.Add(concepto);
-      }
-      
-      /// <summary>
-      /// Elimina un concepto
-      /// </summary>
-      /// <param name="indice">Indice del concepto a eliminar</param>
-      public void Eliminar(int indice) {
-         if(indice >= 0 && indice < conceptos.Count)
-            conceptos.RemoveAt(indice);
-         else
-            throw new Exception("Conceptos::Eliminaconcepto. Indice fuera de rango");
-      }
-      
-      /// <summary>
-      /// Vacia la lista de conceptos actual
-      /// </summary>
-      public void Vaciar() {
-         conceptos = new List<Concepto>();
-      }
-      
-      /// <summary>
-      /// Devuelve el número de conceptos en la lista
-      /// </summary>
-      public int Elementos {
-         get { return conceptos.Count; }
-      }
-   }
+                throw new Exception("Conceptos::Eliminaconcepto. Indice fuera de rango");
+        }
+
+        /// <summary>
+        /// Vacia la lista de conceptos actual
+        /// </summary>
+        public void Vaciar()
+        {
+            conceptos = new List<Concepto>();
+        }
+
+        /// <summary>
+        /// Devuelve el número de conceptos en la lista
+        /// </summary>
+        public int Elementos
+        {
+            get { return conceptos.Count; }
+        }
+    }
 }

@@ -29,7 +29,7 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:decimal">
-									<xs:whiteSpace value="collapse"/>
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -39,8 +39,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:whiteSpace value="collapse"/>
-									<xs:minLength value="1"/>
+									<xs:whiteSpace value="collapse" />
+									<xs:minLength value="1" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -50,8 +50,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:minLength value="1"/>
-									<xs:whiteSpace value="collapse"/>
+									<xs:minLength value="1" />
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -61,8 +61,8 @@
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:minLength value="1"/>
-									<xs:whiteSpace value="collapse"/>
+									<xs:minLength value="1" />
+									<xs:whiteSpace value="collapse" />
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>
@@ -90,8 +90,8 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:minLength value="1"/>
-						<xs:whiteSpace value="collapse"/>
+						<xs:minLength value="1" />
+						<xs:whiteSpace value="collapse" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
@@ -101,8 +101,8 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:minLength value="1"/>
-						<xs:whiteSpace value="collapse"/>
+						<xs:minLength value="1" />
+						<xs:whiteSpace value="collapse" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
@@ -118,8 +118,8 @@
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
-					<xs:minLength value="1"/>
-					<xs:whiteSpace value="collapse"/>
+					<xs:minLength value="1" />
+					<xs:whiteSpace value="collapse" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
@@ -129,7 +129,7 @@
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:date">
-					<xs:whiteSpace value="collapse"/>
+					<xs:whiteSpace value="collapse" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
@@ -139,8 +139,8 @@
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
-					<xs:minLength value="1"/>
-					<xs:whiteSpace value="collapse"/>
+					<xs:minLength value="1" />
+					<xs:whiteSpace value="collapse" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
@@ -150,8 +150,8 @@
 			<xs:documentation>Tipo definido para expresar importes numéricos con fracción hasta seis decimales</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:decimal">
-			<xs:fractionDigits value="6"/>
-			<xs:whiteSpace value="collapse"/>
+			<xs:fractionDigits value="6" />
+			<xs:whiteSpace value="collapse" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

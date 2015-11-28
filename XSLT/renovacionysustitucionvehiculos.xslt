@@ -13,7 +13,7 @@
     <xsl:apply-templates select="./decreto:DecretoRenovVehicular" />
     <xsl:apply-templates select="./decreto:DecretoSustitVehicular" />
   </xsl:template>
-  
+
   <xsl:template match="decreto:DecretoRenovVehicular">
     <!--  Iniciamos el tratamiento de los atributos de sustitucionvehiculos:DecretoRenovVehicular-->
     <xsl:call-template name="Requerido">
@@ -21,7 +21,7 @@
     </xsl:call-template>
     <!--  Iniciamos el manejo de los nodos dependientes -->
     <xsl:for-each select="./decreto:VehiculosUsadosEnajenadoPermAlFab">
-      <xsl:apply-templates select="."/>
+      <xsl:apply-templates select="." />
     </xsl:for-each>
     <xsl:apply-templates select="./decreto:VehiculoNuvoSemEnajenadoFabAlPerm" />
   </xsl:template>

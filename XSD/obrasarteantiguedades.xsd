@@ -20,7 +20,7 @@ attributeFormDefault="unqualified">
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="obrasarte:c_TipoBien">
-            <xs:length value="2"/>
+            <xs:length value="2" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -30,8 +30,8 @@ attributeFormDefault="unqualified">
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
-            <xs:maxLength value="255"/>
+            <xs:minLength value="1" />
+            <xs:maxLength value="255" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -41,7 +41,7 @@ attributeFormDefault="unqualified">
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="obrasarte:c_Tituloadquirido">
-            <xs:length value="2"/>
+            <xs:length value="2" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -51,8 +51,8 @@ attributeFormDefault="unqualified">
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
-            <xs:maxLength value="255"/>
+            <xs:minLength value="1" />
+            <xs:maxLength value="255" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -66,13 +66,13 @@ attributeFormDefault="unqualified">
           <xs:documentation>Atributo opcional para expresar el IVA  del monto o valor original de adquisición, en su caso.</xs:documentation>
         </xs:annotation>
       </xs:attribute>
-      <xs:attribute name="FechaAdquisicion" use="required" >
+      <xs:attribute name="FechaAdquisicion" use="required">
         <xs:annotation>
           <xs:documentation>Atributo requerido que indica la fecha en que se adquirió originalmente la obra de arte plástica o antigüedades.</xs:documentation>
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:date">
-            <xs:whiteSpace value="collapse"/>
+            <xs:whiteSpace value="collapse" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -82,7 +82,7 @@ attributeFormDefault="unqualified">
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="obrasarte:c_CaracterísticasDeObraoPieza">
-            <xs:length value="2"/>
+            <xs:length value="2" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -95,36 +95,36 @@ attributeFormDefault="unqualified">
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:decimal">
-      <xs:fractionDigits value="6"/>
-      <xs:whiteSpace value="collapse"/>
+      <xs:fractionDigits value="6" />
+      <xs:whiteSpace value="collapse" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="c_TipoBien">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="01"/>
-      <xs:enumeration value="02"/>
-      <xs:enumeration value="03"/>
-      <xs:enumeration value="04"/>
+      <xs:enumeration value="01" />
+      <xs:enumeration value="02" />
+      <xs:enumeration value="03" />
+      <xs:enumeration value="04" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="c_Tituloadquirido">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="01"/>
-      <xs:enumeration value="02"/>
-      <xs:enumeration value="03"/>
-      <xs:enumeration value="04"/>
-      <xs:enumeration value="05"/>
+      <xs:enumeration value="01" />
+      <xs:enumeration value="02" />
+      <xs:enumeration value="03" />
+      <xs:enumeration value="04" />
+      <xs:enumeration value="05" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="c_CaracterísticasDeObraoPieza">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="01"/>
-      <xs:enumeration value="02"/>
-      <xs:enumeration value="03"/>
-      <xs:enumeration value="04"/>
-      <xs:enumeration value="05"/>
-      <xs:enumeration value="06"/>
-      <xs:enumeration value="07"/>
+      <xs:enumeration value="01" />
+      <xs:enumeration value="02" />
+      <xs:enumeration value="03" />
+      <xs:enumeration value="04" />
+      <xs:enumeration value="05" />
+      <xs:enumeration value="06" />
+      <xs:enumeration value="07" />
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
