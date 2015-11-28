@@ -85,6 +85,7 @@
     <Content Include="XML\cfdi-c_turistaPasajeroExtranjero.xml" />
     <Content Include="XML\cfdi-c_valesDeDespensa.xml" />
     <Content Include="XML\cfdi-c_vehiculosUsados.xml" />
+    <Content Include="XML\Fuente.txt" />
     <Content Include="XSLT\AcreditamientoIEPS10.xslt" />
     <Content Include="XSLT\aerolineas.xslt" />
     <Content Include="XSLT\cadenaoriginal_TFD_1_0.xslt" />
