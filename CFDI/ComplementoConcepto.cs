@@ -27,21 +27,21 @@ namespace IsaRoGaMX.CFDI
             atributos.Add("version", "1.0");
         }
 
-        public string NombreAlumno
+        public string autRVOE
         {
             get
             {
-                if (atributos.ContainsKey("nombreAlumno"))
-                    return atributos["nombreAlumno"];
+                if (atributos.ContainsKey("autRVOE"))
+                    return atributos["autRVOE"];
                 else
-                    throw new Exception("InstEducativas::NombreAlumno no puede estar vacio.");
+                    throw new Exception("InstEducativas::autRVOE no puede estar vacio.");
             }
             set
             {
-                if (atributos.ContainsKey("nombreAlumno"))
-                    atributos["nombreAlumno"] = value;
+                if (atributos.ContainsKey("autRVOE"))
+                    atributos["autRVOE"] = value;
                 else
-                    atributos.Add("nombreAlumno", value);
+                    atributos.Add("autRVOE", value);
             }
         }
 
@@ -81,24 +81,23 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public string autRVOE
+        public string NombreAlumno
         {
             get
             {
-                if (atributos.ContainsKey("autRVOE"))
-                    return atributos["autRVOE"];
+                if (atributos.ContainsKey("nombreAlumno"))
+                    return atributos["nombreAlumno"];
                 else
-                    throw new Exception("InstEducativas::autRVOE no puede estar vacio.");
+                    throw new Exception("InstEducativas::NombreAlumno no puede estar vacio.");
             }
             set
             {
-                if (atributos.ContainsKey("autRVOE"))
-                    atributos["autRVOE"] = value;
+                if (atributos.ContainsKey("nombreAlumno"))
+                    atributos["nombreAlumno"] = value;
                 else
-                    atributos.Add("autRVOE", value);
+                    atributos.Add("nombreAlumno", value);
             }
         }
-
         public string RFCPago
         {
             get { return (atributos.ContainsKey("rfcPago")) ? atributos["rfcPago"] : string.Empty; }

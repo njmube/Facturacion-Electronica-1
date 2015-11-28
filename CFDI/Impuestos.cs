@@ -12,6 +12,77 @@ using System.Collections.Generic;
 namespace IsaRoGaMX.CFDI
 {
     /// <summary>
+    /// Nodo requerido para capturar los impuestos aplicables.
+    /// </summary>
+    public class Impuestos : baseObject
+    {
+        private Retenciones retenciones;
+        private Traslados traslados;
+
+        /// <summary>
+        /// Crea una instancia de Impuestos vacia
+        /// </summary>
+        public Impuestos() : base("http://www.sat.gob.mx/cfd/3", "cfdi")
+        {
+            retenciones = new Retenciones();
+            traslados = new Traslados();
+        }
+
+        /// <summary>
+        /// Devuelve o Establece las retenciones del objeto <see cref="Impuestos" /> actual
+        /// </summary>
+        public Retenciones Retenciones
+        {
+            get { return retenciones; }
+            set { retenciones = value; }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece las retenciones del objeto <see cref="Traslados" /> actual
+        /// </summary>
+        public Traslados Traslados
+        {
+            get { return traslados; }
+            set { traslados = value; }
+        }
+
+        /// <summary>
+        /// Agrega una <see cref="Retencion"/> a los impuestos
+        /// </summary>
+        /// <param name="retencion">Retención a agregar</param>
+        public void AgregaRetencion(Retencion retencion)
+        {
+            retenciones.Agregar(retencion);
+        }
+
+        /// <summary>
+        /// Agrega un <see cref="Traslado"/> a los impuestos
+        /// </summary>
+        /// <param name="traslado"></param>
+        public void AgregaTraslado(Traslado traslado)
+        {
+            traslados.Agregar(traslado);
+        }
+
+        /// <summary>
+        /// Elimina la <see cref="Retencion"/> en el indice especificado
+        /// </summary>
+        /// <param name="indice"></param>
+        public void EliminaRetencion(int indice)
+        {
+            retenciones.Elimina(indice);
+        }
+        /// <summary>
+        /// Elimina el <see cref="Traslado"/> en el indice especificado
+        /// </summary>
+        /// <param name="indice"></param>
+        public void EliminaTraslado(int indice)
+        {
+            traslados.Elimina(indice);
+        }
+    }
+
+    /// <summary>
     /// Nodo para la información detallada de una retención de impuesto específico
     /// </summary>
     public class Retencion : baseObject
@@ -34,27 +105,6 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Devuelve o Establece el Tipo de impuesto retenido
-        /// </summary>
-        public string Impuesto
-        {
-            get
-            {
-                if (atributos.ContainsKey("impuesto"))
-                    return atributos["impuesto"];
-                else
-                    throw new Exception("Retencion::impuesto no puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("impuesto"))
-                    atributos["impuesto"] = value;
-                else
-                    atributos.Add("impuesto", value);
-            }
-        }
-
-        /// <summary>
         /// Devuelve o Establece el Importe o monto del impuesto retenido
         /// </summary>
         public double Importe
@@ -74,34 +124,9 @@ namespace IsaRoGaMX.CFDI
                     atributos.Add("importe", Conversiones.Importe(value));
             }
         }
-    }
-
-    /// <summary>
-    /// Información detallada de un traslado de impuesto específico
-    /// </summary>
-    public class Traslado : baseObject
-    {
-        /// <summary>
-        /// Crea una instancia de un objeto Traslado en blanco
-        /// </summary>
-        public Traslado() : base("http://www.sat.gob.mx/cfd/3", "cfdi") { }
 
         /// <summary>
-        /// Crea una instancia de un objeto Traslado
-        /// </summary>
-        /// <param name="impuesto">Atributo requerido para señalar el tipo de impuesto trasladado</param>
-        /// <param name="importe">Atributo requerido para señalar el importe del impuesto trasladado</param>
-        /// <param name="tasa">Atributo requerido para señalar la tasa del impuesto que se traslada por cada concepto amparado en el comprobante</param>
-        public Traslado(string impuesto, double importe, double tasa)
-           : base("http://www.sat.gob.mx/cfd/3", "cfdi")
-        {
-            atributos.Add("impuesto", impuesto);
-            atributos.Add("importe", importe.ToString("#.000000"));
-            atributos.Add("tasa", tasa.ToString("#.000000"));
-        }
-
-        /// <summary>
-        /// Devuelve o Establece el Tipo de impuesto trasladado
+        /// Devuelve o Establece el Tipo de impuesto retenido
         /// </summary>
         public string Impuesto
         {
@@ -120,48 +145,6 @@ namespace IsaRoGaMX.CFDI
                     atributos.Add("impuesto", value);
             }
         }
-
-        /// <summary>
-        /// Devuelve o Establece el Importe del impuesto trasladado
-        /// </summary>
-        public double Importe
-        {
-            get
-            {
-                if (atributos.ContainsKey("importe"))
-                    return Convert.ToDouble(atributos["importe"]);
-                else
-                    throw new Exception("Retencion::importe no puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("importe"))
-                    atributos["importe"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("importe", Conversiones.Importe(value));
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece la Tasa del impuesto que se traslada por cada concepto amparado en el comprobante
-        /// </summary>
-        public double Tasa
-        {
-            get
-            {
-                if (atributos.ContainsKey("tasa"))
-                    return Convert.ToDouble(atributos["tasa"]);
-                else
-                    throw new Exception("Retencion::tasa no puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("tasa"))
-                    atributos["tasa"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("tasa", Conversiones.Importe(value));
-            }
-        }
     }
 
     /// <summary>
@@ -177,6 +160,14 @@ namespace IsaRoGaMX.CFDI
         public Retenciones()
         {
             retenciones = new List<Retencion>();
+        }
+
+        /// <summary>
+        /// Devuelve el número de elementos <see cref="Retencion"/> contenidos
+        /// </summary>
+        public int Elementos
+        {
+            get { return retenciones.Count; }
         }
 
         /// <summary>
@@ -209,16 +200,94 @@ namespace IsaRoGaMX.CFDI
         {
             retenciones.RemoveAt(indice);
         }
-
-        /// <summary>
-        /// Devuelve el número de elementos <see cref="Retencion"/> contenidos
-        /// </summary>
-        public int Elementos
-        {
-            get { return retenciones.Count; }
-        }
     }
 
+    /// <summary>
+    /// Información detallada de un traslado de impuesto específico
+    /// </summary>
+    public class Traslado : baseObject
+    {
+        /// <summary>
+        /// Crea una instancia de un objeto Traslado en blanco
+        /// </summary>
+        public Traslado() : base("http://www.sat.gob.mx/cfd/3", "cfdi") { }
+
+        /// <summary>
+        /// Crea una instancia de un objeto Traslado
+        /// </summary>
+        /// <param name="impuesto">Atributo requerido para señalar el tipo de impuesto trasladado</param>
+        /// <param name="importe">Atributo requerido para señalar el importe del impuesto trasladado</param>
+        /// <param name="tasa">Atributo requerido para señalar la tasa del impuesto que se traslada por cada concepto amparado en el comprobante</param>
+        public Traslado(string impuesto, double importe, double tasa)
+           : base("http://www.sat.gob.mx/cfd/3", "cfdi")
+        {
+            atributos.Add("impuesto", impuesto);
+            atributos.Add("importe", importe.ToString("#.000000"));
+            atributos.Add("tasa", tasa.ToString("#.000000"));
+        }
+
+        /// <summary>
+        /// Devuelve o Establece el Importe del impuesto trasladado
+        /// </summary>
+        public double Importe
+        {
+            get
+            {
+                if (atributos.ContainsKey("importe"))
+                    return Convert.ToDouble(atributos["importe"]);
+                else
+                    throw new Exception("Retencion::importe no puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("importe"))
+                    atributos["importe"] = Conversiones.Importe(value);
+                else
+                    atributos.Add("importe", Conversiones.Importe(value));
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece el Tipo de impuesto trasladado
+        /// </summary>
+        public string Impuesto
+        {
+            get
+            {
+                if (atributos.ContainsKey("impuesto"))
+                    return atributos["impuesto"];
+                else
+                    throw new Exception("Retencion::impuesto no puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("impuesto"))
+                    atributos["impuesto"] = value;
+                else
+                    atributos.Add("impuesto", value);
+            }
+        }
+        /// <summary>
+        /// Devuelve o Establece la Tasa del impuesto que se traslada por cada concepto amparado en el comprobante
+        /// </summary>
+        public double Tasa
+        {
+            get
+            {
+                if (atributos.ContainsKey("tasa"))
+                    return Convert.ToDouble(atributos["tasa"]);
+                else
+                    throw new Exception("Retencion::tasa no puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("tasa"))
+                    atributos["tasa"] = Conversiones.Importe(value);
+                else
+                    atributos.Add("tasa", Conversiones.Importe(value));
+            }
+        }
+    }
     /// <summary>
     /// Nodo opcional para asentar o referir los impuestos trasladados aplicables
     /// </summary>
@@ -232,6 +301,14 @@ namespace IsaRoGaMX.CFDI
         public Traslados()
         {
             traslados = new List<Traslado>();
+        }
+
+        /// <summary>
+        /// Devuelve el número de <see cref="Traslado">Traslados</see>
+        /// </summary>
+        public int Elementos
+        {
+            get { return traslados.Count; }
         }
 
         /// <summary>
@@ -264,86 +341,6 @@ namespace IsaRoGaMX.CFDI
         public void Elimina(int indice)
         {
             traslados.RemoveAt(indice);
-        }
-
-        /// <summary>
-        /// Devuelve el número de <see cref="Traslado">Traslados</see>
-        /// </summary>
-        public int Elementos
-        {
-            get { return traslados.Count; }
-        }
-    }
-
-    /// <summary>
-    /// Nodo requerido para capturar los impuestos aplicables.
-    /// </summary>
-    public class Impuestos : baseObject
-    {
-        private Retenciones retenciones;
-        private Traslados traslados;
-
-        /// <summary>
-        /// Crea una instancia de Impuestos vacia
-        /// </summary>
-        public Impuestos() : base("http://www.sat.gob.mx/cfd/3", "cfdi")
-        {
-            retenciones = new Retenciones();
-            traslados = new Traslados();
-        }
-
-        /// <summary>
-        /// Agrega una <see cref="Retencion"/> a los impuestos
-        /// </summary>
-        /// <param name="retencion">Retención a agregar</param>
-        public void AgregaRetencion(Retencion retencion)
-        {
-            retenciones.Agregar(retencion);
-        }
-
-        /// <summary>
-        /// Elimina la <see cref="Retencion"/> en el indice especificado
-        /// </summary>
-        /// <param name="indice"></param>
-        public void EliminaRetencion(int indice)
-        {
-            retenciones.Elimina(indice);
-        }
-
-        /// <summary>
-        /// Agrega un <see cref="Traslado"/> a los impuestos
-        /// </summary>
-        /// <param name="traslado"></param>
-        public void AgregaTraslado(Traslado traslado)
-        {
-            traslados.Agregar(traslado);
-        }
-
-        /// <summary>
-        /// Elimina el <see cref="Traslado"/> en el indice especificado
-        /// </summary>
-        /// <param name="indice"></param>
-        public void EliminaTraslado(int indice)
-        {
-            traslados.Elimina(indice);
-        }
-
-        /// <summary>
-        /// Devuelve o Establece las retenciones del objeto <see cref="Impuestos" /> actual
-        /// </summary>
-        public Retenciones Retenciones
-        {
-            get { return retenciones; }
-            set { retenciones = value; }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece las retenciones del objeto <see cref="Traslados" /> actual
-        /// </summary>
-        public Traslados Traslados
-        {
-            get { return traslados; }
-            set { traslados = value; }
         }
     }
 }

@@ -12,56 +12,11 @@ using System.Xml;
 
 namespace IsaRoGaMX.CFDI
 {
-    public class InformacionAduaneraConcepto : baseObject
-    {
-        private List<InformacionAduanera> infoAduanera;
-
-        public InformacionAduaneraConcepto()
-            : base("http://www.sat.gob.mx/cfd/3", "cfdi")
-        {
-            infoAduanera = new List<InformacionAduanera>();
-        }
-
-        public InformacionAduanera this[int indice]
-        {
-            get
-            {
-                if (indice >= 0 && indice < infoAduanera.Count)
-                    return infoAduanera[indice];
-                else
-                    throw new Exception("InformacionAduaneraConcepto::[indice]. Indice fuera de rango");
-            }
-        }
-
-        public void Vaciar()
-        {
-            infoAduanera = new List<InformacionAduanera>();
-        }
-
-        public int Elementos
-        {
-            get { return infoAduanera.Count; }
-        }
-
-        public void AgregaInformacionAduanera(InformacionAduanera infoAduanera)
-        {
-            this.infoAduanera.Add(infoAduanera);
-        }
-
-        public void EliminaInformacionAduanera(int indice)
-        {
-            if (indice >= 0 && indice < infoAduanera.Count)
-                this.infoAduanera.RemoveAt(indice);
-            else
-                throw new Exception("InformacionAduaneraConcepto::EliminaInformacionAduanera. Indice fuera de rango");
-        }
-    }
-
     public class Concepto : baseObject
     {
-        private InformacionAduaneraConcepto infoAduanera;
-        private CuentaPredial cuentaPredial;
         private List<ComplementoConcepto> complementos;
+        private CuentaPredial cuentaPredial;
+        private InformacionAduaneraConcepto infoAduanera;
         private Parte parte;
 
         /// <summary>
@@ -108,73 +63,129 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Agrega información aduanera al concepto actual
+        /// Cantidad del concepto actual
         /// </summary>
-        /// <param name="infoAduanera"></param>
-        public void AgregaInformacionAduanera(InformacionAduanera infoAduanera)
+        public double Cantidad
         {
-            if (cuentaPredial != null || parte != null || complementos != null)
+            get
             {
-                throw new Exception("Concepto::AgregaInformacionAduanera. No se puede agregar este nodo.");
-            }
-            else
-            {
-                if (this.infoAduanera == null)
-                    this.infoAduanera = new InformacionAduaneraConcepto();
-                this.infoAduanera.AgregaInformacionAduanera(infoAduanera);
-            }
-        }
-
-        /// <summary>
-        /// Elimina toda la información aduanera del concepto actual
-        /// </summary>
-        public void EliminaInformacionAduanera()
-        {
-            infoAduanera = null;
-        }
-
-        /// <summary>
-        /// Elimina un elemento de la colección de información aduanera para el concepto actual
-        /// </summary>
-        /// <param name="indice">Indice del elemento a eliminar</param>
-        public void EliminaInformacionAduanera(int indice)
-        {
-            if (this.infoAduanera == null)
-                throw new Exception("Este complemento no contiene información aduanera");
-            else
-            {
-                if (indice >= 0 && indice < infoAduanera.Elementos)
-                    throw new Exception("Concepto::EliminaInformacionAduanera. Indice fuera de rango");
+                if (atributos.ContainsKey("cantidad"))
+                    return Convert.ToDouble(atributos["cantidad"]);
                 else
-                    infoAduanera.EliminaInformacionAduanera(indice);
+                    throw new Exception("Concepto::cantidad no puede estar vacio");
             }
-        }
-
-        /// <summary>
-        /// Agrega una cuenta predial al concepto actual
-        /// </summary>
-        /// <param name="ctaPredial">Cuenta predial a agregar</param>
-        public void AgregaCuentaPredial(CuentaPredial ctaPredial)
-        {
-            if (infoAduanera != null || parte != null || complementos != null)
+            set
             {
-                throw new Exception("Concepto::AgregaCuentaPredial. No se puede agregar este nodo.");
-            }
-            else
-            {
-                if (ctaPredial != null)
-                    cuentaPredial = ctaPredial;
+                if (atributos.ContainsKey("cantidad"))
+                    atributos["cantidad"] = Conversiones.Importe(value);
                 else
-                    throw new Exception("Concepto::AgregaCuentaPredial. Parametro nulo");
+                    atributos.Add("cantidad", Conversiones.Importe(value));
             }
         }
 
         /// <summary>
-        /// Elimina la cuenta predial del concepto actual
+        /// Descripción del concepto actual
         /// </summary>
-        public void EliminaCuentaPredial()
+        public string Descripcion
         {
-            cuentaPredial = null;
+            get
+            {
+                if (atributos.ContainsKey("descripcion"))
+                    return atributos["descripcion"];
+                else
+                    throw new Exception("Concepto::descripcion no puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("descripcion"))
+                    atributos["descripcion"] = value;
+                else
+                    atributos.Add("descripcion", value);
+            }
+        }
+
+        /// <summary>
+        /// Importe del concepto actual
+        /// </summary>
+        public double Importe
+        {
+            get
+            {
+                if (atributos.ContainsKey("importe"))
+                    return Convert.ToDouble(atributos["importe"]);
+                else
+                    throw new Exception("Concepto::importe no puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("importe"))
+                    atributos["importe"] = Conversiones.Importe(value);
+                else
+                    atributos.Add("importe", Conversiones.Importe(value));
+            }
+        }
+
+        /// <summary>
+        /// Número de identificación del concepto actual
+        /// </summary>
+        public string NoIdentificacion
+        {
+            get
+            {
+                if (atributos.ContainsKey("noIdentificacion"))
+                    return atributos["noIdentificacion"];
+                else
+                    return string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("noIdentificacion"))
+                    atributos["noIdentificacion"] = value;
+                else
+                    atributos.Add("noIdentificacion", value);
+            }
+        }
+
+        /// <summary>
+        /// Unidad del concepto actual
+        /// </summary>
+        public string Unidad
+        {
+            get
+            {
+                if (atributos.ContainsKey("unidad"))
+                    return atributos["unidad"];
+                else
+                    throw new Exception("Concepto::unidad no puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("unidad"))
+                    atributos["unidad"] = value;
+                else
+                    atributos.Add("unidad", value);
+            }
+        }
+
+        /// <summary>
+        /// Valor unitario del concepto actual
+        /// </summary>
+        public double ValorUnitario
+        {
+            get
+            {
+                if (atributos.ContainsKey("valorUnitario"))
+                    return Convert.ToDouble(atributos["valorUnitario"]);
+                else
+                    throw new Exception("Concepto::unidad no puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("valorUnitario"))
+                    atributos["valorUnitario"] = Conversiones.Importe(value);
+                else
+                    atributos.Add("valorUnitario", Conversiones.Importe(value));
+            }
         }
 
         /// <summary>
@@ -201,11 +212,40 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Elimina el complemento del concepto actual
+        /// Agrega una cuenta predial al concepto actual
         /// </summary>
-        public void EliminaComplemento()
+        /// <param name="ctaPredial">Cuenta predial a agregar</param>
+        public void AgregaCuentaPredial(CuentaPredial ctaPredial)
         {
-            //complementoConcepto = null;
+            if (infoAduanera != null || parte != null || complementos != null)
+            {
+                throw new Exception("Concepto::AgregaCuentaPredial. No se puede agregar este nodo.");
+            }
+            else
+            {
+                if (ctaPredial != null)
+                    cuentaPredial = ctaPredial;
+                else
+                    throw new Exception("Concepto::AgregaCuentaPredial. Parametro nulo");
+            }
+        }
+
+        /// <summary>
+        /// Agrega información aduanera al concepto actual
+        /// </summary>
+        /// <param name="infoAduanera"></param>
+        public void AgregaInformacionAduanera(InformacionAduanera infoAduanera)
+        {
+            if (cuentaPredial != null || parte != null || complementos != null)
+            {
+                throw new Exception("Concepto::AgregaInformacionAduanera. No se puede agregar este nodo.");
+            }
+            else
+            {
+                if (this.infoAduanera == null)
+                    this.infoAduanera = new InformacionAduaneraConcepto();
+                this.infoAduanera.AgregaInformacionAduanera(infoAduanera);
+            }
         }
 
         /// <summary>
@@ -228,139 +268,52 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
+        /// Elimina el complemento del concepto actual
+        /// </summary>
+        public void EliminaComplemento()
+        {
+            //complementoConcepto = null;
+        }
+
+        /// <summary>
+        /// Elimina la cuenta predial del concepto actual
+        /// </summary>
+        public void EliminaCuentaPredial()
+        {
+            cuentaPredial = null;
+        }
+
+        /// <summary>
+        /// Elimina toda la información aduanera del concepto actual
+        /// </summary>
+        public void EliminaInformacionAduanera()
+        {
+            infoAduanera = null;
+        }
+
+        /// <summary>
+        /// Elimina un elemento de la colección de información aduanera para el concepto actual
+        /// </summary>
+        /// <param name="indice">Indice del elemento a eliminar</param>
+        public void EliminaInformacionAduanera(int indice)
+        {
+            if (this.infoAduanera == null)
+                throw new Exception("Este complemento no contiene información aduanera");
+            else
+            {
+                if (indice >= 0 && indice < infoAduanera.Elementos)
+                    throw new Exception("Concepto::EliminaInformacionAduanera. Indice fuera de rango");
+                else
+                    infoAduanera.EliminaInformacionAduanera(indice);
+            }
+        }
+        /// <summary>
         /// Elimina la parte del concepto actual
         /// </summary>
         public void EliminaParte()
         {
             parte = null;
         }
-
-        /// <summary>
-        /// Cantidad del concepto actual
-        /// </summary>
-        public double Cantidad
-        {
-            get
-            {
-                if (atributos.ContainsKey("cantidad"))
-                    return Convert.ToDouble(atributos["cantidad"]);
-                else
-                    throw new Exception("Concepto::cantidad no puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("cantidad"))
-                    atributos["cantidad"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("cantidad", Conversiones.Importe(value));
-            }
-        }
-
-        /// <summary>
-        /// Unidad del concepto actual
-        /// </summary>
-        public string Unidad
-        {
-            get
-            {
-                if (atributos.ContainsKey("unidad"))
-                    return atributos["unidad"];
-                else
-                    throw new Exception("Concepto::unidad no puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("unidad"))
-                    atributos["unidad"] = value;
-                else
-                    atributos.Add("unidad", value);
-            }
-        }
-
-        /// <summary>
-        /// Número de identificación del concepto actual
-        /// </summary>
-        public string NoIdentificacion
-        {
-            get
-            {
-                if (atributos.ContainsKey("noIdentificacion"))
-                    return atributos["noIdentificacion"];
-                else
-                    return string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("noIdentificacion"))
-                    atributos["noIdentificacion"] = value;
-                else
-                    atributos.Add("noIdentificacion", value);
-            }
-        }
-
-        /// <summary>
-        /// Descripción del concepto actual
-        /// </summary>
-        public string Descripcion
-        {
-            get
-            {
-                if (atributos.ContainsKey("descripcion"))
-                    return atributos["descripcion"];
-                else
-                    throw new Exception("Concepto::descripcion no puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("descripcion"))
-                    atributos["descripcion"] = value;
-                else
-                    atributos.Add("descripcion", value);
-            }
-        }
-
-        /// <summary>
-        /// Valor unitario del concepto actual
-        /// </summary>
-        public double ValorUnitario
-        {
-            get
-            {
-                if (atributos.ContainsKey("valorUnitario"))
-                    return Convert.ToDouble(atributos["valorUnitario"]);
-                else
-                    throw new Exception("Concepto::unidad no puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("valorUnitario"))
-                    atributos["valorUnitario"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("valorUnitario", Conversiones.Importe(value));
-            }
-        }
-
-        /// <summary>
-        /// Importe del concepto actual
-        /// </summary>
-        public double Importe
-        {
-            get
-            {
-                if (atributos.ContainsKey("importe"))
-                    return Convert.ToDouble(atributos["importe"]);
-                else
-                    throw new Exception("Concepto::importe no puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("importe"))
-                    atributos["importe"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("importe", Conversiones.Importe(value));
-            }
-        }
-
         public override XmlElement NodoXML(string prefijo, string namespaceURI, XmlDocument documento)
         {
             // Nodo concepto
@@ -390,6 +343,14 @@ namespace IsaRoGaMX.CFDI
         public Conceptos()
         {
             conceptos = new List<Concepto>();
+        }
+
+        /// <summary>
+        /// Devuelve el número de conceptos en la lista
+        /// </summary>
+        public int Elementos
+        {
+            get { return conceptos.Count; }
         }
 
         /// <summary>
@@ -434,13 +395,50 @@ namespace IsaRoGaMX.CFDI
         {
             conceptos = new List<Concepto>();
         }
+    }
 
-        /// <summary>
-        /// Devuelve el número de conceptos en la lista
-        /// </summary>
+    public class InformacionAduaneraConcepto : baseObject
+    {
+        private List<InformacionAduanera> infoAduanera;
+
+        public InformacionAduaneraConcepto()
+            : base("http://www.sat.gob.mx/cfd/3", "cfdi")
+        {
+            infoAduanera = new List<InformacionAduanera>();
+        }
+
         public int Elementos
         {
-            get { return conceptos.Count; }
+            get { return infoAduanera.Count; }
+        }
+
+        public InformacionAduanera this[int indice]
+        {
+            get
+            {
+                if (indice >= 0 && indice < infoAduanera.Count)
+                    return infoAduanera[indice];
+                else
+                    throw new Exception("InformacionAduaneraConcepto::[indice]. Indice fuera de rango");
+            }
+        }
+
+        public void AgregaInformacionAduanera(InformacionAduanera infoAduanera)
+        {
+            this.infoAduanera.Add(infoAduanera);
+        }
+
+        public void EliminaInformacionAduanera(int indice)
+        {
+            if (indice >= 0 && indice < infoAduanera.Count)
+                this.infoAduanera.RemoveAt(indice);
+            else
+                throw new Exception("InformacionAduaneraConcepto::EliminaInformacionAduanera. Indice fuera de rango");
+        }
+
+        public void Vaciar()
+        {
+            infoAduanera = new List<InformacionAduanera>();
         }
     }
 }

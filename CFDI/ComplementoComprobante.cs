@@ -75,6 +75,41 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
+        /// Devuelve un arreglo de complementos de CFDI
+        /// </summary>
+        public ComplementoComprobante[] Complementos
+        {
+            get
+            {
+                ComplementoComprobante[] aux = new ComplementoComprobante[complementos.Count];
+                complementos.Values.CopyTo(aux, 0);
+                return aux;
+            }
+        }
+
+        /// <summary>
+        /// Indica la cantidad de <see cref="ComplementoComprobante"/> actual
+        /// </summary>
+        public int Elementos
+        {
+            get { return complementos.Count; }
+        }
+
+        /// <summary>
+        /// Devuelve un string[] con los tipos de complementos actuales
+        /// </summary>
+        public string[] TiposComplemento
+        {
+            get
+            {
+                var tipos = new List<string>();
+                foreach (string tipo in complementos.Keys)
+                    tipos.Add(tipo);
+                return tipos.ToArray();
+            }
+        }
+
+        /// <summary>
         /// Devuelve el <see cref="ComplementoComprobante"/> en el índice especificado
         /// </summary>
         /// <param name="indice">Indice del <see cref="ComplementoComprobante"/> a devolver</param>
@@ -118,41 +153,6 @@ namespace IsaRoGaMX.CFDI
             }
             throw new Exception("ComplementosConcepto::Eliminar(). Indice fuera de rango");
         }
-
-        /// <summary>
-        /// Devuelve un arreglo de complementos de CFDI
-        /// </summary>
-        public ComplementoComprobante[] Complementos
-        {
-            get
-            {
-                ComplementoComprobante[] aux = new ComplementoComprobante[complementos.Count];
-                complementos.Values.CopyTo(aux, 0);
-                return aux;
-            }
-        }
-
-        /// <summary>
-        /// Indica la cantidad de <see cref="ComplementoComprobante"/> actual
-        /// </summary>
-        public int Elementos
-        {
-            get { return complementos.Count; }
-        }
-
-        /// <summary>
-        /// Devuelve un string[] con los tipos de complementos actuales
-        /// </summary>
-        public string[] TiposComplemento
-        {
-            get
-            {
-                var tipos = new List<string>();
-                foreach (string tipo in complementos.Keys)
-                    tipos.Add(tipo);
-                return tipos.ToArray();
-            }
-        }
     }
 
     #endregion Nodo Complemento
@@ -190,46 +190,6 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Devuelve o Establece la Versión del estándar del Timbre Fiscal Digital
-        /// </summary>
-        public string Version
-        {
-            get
-            {
-                if (atributos.ContainsKey("version"))
-                    return atributos["version"];
-                throw new Exception(this.GetType().Name + "::version. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("version"))
-                    atributos["version"] = value;
-                else
-                    atributos.Add("version", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece el UUID de la transacción de timbrado
-        /// </summary>
-        public string UUID
-        {
-            get
-            {
-                if (atributos.ContainsKey("UUID"))
-                    return atributos["UUID"];
-                throw new Exception(this.GetType().Name + "::UUID. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("UUID"))
-                    atributos["UUID"] = value;
-                else
-                    atributos.Add("UUID", value);
-            }
-        }
-
-        /// <summary>
         /// Devuelve o Establece la Fecha y hora de la generación del timbre
         /// </summary>
         public string FechaTimbrado
@@ -246,26 +206,6 @@ namespace IsaRoGaMX.CFDI
                     atributos["FechaTimbrado"] = value;
                 else
                     atributos.Add("FechaTimbrado", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece el Sello digital del comprobante fiscal, que será timbrado
-        /// </summary>
-        public string SelloCFD
-        {
-            get
-            {
-                if (atributos.ContainsKey("selloCFD"))
-                    return atributos["selloCFD"];
-                throw new Exception(this.GetType().Name + "::selloCFD. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("selloCFD"))
-                    atributos["selloCFD"] = value;
-                else
-                    atributos.Add("selloCFD", value);
             }
         }
 
@@ -290,6 +230,26 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
+        /// Devuelve o Establece el Sello digital del comprobante fiscal, que será timbrado
+        /// </summary>
+        public string SelloCFD
+        {
+            get
+            {
+                if (atributos.ContainsKey("selloCFD"))
+                    return atributos["selloCFD"];
+                throw new Exception(this.GetType().Name + "::selloCFD. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("selloCFD"))
+                    atributos["selloCFD"] = value;
+                else
+                    atributos.Add("selloCFD", value);
+            }
+        }
+
+        /// <summary>
         /// Devuelve o Establece el Sello digital del Timbre Fiscal Digital
         /// </summary>
         public string SelloSAT
@@ -306,6 +266,46 @@ namespace IsaRoGaMX.CFDI
                     atributos["selloSAT"] = value;
                 else
                     atributos.Add("selloSAT", value);
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece el UUID de la transacción de timbrado
+        /// </summary>
+        public string UUID
+        {
+            get
+            {
+                if (atributos.ContainsKey("UUID"))
+                    return atributos["UUID"];
+                throw new Exception(this.GetType().Name + "::UUID. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("UUID"))
+                    atributos["UUID"] = value;
+                else
+                    atributos.Add("UUID", value);
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece la Versión del estándar del Timbre Fiscal Digital
+        /// </summary>
+        public string Version
+        {
+            get
+            {
+                if (atributos.ContainsKey("version"))
+                    return atributos["version"];
+                throw new Exception(this.GetType().Name + "::version. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("version"))
+                    atributos["version"] = value;
+                else
+                    atributos.Add("version", value);
             }
         }
     }
@@ -333,42 +333,22 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Atributo requerido para expresar la versión del complemento de donatarias
+        /// Atributo requerido para expresar la fecha del oficio en que se haya informado a la organización civil o fideicomiso, la procedencia de la autorización para recibir donativos deducibles, o su renovación correspondiente otorgada por el Servicio de Administración Tributaria.
         /// </summary>
-        public string Version
+        public DateTime FechaAutorizacionDateTime
         {
             get
             {
-                if (atributos.ContainsKey("version"))
-                    return atributos["version"];
-                throw new Exception("Donatorias::Version. No puede estar vacio.");
+                if (atributos.ContainsKey("fechaAutorizacion"))
+                    return Conversiones.FechaISO8601DateTime(atributos["fechaAutorizacion"]);
+                throw new Exception("Donatorias::FechaAutorizacion. No puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("version"))
-                    atributos["version"] = value;
+                if (atributos.ContainsKey("fechaAutorizacion"))
+                    atributos["fechaAutorizacion"] = Conversiones.DateTimeFechaISO8601(value);
                 else
-                    atributos.Add("version", value);
-            }
-        }
-
-        /// <summary>
-        /// Atributo requerido para expresar el número del oficio en que se haya informado a la organización civil o fideicomiso, la procedencia de la autorización para recibir donativos deducibles, o su renovación correspondiente otorgada por el Servicio de Administración Tributaria.
-        /// </summary>
-        public string NoAutorizacion
-        {
-            get
-            {
-                if (atributos.ContainsKey("noAutorizacion"))
-                    return atributos["noAutorizacion"];
-                throw new Exception("Donatorias::NoAutorizacion. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("noAutorizacion"))
-                    atributos["noAutorizacion"] = value;
-                else
-                    atributos.Add("noAutorizacion", value);
+                    atributos.Add("fechaAutorizacion", Conversiones.DateTimeFechaISO8601(value));
             }
         }
 
@@ -393,26 +373,6 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Atributo requerido para expresar la fecha del oficio en que se haya informado a la organización civil o fideicomiso, la procedencia de la autorización para recibir donativos deducibles, o su renovación correspondiente otorgada por el Servicio de Administración Tributaria.
-        /// </summary>
-        public DateTime FechaAutorizacionDateTime
-        {
-            get
-            {
-                if (atributos.ContainsKey("fechaAutorizacion"))
-                    return Conversiones.FechaISO8601DateTime(atributos["fechaAutorizacion"]);
-                throw new Exception("Donatorias::FechaAutorizacion. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("fechaAutorizacion"))
-                    atributos["fechaAutorizacion"] = Conversiones.DateTimeFechaISO8601(value);
-                else
-                    atributos.Add("fechaAutorizacion", Conversiones.DateTimeFechaISO8601(value));
-            }
-        }
-
-        /// <summary>
         /// Atributo requerido para señalar de manera expresa que el comprobante que se expide se deriva de un donativo.
         /// </summary>
         public string Leyenda
@@ -429,6 +389,46 @@ namespace IsaRoGaMX.CFDI
                     atributos["leyenda"] = value;
                 else
                     atributos.Add("leyenda", value);
+            }
+        }
+
+        /// <summary>
+        /// Atributo requerido para expresar el número del oficio en que se haya informado a la organización civil o fideicomiso, la procedencia de la autorización para recibir donativos deducibles, o su renovación correspondiente otorgada por el Servicio de Administración Tributaria.
+        /// </summary>
+        public string NoAutorizacion
+        {
+            get
+            {
+                if (atributos.ContainsKey("noAutorizacion"))
+                    return atributos["noAutorizacion"];
+                throw new Exception("Donatorias::NoAutorizacion. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("noAutorizacion"))
+                    atributos["noAutorizacion"] = value;
+                else
+                    atributos.Add("noAutorizacion", value);
+            }
+        }
+
+        /// <summary>
+        /// Atributo requerido para expresar la versión del complemento de donatarias
+        /// </summary>
+        public string Version
+        {
+            get
+            {
+                if (atributos.ContainsKey("version"))
+                    return atributos["version"];
+                throw new Exception("Donatorias::Version. No puede estar vacio.");
+            }
+            set
+            {
+                if (atributos.ContainsKey("version"))
+                    atributos["version"] = value;
+                else
+                    atributos.Add("version", value);
             }
         }
     }
@@ -459,26 +459,6 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Devuelve o Establece la Versión del complemento de divisas
-        /// </summary>
-        public string Version
-        {
-            get
-            {
-                if (atributos.ContainsKey("version"))
-                    return atributos["version"];
-                throw new Exception("Divisas::Version. No puede estar vacio.");
-            }
-            set
-            {
-                if (atributos.ContainsKey("version"))
-                    atributos["version"] = value;
-                else
-                    atributos.Add("version", value);
-            }
-        }
-
-        /// <summary>
         /// Devuelve o Establece el tipo de operación realizada. venta o compra de divisas
         /// </summary>
         public string TipoOperacion
@@ -495,6 +475,26 @@ namespace IsaRoGaMX.CFDI
                     atributos["tipoOperacion"] = value;
                 else
                     atributos.Add("tipoOperacion", value);
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece la Versión del complemento de divisas
+        /// </summary>
+        public string Version
+        {
+            get
+            {
+                if (atributos.ContainsKey("version"))
+                    return atributos["version"];
+                throw new Exception("Divisas::Version. No puede estar vacio.");
+            }
+            set
+            {
+                if (atributos.ContainsKey("version"))
+                    atributos["version"] = value;
+                else
+                    atributos.Add("version", value);
             }
         }
     }
@@ -550,26 +550,6 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Porcentaje de retención del impuesto local
-        /// </summary>
-        public double TasaDeRetencion
-        {
-            get
-            {
-                if (atributos.ContainsKey("TasadeRetencion"))
-                    return Convert.ToDouble(atributos["TasadeRetencion"]);
-                throw new Exception("RetencionesLocales::TasaDeRetencion. No puede estar vacio.");
-            }
-            set
-            {
-                if (atributos.ContainsKey("TasadeRetencion"))
-                    atributos["TasadeRetencion"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("TasadeRetencion", Conversiones.Importe(value));
-            }
-        }
-
-        /// <summary>
         /// Monto del impuesto local retenido
         /// </summary>
         public double Importe
@@ -586,6 +566,26 @@ namespace IsaRoGaMX.CFDI
                     atributos["Importe"] = Conversiones.Importe(value);
                 else
                     atributos.Add("Importe", Conversiones.Importe(value));
+            }
+        }
+
+        /// <summary>
+        /// Porcentaje de retención del impuesto local
+        /// </summary>
+        public double TasaDeRetencion
+        {
+            get
+            {
+                if (atributos.ContainsKey("TasadeRetencion"))
+                    return Convert.ToDouble(atributos["TasadeRetencion"]);
+                throw new Exception("RetencionesLocales::TasaDeRetencion. No puede estar vacio.");
+            }
+            set
+            {
+                if (atributos.ContainsKey("TasadeRetencion"))
+                    atributos["TasadeRetencion"] = Conversiones.Importe(value);
+                else
+                    atributos.Add("TasadeRetencion", Conversiones.Importe(value));
             }
         }
     }
@@ -639,26 +639,6 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Porcentaje de traslado del impuesto local
-        /// </summary>
-        public double TasaDeTraslado
-        {
-            get
-            {
-                if (atributos.ContainsKey("TasadeTraslado"))
-                    return Convert.ToDouble(atributos["TasadeTraslado"]);
-                throw new Exception("TrasladosLocales::TasadeTraslado. No puede estar vacio.");
-            }
-            set
-            {
-                if (atributos.ContainsKey("TasadeTraslado"))
-                    atributos["TasadeTraslado"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("TasadeTraslado", Conversiones.Importe(value));
-            }
-        }
-
-        /// <summary>
         /// Monto del impuesto local retenido
         /// </summary>
         public double Importe
@@ -675,6 +655,26 @@ namespace IsaRoGaMX.CFDI
                     atributos["Importe"] = Conversiones.Importe(value);
                 else
                     atributos.Add("Importe", Conversiones.Importe(value));
+            }
+        }
+
+        /// <summary>
+        /// Porcentaje de traslado del impuesto local
+        /// </summary>
+        public double TasaDeTraslado
+        {
+            get
+            {
+                if (atributos.ContainsKey("TasadeTraslado"))
+                    return Convert.ToDouble(atributos["TasadeTraslado"]);
+                throw new Exception("TrasladosLocales::TasadeTraslado. No puede estar vacio.");
+            }
+            set
+            {
+                if (atributos.ContainsKey("TasadeTraslado"))
+                    atributos["TasadeTraslado"] = Conversiones.Importe(value);
+                else
+                    atributos.Add("TasadeTraslado", Conversiones.Importe(value));
             }
         }
     }
@@ -710,92 +710,6 @@ namespace IsaRoGaMX.CFDI
             atributos.Add("version", version);
             atributos.Add("TotaldeRetenciones", Conversiones.Importe(totalDeRetenciones));
             atributos.Add("TotaldeTraslados", Conversiones.Importe(totalDeTraslados));
-        }
-
-        /// <summary>
-        /// Devuelve o Establece la Versión del complemento
-        /// </summary>
-        public string Version
-        {
-            get
-            {
-                if (atributos.ContainsKey("version"))
-                    return atributos["version"];
-                throw new Exception("ImpuestosLocales::Version. No puede estar vacio.");
-            }
-            set
-            {
-                if (atributos.ContainsKey("version"))
-                    atributos["version"] = value;
-                else
-                    atributos.Add("version", value);
-            }
-        }
-
-        /// <summary>
-        /// Agrega una <see cref="RetencionLocal">Retención Local</see>
-        /// </summary>
-        /// <param name="retencion">Retención a agregar</param>
-        public void AgregarRetencion(RetencionLocal retencion)
-        {
-            retencionesLocales.Add(retencion);
-        }
-
-        /// <summary>
-        /// Elimina una <see cref="RetencionLocal">Retención Local</see> en el índice especificado
-        /// </summary>
-        /// <param name="indice">Indice de la Retención Local a eliminar</param>
-        public void EliminaRetencion(int indice)
-        {
-            if (indice >= 0 && indice < retencionesLocales.Count)
-            {
-                retencionesLocales.RemoveAt(indice);
-            }
-            throw new Exception("ImpuestosLocales::EliminaRetencion. Indice fuera de rango.");
-        }
-
-        /// <summary>
-        /// Agrega un <see cref="TrasladoLocal">Traslado Local</see>
-        /// </summary>
-        /// <param name="traslado">Traslado a agregar</param>
-        public void AgregarTraslado(TrasladoLocal traslado)
-        {
-            trasladosLocales.Add(traslado);
-        }
-
-        /// <summary>
-        /// Elimina una <see cref="TrasladoLocal">Traslado Local</see> en el índice especificado
-        /// </summary>
-        /// <param name="indice">Indice del Traslado Local a eliminar</param>
-        public void EliminarTraslado(int indice)
-        {
-            if (indice >= 0 && indice < trasladosLocales.Count)
-            {
-                trasladosLocales.RemoveAt(indice);
-            }
-            throw new Exception("ImpuestosLocales::EliminaRetencion. Indice fuera de rango.");
-        }
-
-        /// <summary>
-        /// Devuelve la <see cref="RetencionLocal">Retención Local</see> en el índice especificado
-        /// </summary>
-        /// <param name="indice">Indice de la Retención Local deseada</param>
-        public RetencionLocal Retencion(int indice)
-        {
-            if (indice >= 0 && indice < retencionesLocales.Count)
-                return retencionesLocales[indice];
-            throw new Exception("ImpuestosLocales::Retencion(indice). Indice fuera de rango.");
-        }
-
-        /// <summary>
-        /// Devuelve el <see cref="TrasladoLocal">Traslado Local</see> en el índice especificado
-        /// </summary>
-        /// <param name="indice">Indice de la Retención Local deseada</param>
-        public TrasladoLocal Traslados(int indice)
-        {
-            if (indice >= 0 && indice < trasladosLocales.Count)
-                return trasladosLocales[indice];
-            throw new Exception("ImpuestosLocales::Retencion(indice). Indice fuera de rango.");
         }
 
         /// <summary>
@@ -855,6 +769,69 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
+        /// <summary>
+        /// Devuelve o Establece la Versión del complemento
+        /// </summary>
+        public string Version
+        {
+            get
+            {
+                if (atributos.ContainsKey("version"))
+                    return atributos["version"];
+                throw new Exception("ImpuestosLocales::Version. No puede estar vacio.");
+            }
+            set
+            {
+                if (atributos.ContainsKey("version"))
+                    atributos["version"] = value;
+                else
+                    atributos.Add("version", value);
+            }
+        }
+
+        /// <summary>
+        /// Agrega una <see cref="RetencionLocal">Retención Local</see>
+        /// </summary>
+        /// <param name="retencion">Retención a agregar</param>
+        public void AgregarRetencion(RetencionLocal retencion)
+        {
+            retencionesLocales.Add(retencion);
+        }
+
+        /// <summary>
+        /// Agrega un <see cref="TrasladoLocal">Traslado Local</see>
+        /// </summary>
+        /// <param name="traslado">Traslado a agregar</param>
+        public void AgregarTraslado(TrasladoLocal traslado)
+        {
+            trasladosLocales.Add(traslado);
+        }
+
+        /// <summary>
+        /// Elimina una <see cref="RetencionLocal">Retención Local</see> en el índice especificado
+        /// </summary>
+        /// <param name="indice">Indice de la Retención Local a eliminar</param>
+        public void EliminaRetencion(int indice)
+        {
+            if (indice >= 0 && indice < retencionesLocales.Count)
+            {
+                retencionesLocales.RemoveAt(indice);
+            }
+            throw new Exception("ImpuestosLocales::EliminaRetencion. Indice fuera de rango.");
+        }
+        /// <summary>
+        /// Elimina una <see cref="TrasladoLocal">Traslado Local</see> en el índice especificado
+        /// </summary>
+        /// <param name="indice">Indice del Traslado Local a eliminar</param>
+        public void EliminarTraslado(int indice)
+        {
+            if (indice >= 0 && indice < trasladosLocales.Count)
+            {
+                trasladosLocales.RemoveAt(indice);
+            }
+            throw new Exception("ImpuestosLocales::EliminaRetencion. Indice fuera de rango.");
+        }
+
         /// <inheritdoc/>
         public override XmlElement NodoXML(string prefijo, string namespaceURI, XmlDocument documento)
         {
@@ -901,6 +878,28 @@ namespace IsaRoGaMX.CFDI
 
             // Se retorna el elemento
             return elemento;
+        }
+
+        /// <summary>
+        /// Devuelve la <see cref="RetencionLocal">Retención Local</see> en el índice especificado
+        /// </summary>
+        /// <param name="indice">Indice de la Retención Local deseada</param>
+        public RetencionLocal Retencion(int indice)
+        {
+            if (indice >= 0 && indice < retencionesLocales.Count)
+                return retencionesLocales[indice];
+            throw new Exception("ImpuestosLocales::Retencion(indice). Indice fuera de rango.");
+        }
+
+        /// <summary>
+        /// Devuelve el <see cref="TrasladoLocal">Traslado Local</see> en el índice especificado
+        /// </summary>
+        /// <param name="indice">Indice de la Retención Local deseada</param>
+        public TrasladoLocal Traslados(int indice)
+        {
+            if (indice >= 0 && indice < trasladosLocales.Count)
+                return trasladosLocales[indice];
+            throw new Exception("ImpuestosLocales::Retencion(indice). Indice fuera de rango.");
         }
     }
 
@@ -989,16 +988,9 @@ namespace IsaRoGaMX.CFDI
             atributos.Add("version", "1.0");
         }
 
-        public void Agregar(Leyenda leyenda)
+        public int Elementos
         {
-            leyendas.Add(leyenda);
-        }
-
-        public void Eliminar(int indice)
-        {
-            if (indice >= 0 && indice < leyendas.Count)
-                leyendas.RemoveAt(indice);
-            throw new Exception("LeyendasFiscales::Eliminar(). Indice fuera de rango");
+            get { return leyendas.Count; }
         }
 
         public Leyenda this[int indice]
@@ -1011,11 +1003,17 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public int Elementos
+        public void Agregar(Leyenda leyenda)
         {
-            get { return leyendas.Count; }
+            leyendas.Add(leyenda);
         }
 
+        public void Eliminar(int indice)
+        {
+            if (indice >= 0 && indice < leyendas.Count)
+                leyendas.RemoveAt(indice);
+            throw new Exception("LeyendasFiscales::Eliminar(). Indice fuera de rango");
+        }
         public override XmlElement NodoXML(string prefijo, string namespaceURI, XmlDocument documento)
         {
             XmlElement leyendas = base.NodoXML(prefijo, namespaceURI, documento);
@@ -1038,86 +1036,6 @@ namespace IsaRoGaMX.CFDI
 
     #region Percepciones
 
-    public class Percepciones : baseObject
-    {
-        private readonly List<Percepcion> percepciones;
-
-        public Percepciones() : base("http://www.sat.gob.mx/nomina", "nomina")
-        {
-            percepciones = new List<Percepcion>();
-        }
-
-        public Percepciones(double totalGravado, double totalExento, List<Percepcion> percepciones)
-           : base("http://www.sat.gob.mx/nomina", "nomina")
-        {
-            atributos.Add("TotalGravado", totalGravado.ToString());
-            atributos.Add("TotalExento", totalExento.ToString());
-            this.percepciones = percepciones;
-        }
-
-        public void Agregar(Percepcion percepcion)
-        {
-            percepciones.Add(percepcion);
-        }
-
-        public void Eliminar(int indice)
-        {
-            if (indice >= 0 && indice < percepciones.Count)
-                percepciones.RemoveAt(indice);
-            else
-                throw new Exception("Percepciones::[indice]. Indice fuera de rango");
-        }
-
-        public Percepcion this[int indice]
-        {
-            get
-            {
-                if (indice >= 0 && indice < percepciones.Count)
-                    return percepciones[indice];
-                throw new Exception("Percepciones::[indice]. Indice fuera de rango");
-            }
-        }
-
-        public double TotalGravado
-        {
-            get
-            {
-                if (atributos.ContainsKey("TotalGravado"))
-                    return Convert.ToDouble(atributos["TotalGravado"]);
-                throw new Exception("Percepciones::TotalGravado. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("TotalGravado"))
-                    atributos["TotalGravado"] = value.ToString();
-                else
-                    atributos.Add("TotalGravado", value.ToString());
-            }
-        }
-
-        public double TotalExento
-        {
-            get
-            {
-                if (atributos.ContainsKey("TotalExento"))
-                    return Convert.ToDouble(atributos["TotalExento"]);
-                throw new Exception("Percepciones::TotalExento. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("TotalExento"))
-                    atributos["TotalExento"] = value.ToString();
-                else
-                    atributos.Add("TotalGravado", value.ToString());
-            }
-        }
-
-        public int Elementos
-        {
-            get { return percepciones.Count; }
-        }
-    }
-
     public class Percepcion : baseObject
     {
         public Percepcion() : base("http://www.sat.gob.mx/nomina", "nomina")
@@ -1132,23 +1050,6 @@ namespace IsaRoGaMX.CFDI
             atributos.Add("Concepto", concepto);
             atributos.Add("ImporteGravado", importeGravado.ToString("#.000000"));
             atributos.Add("ImporteExento", importeExento.ToString("#.000000"));
-        }
-
-        public int TipoPercepcion
-        {
-            get
-            {
-                if (atributos.ContainsKey("TipoPercepcion"))
-                    return Convert.ToInt32(atributos["TipoPercepcion"]);
-                throw new Exception("Percepcion::TipoPercepcion. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("TipoPercepcion"))
-                    atributos["TipoPercepcion"] = value.ToString();
-                else
-                    atributos.Add("TipoPercepcion", value.ToString());
-            }
         }
 
         public string Clave
@@ -1185,6 +1086,23 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
+        public double ImporteExento
+        {
+            get
+            {
+                if (atributos.ContainsKey("ImporteExento"))
+                    return Convert.ToDouble(atributos["ImporteExento"]);
+                throw new Exception("Percepcion::ImporteExento. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("ImporteExento"))
+                    atributos["ImporteExento"] = Conversiones.Importe(value);
+                else
+                    atributos.Add("ImporteExento", Conversiones.Importe(value));
+            }
+        }
+
         public double ImporteGravado
         {
             get
@@ -1199,6 +1117,157 @@ namespace IsaRoGaMX.CFDI
                     atributos["ImporteGravado"] = Conversiones.Importe(value);
                 else
                     atributos.Add("ImporteGravado", Conversiones.Importe(value));
+            }
+        }
+
+        public int TipoPercepcion
+        {
+            get
+            {
+                if (atributos.ContainsKey("TipoPercepcion"))
+                    return Convert.ToInt32(atributos["TipoPercepcion"]);
+                throw new Exception("Percepcion::TipoPercepcion. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("TipoPercepcion"))
+                    atributos["TipoPercepcion"] = value.ToString();
+                else
+                    atributos.Add("TipoPercepcion", value.ToString());
+            }
+        }
+    }
+
+    public class Percepciones : baseObject
+    {
+        private readonly List<Percepcion> percepciones;
+
+        public Percepciones() : base("http://www.sat.gob.mx/nomina", "nomina")
+        {
+            percepciones = new List<Percepcion>();
+        }
+
+        public Percepciones(double totalGravado, double totalExento, List<Percepcion> percepciones)
+           : base("http://www.sat.gob.mx/nomina", "nomina")
+        {
+            atributos.Add("TotalGravado", totalGravado.ToString());
+            atributos.Add("TotalExento", totalExento.ToString());
+            this.percepciones = percepciones;
+        }
+
+        public int Elementos
+        {
+            get { return percepciones.Count; }
+        }
+
+        public double TotalExento
+        {
+            get
+            {
+                if (atributos.ContainsKey("TotalExento"))
+                    return Convert.ToDouble(atributos["TotalExento"]);
+                throw new Exception("Percepciones::TotalExento. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("TotalExento"))
+                    atributos["TotalExento"] = value.ToString();
+                else
+                    atributos.Add("TotalGravado", value.ToString());
+            }
+        }
+
+        public double TotalGravado
+        {
+            get
+            {
+                if (atributos.ContainsKey("TotalGravado"))
+                    return Convert.ToDouble(atributos["TotalGravado"]);
+                throw new Exception("Percepciones::TotalGravado. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("TotalGravado"))
+                    atributos["TotalGravado"] = value.ToString();
+                else
+                    atributos.Add("TotalGravado", value.ToString());
+            }
+        }
+
+        public Percepcion this[int indice]
+        {
+            get
+            {
+                if (indice >= 0 && indice < percepciones.Count)
+                    return percepciones[indice];
+                throw new Exception("Percepciones::[indice]. Indice fuera de rango");
+            }
+        }
+
+        public void Agregar(Percepcion percepcion)
+        {
+            percepciones.Add(percepcion);
+        }
+
+        public void Eliminar(int indice)
+        {
+            if (indice >= 0 && indice < percepciones.Count)
+                percepciones.RemoveAt(indice);
+            else
+                throw new Exception("Percepciones::[indice]. Indice fuera de rango");
+        }
+    }
+    #endregion Percepciones
+
+    #region Deducciones
+
+    public class Deduccion : baseObject
+    {
+        public Deduccion() : base("http://www.sat.gob.mx/nomina", "nomina")
+        {
+        }
+
+        public Deduccion(int tipoDeduccion, string clave, string concepto, double importeGravado, double importeExento)
+           : base("http://www.sat.gob.mx/nomina", "nomina")
+        {
+            atributos.Add("TipoDeduccion", tipoDeduccion.ToString());
+            atributos.Add("Clave", clave);
+            atributos.Add("Concepto", concepto);
+            atributos.Add("ImporteGravado", importeGravado.ToString("#.000000"));
+            atributos.Add("ImporteExento", importeExento.ToString("#.000000"));
+        }
+
+        public string Clave
+        {
+            get
+            {
+                if (atributos.ContainsKey("Clave"))
+                    return atributos["Clave"];
+                throw new Exception("Percepcion::Clave. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("Clave"))
+                    atributos["Clave"] = value;
+                else
+                    atributos.Add("Clave", value);
+            }
+        }
+
+        public string Concepto
+        {
+            get
+            {
+                if (atributos.ContainsKey("Concepto"))
+                    return atributos["Concepto"];
+                throw new Exception("Percepcion::Concepto. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("Concepto"))
+                    atributos["Concepto"] = value;
+                else
+                    atributos.Add("Concepto", value);
             }
         }
 
@@ -1218,11 +1287,41 @@ namespace IsaRoGaMX.CFDI
                     atributos.Add("ImporteExento", Conversiones.Importe(value));
             }
         }
+
+        public double ImporteGravado
+        {
+            get
+            {
+                if (atributos.ContainsKey("ImporteGravado"))
+                    return Convert.ToDouble(atributos["ImporteGravado"]);
+                throw new Exception("Percepcion::ImporteGravado. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("ImporteGravado"))
+                    atributos["ImporteGravado"] = Conversiones.Importe(value);
+                else
+                    atributos.Add("ImporteGravado", Conversiones.Importe(value));
+            }
+        }
+
+        public int TipoPercepcion
+        {
+            get
+            {
+                if (atributos.ContainsKey("TipoPercepcion"))
+                    return Convert.ToInt32(atributos["TipoPercepcion"]);
+                throw new Exception("Percepcion::TipoPercepcion. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("TipoPercepcion"))
+                    atributos["TipoPercepcion"] = value.ToString();
+                else
+                    atributos.Add("TipoPercepcion", value.ToString());
+            }
+        }
     }
-
-    #endregion Percepciones
-
-    #region Deducciones
 
     public class Deducciones : baseObject
     {
@@ -1241,26 +1340,25 @@ namespace IsaRoGaMX.CFDI
             this.deducciones = deducciones;
         }
 
-        public void Agregar(Deduccion deduccion)
+        public int Elementos
         {
-            deducciones.Add(deduccion);
+            get { return deducciones.Count; }
         }
 
-        public void Eliminar(int indice)
-        {
-            if (indice >= 0 && indice < deducciones.Count)
-                deducciones.RemoveAt(indice);
-            else
-                throw new Exception("Deducciones::[indice]. Indice fuera de rango");
-        }
-
-        public Deduccion this[int indice]
+        public double TotalExento
         {
             get
             {
-                if (indice >= 0 && indice < deducciones.Count)
-                    return deducciones[indice];
-                throw new Exception("Deducciones::[indice]. Indice fuera de rango");
+                if (atributos.ContainsKey("TotalExento"))
+                    return Convert.ToDouble(atributos["TotalExento"]);
+                throw new Exception("Percepciones::TotalExento. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("TotalExento"))
+                    atributos["TotalExento"] = value.ToString();
+                else
+                    atributos.Add("TotalGravado", value.ToString());
             }
         }
 
@@ -1281,131 +1379,29 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public double TotalExento
+        public Deduccion this[int indice]
         {
             get
             {
-                if (atributos.ContainsKey("TotalExento"))
-                    return Convert.ToDouble(atributos["TotalExento"]);
-                throw new Exception("Percepciones::TotalExento. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("TotalExento"))
-                    atributos["TotalExento"] = value.ToString();
-                else
-                    atributos.Add("TotalGravado", value.ToString());
+                if (indice >= 0 && indice < deducciones.Count)
+                    return deducciones[indice];
+                throw new Exception("Deducciones::[indice]. Indice fuera de rango");
             }
         }
 
-        public int Elementos
+        public void Agregar(Deduccion deduccion)
         {
-            get { return deducciones.Count; }
+            deducciones.Add(deduccion);
+        }
+
+        public void Eliminar(int indice)
+        {
+            if (indice >= 0 && indice < deducciones.Count)
+                deducciones.RemoveAt(indice);
+            else
+                throw new Exception("Deducciones::[indice]. Indice fuera de rango");
         }
     }
-
-    public class Deduccion : baseObject
-    {
-        public Deduccion() : base("http://www.sat.gob.mx/nomina", "nomina")
-        {
-        }
-
-        public Deduccion(int tipoDeduccion, string clave, string concepto, double importeGravado, double importeExento)
-           : base("http://www.sat.gob.mx/nomina", "nomina")
-        {
-            atributos.Add("TipoDeduccion", tipoDeduccion.ToString());
-            atributos.Add("Clave", clave);
-            atributos.Add("Concepto", concepto);
-            atributos.Add("ImporteGravado", importeGravado.ToString("#.000000"));
-            atributos.Add("ImporteExento", importeExento.ToString("#.000000"));
-        }
-
-        public int TipoPercepcion
-        {
-            get
-            {
-                if (atributos.ContainsKey("TipoPercepcion"))
-                    return Convert.ToInt32(atributos["TipoPercepcion"]);
-                throw new Exception("Percepcion::TipoPercepcion. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("TipoPercepcion"))
-                    atributos["TipoPercepcion"] = value.ToString();
-                else
-                    atributos.Add("TipoPercepcion", value.ToString());
-            }
-        }
-
-        public string Clave
-        {
-            get
-            {
-                if (atributos.ContainsKey("Clave"))
-                    return atributos["Clave"];
-                throw new Exception("Percepcion::Clave. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("Clave"))
-                    atributos["Clave"] = value;
-                else
-                    atributos.Add("Clave", value);
-            }
-        }
-
-        public string Concepto
-        {
-            get
-            {
-                if (atributos.ContainsKey("Concepto"))
-                    return atributos["Concepto"];
-                throw new Exception("Percepcion::Concepto. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("Concepto"))
-                    atributos["Concepto"] = value;
-                else
-                    atributos.Add("Concepto", value);
-            }
-        }
-
-        public double ImporteGravado
-        {
-            get
-            {
-                if (atributos.ContainsKey("ImporteGravado"))
-                    return Convert.ToDouble(atributos["ImporteGravado"]);
-                throw new Exception("Percepcion::ImporteGravado. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("ImporteGravado"))
-                    atributos["ImporteGravado"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("ImporteGravado", Conversiones.Importe(value));
-            }
-        }
-
-        public double ImporteExento
-        {
-            get
-            {
-                if (atributos.ContainsKey("ImporteExento"))
-                    return Convert.ToDouble(atributos["ImporteExento"]);
-                throw new Exception("Percepcion::ImporteExento. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("ImporteExento"))
-                    atributos["ImporteExento"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("ImporteExento", Conversiones.Importe(value));
-            }
-        }
-    }
-
     #endregion Deducciones
 
     #region Incapacidades
@@ -1422,6 +1418,23 @@ namespace IsaRoGaMX.CFDI
             atributos.Add("DiasIncapacidad", diasIncapacidad.ToString());
             atributos.Add("TipoIncapacidad", tipoIncapacidad.ToString());
             atributos.Add("Decuento", descuento.ToString("#.000000"));
+        }
+
+        public double Decuento
+        {
+            get
+            {
+                if (atributos.ContainsKey("Decuento"))
+                    return Convert.ToDouble(atributos["Decuento"]);
+                throw new Exception("Incapacidad::Decuento. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("Decuento"))
+                    atributos["Decuento"] = value.ToString();
+                else
+                    atributos.Add("Decuento", value.ToString());
+            }
         }
 
         public double DiasIncapacidad
@@ -1457,23 +1470,6 @@ namespace IsaRoGaMX.CFDI
                     atributos.Add("TipoIncapacidad", value.ToString());
             }
         }
-
-        public double Decuento
-        {
-            get
-            {
-                if (atributos.ContainsKey("Decuento"))
-                    return Convert.ToDouble(atributos["Decuento"]);
-                throw new Exception("Incapacidad::Decuento. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("Decuento"))
-                    atributos["Decuento"] = value.ToString();
-                else
-                    atributos.Add("Decuento", value.ToString());
-            }
-        }
     }
 
     public class Incapacidades
@@ -1483,6 +1479,11 @@ namespace IsaRoGaMX.CFDI
         public Incapacidades()
         {
             incapacidades = new List<Incapacidad>();
+        }
+
+        public int Elementos
+        {
+            get { return incapacidades.Count; }
         }
 
         public Incapacidad this[int indice]
@@ -1506,11 +1507,6 @@ namespace IsaRoGaMX.CFDI
                 incapacidades.RemoveAt(indice);
             else
                 throw new Exception("Incapacidades:Eliminar(). Indice fuera de rango");
-        }
-
-        public int Elementos
-        {
-            get { return incapacidades.Count; }
         }
     }
 
@@ -1550,23 +1546,6 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public string TipoHoras
-        {
-            get
-            {
-                if (atributos.ContainsKey("TipoHoras"))
-                    return atributos["TipoHoras"];
-                throw new Exception("HorasExtra::TipoHoras. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("TipoHoras"))
-                    atributos["TipoHoras"] = value;
-                else
-                    atributos.Add("TipoHoras", value);
-            }
-        }
-
         public int Horas
         {
             get
@@ -1600,6 +1579,23 @@ namespace IsaRoGaMX.CFDI
                     atributos.Add("ImportePagado", value.ToString());
             }
         }
+
+        public string TipoHoras
+        {
+            get
+            {
+                if (atributos.ContainsKey("TipoHoras"))
+                    return atributos["TipoHoras"];
+                throw new Exception("HorasExtra::TipoHoras. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("TipoHoras"))
+                    atributos["TipoHoras"] = value;
+                else
+                    atributos.Add("TipoHoras", value);
+            }
+        }
     }
 
     public class HorasExtras
@@ -1609,6 +1605,11 @@ namespace IsaRoGaMX.CFDI
         public HorasExtras()
         {
             horasExtra = new List<HorasExtra>();
+        }
+
+        public int Elementos
+        {
+            get { return horasExtra.Count; }
         }
 
         public HorasExtra this[int indice]
@@ -1633,11 +1634,6 @@ namespace IsaRoGaMX.CFDI
             else
                 throw new Exception("HorasExtras:Eliminar(). Indice fuera de rango");
         }
-
-        public int Elementos
-        {
-            get { return horasExtra.Count; }
-        }
     }
 
     #endregion HorasExtras
@@ -1646,11 +1642,10 @@ namespace IsaRoGaMX.CFDI
 
     public class Nomina : ComplementoComprobante
     {
-        private Percepciones percepciones;
         private Deducciones deducciones;
-        private Incapacidades incapacidades;
         private HorasExtras horasExtras;
-
+        private Incapacidades incapacidades;
+        private Percepciones percepciones;
         public Nomina() : base("nomina", "http://www.sat.gob.mx/nomina")
         {
             atributos.Add("Version", "1.1");
@@ -1670,38 +1665,48 @@ namespace IsaRoGaMX.CFDI
             atributos.Add("PeriodicidadPago", periodicidadPago);
         }
 
-        public string Version
+        public int Antiguedad
         {
             get
             {
-                if (atributos.ContainsKey("Version"))
-                    return atributos["Version"];
-                throw new Exception("Nomina::Version. No puede estar vacio");
-            }
-        }
-
-        public string RegistroPatronal
-        {
-            get
-            {
-                return atributos.ContainsKey("RegistroPatronal") ? atributos["RegistroPatronal"] : string.Empty;
+                return atributos.ContainsKey("Antiguedad") ? Convert.ToInt32(atributos["Antiguedad"]) : -1;
             }
             set
             {
-                if (atributos.ContainsKey("RegistroPatronal"))
-                    atributos["RegistroPatronal"] = value;
+                if (atributos.ContainsKey("Antiguedad"))
+                    atributos["Antiguedad"] = value.ToString();
                 else
-                    atributos.Add("RegistroPatronal", value);
+                    atributos.Add("Antiguedad", value.ToString());
             }
         }
 
-        public string NumEmpleado
+        public int Banco
         {
             get
             {
-                if (atributos.ContainsKey("NumEmpleado"))
-                    return atributos["NumEmpleado"];
-                throw new Exception("Nomina::NumEmpleado. No puede estar vacio");
+                return atributos.ContainsKey("Banco") ? Convert.ToInt32(atributos["Banco"]) : -1;
+            }
+            set
+            {
+                if (atributos.ContainsKey("Banco"))
+                    atributos["Banco"] = value.ToString();
+                else
+                    atributos.Add("Banco", value.ToString());
+            }
+        }
+
+        public string CLABE
+        {
+            get
+            {
+                return atributos.ContainsKey("CLABE") ? atributos["CLABE"] : string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("CLABE"))
+                    atributos["CLABE"] = value;
+                else
+                    atributos.Add("CLABE", value);
             }
         }
 
@@ -1722,120 +1727,24 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public string TipoRegimen
+        public Deducciones Deducciones
         {
-            get
-            {
-                if (atributos.ContainsKey("TipoRegimen"))
-                    return atributos["TipoRegimen"];
-                throw new Exception("Nomina::TipoRegimen. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("TipoRegimen"))
-                    atributos["TipoRegimen"] = value;
-                else
-                    atributos.Add("TipoRegimen", value);
-            }
+            get { return deducciones; }
+            set { deducciones = value; }
         }
 
-        public string NumSeguridadSocial
+        public string Departamento
         {
             get
             {
-                return atributos.ContainsKey("NumSeguridadSocial") ? atributos["NumSeguridadSocial"] : string.Empty;
+                return atributos.ContainsKey("Departamento") ? atributos["Departamento"] : string.Empty;
             }
             set
             {
-                if (atributos.ContainsKey("NumSeguridadSocial"))
-                    atributos["NumSeguridadSocial"] = value;
+                if (atributos.ContainsKey("Departamento"))
+                    atributos["Departamento"] = value;
                 else
-                    atributos.Add("NumSeguridadSocial", value);
-            }
-        }
-
-        public string FechaPagoString
-        {
-            get
-            {
-                if (atributos.ContainsKey("FechaPago"))
-                    return atributos["FechaPago"];
-                throw new Exception("Nomina::FechaPago. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("FechaPago"))
-                    atributos["FechaPago"] = value;
-                else
-                    atributos.Add("FechaPago", value);
-            }
-        }
-
-        public DateTime FechaPagoDateTime
-        {
-            get
-            {
-                if (atributos.ContainsKey("FechaPago"))
-                    return Conversiones.FechaISO8601DateTime(atributos["FechaPago"]);
-                throw new Exception("Nomina::FechaPago. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("FechaPago"))
-                    atributos["FechaPago"] = Conversiones.DateTimeFechaISO8601(value);
-                else
-                    atributos.Add("FechaPago", Conversiones.DateTimeFechaISO8601(value));
-            }
-        }
-
-        public string FechaInicialPagoString
-        {
-            get
-            {
-                if (atributos.ContainsKey("FechaInicialPago"))
-                    return atributos["FechaInicialPago"];
-                throw new Exception("Nomina::FechaInicialPago. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("FechaInicialPago"))
-                    atributos["FechaInicialPago"] = value;
-                else
-                    atributos.Add("FechaInicialPago", value);
-            }
-        }
-
-        public DateTime FechaInicialPagoDateTime
-        {
-            get
-            {
-                if (atributos.ContainsKey("FechaInicialPago"))
-                    return Conversiones.FechaISO8601DateTime(atributos["FechaInicialPago"]);
-                throw new Exception("Nomina::FechaInicialPago. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("FechaInicialPago"))
-                    atributos["FechaInicialPago"] = Conversiones.DateTimeFechaISO8601(value);
-                else
-                    atributos.Add("FechaInicialPago", Conversiones.DateTimeFechaISO8601(value));
-            }
-        }
-
-        public string FechaFinalPagoString
-        {
-            get
-            {
-                if (atributos.ContainsKey("FechaFinalPago"))
-                    return atributos["FechaFinalPago"];
-                throw new Exception("Nomina::FechaFinalPago. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("FechaFinalPago"))
-                    atributos["FechaFinalPago"] = value;
-                else
-                    atributos.Add("FechaFinalPago", value);
+                    atributos.Add("Departamento", value);
             }
         }
 
@@ -1856,80 +1765,54 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public double NumDiasPagados
+        public string FechaFinalPagoString
         {
             get
             {
-                if (atributos.ContainsKey("NumDiasPagados"))
-                    return Convert.ToDouble(atributos["NumDiasPagados"]);
-                throw new Exception("Nomina::NumDiasPagados. No puede estar vacio");
+                if (atributos.ContainsKey("FechaFinalPago"))
+                    return atributos["FechaFinalPago"];
+                throw new Exception("Nomina::FechaFinalPago. No puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("NumDiasPagados"))
-                    atributos["NumDiasPagados"] = value.ToString();
+                if (atributos.ContainsKey("FechaFinalPago"))
+                    atributos["FechaFinalPago"] = value;
                 else
-                    atributos.Add("NumDiasPagados", value.ToString());
+                    atributos.Add("FechaFinalPago", value);
             }
         }
 
-        public string Departamento
+        public DateTime FechaInicialPagoDateTime
         {
             get
             {
-                return atributos.ContainsKey("Departamento") ? atributos["Departamento"] : string.Empty;
+                if (atributos.ContainsKey("FechaInicialPago"))
+                    return Conversiones.FechaISO8601DateTime(atributos["FechaInicialPago"]);
+                throw new Exception("Nomina::FechaInicialPago. No puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("Departamento"))
-                    atributos["Departamento"] = value;
+                if (atributos.ContainsKey("FechaInicialPago"))
+                    atributos["FechaInicialPago"] = Conversiones.DateTimeFechaISO8601(value);
                 else
-                    atributos.Add("Departamento", value);
+                    atributos.Add("FechaInicialPago", Conversiones.DateTimeFechaISO8601(value));
             }
         }
 
-        public string CLABE
+        public string FechaInicialPagoString
         {
             get
             {
-                return atributos.ContainsKey("CLABE") ? atributos["CLABE"] : string.Empty;
+                if (atributos.ContainsKey("FechaInicialPago"))
+                    return atributos["FechaInicialPago"];
+                throw new Exception("Nomina::FechaInicialPago. No puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("CLABE"))
-                    atributos["CLABE"] = value;
+                if (atributos.ContainsKey("FechaInicialPago"))
+                    atributos["FechaInicialPago"] = value;
                 else
-                    atributos.Add("CLABE", value);
-            }
-        }
-
-        public int Banco
-        {
-            get
-            {
-                return atributos.ContainsKey("Banco") ? Convert.ToInt32(atributos["Banco"]) : -1;
-            }
-            set
-            {
-                if (atributos.ContainsKey("Banco"))
-                    atributos["Banco"] = value.ToString();
-                else
-                    atributos.Add("Banco", value.ToString());
-            }
-        }
-
-        public string FechaInicioRelLaboralString
-        {
-            get
-            {
-                return atributos.ContainsKey("FechaInicioRelLaboral") ? atributos["FechaInicioRelLaboral"] : string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("FechaInicioRelLaboral"))
-                    atributos["FechaInicioRelLaboral"] = value;
-                else
-                    atributos.Add("FechaInicioRelLaboral", value);
+                    atributos.Add("FechaInicialPago", value);
             }
         }
 
@@ -1948,18 +1831,130 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public int Antiguedad
+        public string FechaInicioRelLaboralString
         {
             get
             {
-                return atributos.ContainsKey("Antiguedad") ? Convert.ToInt32(atributos["Antiguedad"]) : -1;
+                return atributos.ContainsKey("FechaInicioRelLaboral") ? atributos["FechaInicioRelLaboral"] : string.Empty;
             }
             set
             {
-                if (atributos.ContainsKey("Antiguedad"))
-                    atributos["Antiguedad"] = value.ToString();
+                if (atributos.ContainsKey("FechaInicioRelLaboral"))
+                    atributos["FechaInicioRelLaboral"] = value;
                 else
-                    atributos.Add("Antiguedad", value.ToString());
+                    atributos.Add("FechaInicioRelLaboral", value);
+            }
+        }
+
+        public DateTime FechaPagoDateTime
+        {
+            get
+            {
+                if (atributos.ContainsKey("FechaPago"))
+                    return Conversiones.FechaISO8601DateTime(atributos["FechaPago"]);
+                throw new Exception("Nomina::FechaPago. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("FechaPago"))
+                    atributos["FechaPago"] = Conversiones.DateTimeFechaISO8601(value);
+                else
+                    atributos.Add("FechaPago", Conversiones.DateTimeFechaISO8601(value));
+            }
+        }
+
+        public string FechaPagoString
+        {
+            get
+            {
+                if (atributos.ContainsKey("FechaPago"))
+                    return atributos["FechaPago"];
+                throw new Exception("Nomina::FechaPago. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("FechaPago"))
+                    atributos["FechaPago"] = value;
+                else
+                    atributos.Add("FechaPago", value);
+            }
+        }
+
+        public HorasExtras HorasExtras
+        {
+            get { return horasExtras; }
+            set { horasExtras = value; }
+        }
+
+        public Incapacidades Incapacidades
+        {
+            get { return incapacidades; }
+            set { incapacidades = value; }
+        }
+
+        public double NumDiasPagados
+        {
+            get
+            {
+                if (atributos.ContainsKey("NumDiasPagados"))
+                    return Convert.ToDouble(atributos["NumDiasPagados"]);
+                throw new Exception("Nomina::NumDiasPagados. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("NumDiasPagados"))
+                    atributos["NumDiasPagados"] = value.ToString();
+                else
+                    atributos.Add("NumDiasPagados", value.ToString());
+            }
+        }
+
+        public string NumEmpleado
+        {
+            get
+            {
+                if (atributos.ContainsKey("NumEmpleado"))
+                    return atributos["NumEmpleado"];
+                throw new Exception("Nomina::NumEmpleado. No puede estar vacio");
+            }
+        }
+
+        public string NumSeguridadSocial
+        {
+            get
+            {
+                return atributos.ContainsKey("NumSeguridadSocial") ? atributos["NumSeguridadSocial"] : string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("NumSeguridadSocial"))
+                    atributos["NumSeguridadSocial"] = value;
+                else
+                    atributos.Add("NumSeguridadSocial", value);
+            }
+        }
+
+        // disable ConvertToAutoProperty
+        public Percepciones Percepciones
+        {
+            get { return percepciones; }
+            set { percepciones = value; }
+        }
+
+        public string PeriodicidadPago
+        {
+            get
+            {
+                if (atributos.ContainsKey("PeriodicidadPago"))
+                    return atributos["PeriodicidadPago"];
+                throw new Exception("Nomina:PeriodicidadPago. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("PeriodicidadPago"))
+                    atributos["PeriodicidadPago"] = value;
+                else
+                    atributos.Add("PeriodicidadPago", value);
             }
         }
 
@@ -1975,6 +1970,66 @@ namespace IsaRoGaMX.CFDI
                     atributos["Puesto"] = value;
                 else
                     atributos.Add("Puesto", value);
+            }
+        }
+
+        public string RegistroPatronal
+        {
+            get
+            {
+                return atributos.ContainsKey("RegistroPatronal") ? atributos["RegistroPatronal"] : string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("RegistroPatronal"))
+                    atributos["RegistroPatronal"] = value;
+                else
+                    atributos.Add("RegistroPatronal", value);
+            }
+        }
+
+        public int RiesgoPuesto
+        {
+            get
+            {
+                return atributos.ContainsKey("RiesgoPuesto") ? Convert.ToInt32(atributos["RiesgoPuesto"]) : -1;
+            }
+            set
+            {
+                if (atributos.ContainsKey("RiesgoPuesto"))
+                    atributos["RiesgoPuesto"] = value.ToString();
+                else
+                    atributos.Add("RiesgoPuesto", value.ToString());
+            }
+        }
+
+        public string SalarioBasoCotApor
+        {
+            get
+            {
+                return atributos.ContainsKey("SalarioBasoCotApor") ? atributos["SalarioBasoCotApor"] : string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("SalarioBasoCotApor"))
+                    atributos["SalarioBasoCotApor"] = value;
+                else
+                    atributos.Add("SalarioBasoCotApor", value);
+            }
+        }
+
+        public string SalarioDiarioIntegrado
+        {
+            get
+            {
+                return atributos.ContainsKey("SalarioDiarioIntegrado") ? atributos["SalarioDiarioIntegrado"] : string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("SalarioDiarioIntegrado"))
+                    atributos["SalarioDiarioIntegrado"] = value;
+                else
+                    atributos.Add("SalarioDiarioIntegrado", value);
             }
         }
 
@@ -2008,91 +2063,31 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public string PeriodicidadPago
+        public string TipoRegimen
         {
             get
             {
-                if (atributos.ContainsKey("PeriodicidadPago"))
-                    return atributos["PeriodicidadPago"];
-                throw new Exception("Nomina:PeriodicidadPago. No puede estar vacio");
+                if (atributos.ContainsKey("TipoRegimen"))
+                    return atributos["TipoRegimen"];
+                throw new Exception("Nomina::TipoRegimen. No puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("PeriodicidadPago"))
-                    atributos["PeriodicidadPago"] = value;
+                if (atributos.ContainsKey("TipoRegimen"))
+                    atributos["TipoRegimen"] = value;
                 else
-                    atributos.Add("PeriodicidadPago", value);
+                    atributos.Add("TipoRegimen", value);
             }
         }
 
-        public string SalarioBasoCotApor
+        public string Version
         {
             get
             {
-                return atributos.ContainsKey("SalarioBasoCotApor") ? atributos["SalarioBasoCotApor"] : string.Empty;
+                if (atributos.ContainsKey("Version"))
+                    return atributos["Version"];
+                throw new Exception("Nomina::Version. No puede estar vacio");
             }
-            set
-            {
-                if (atributos.ContainsKey("SalarioBasoCotApor"))
-                    atributos["SalarioBasoCotApor"] = value;
-                else
-                    atributos.Add("SalarioBasoCotApor", value);
-            }
-        }
-
-        public int RiesgoPuesto
-        {
-            get
-            {
-                return atributos.ContainsKey("RiesgoPuesto") ? Convert.ToInt32(atributos["RiesgoPuesto"]) : -1;
-            }
-            set
-            {
-                if (atributos.ContainsKey("RiesgoPuesto"))
-                    atributos["RiesgoPuesto"] = value.ToString();
-                else
-                    atributos.Add("RiesgoPuesto", value.ToString());
-            }
-        }
-
-        public string SalarioDiarioIntegrado
-        {
-            get
-            {
-                return atributos.ContainsKey("SalarioDiarioIntegrado") ? atributos["SalarioDiarioIntegrado"] : string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("SalarioDiarioIntegrado"))
-                    atributos["SalarioDiarioIntegrado"] = value;
-                else
-                    atributos.Add("SalarioDiarioIntegrado", value);
-            }
-        }
-
-        // disable ConvertToAutoProperty
-        public Percepciones Percepciones
-        {
-            get { return percepciones; }
-            set { percepciones = value; }
-        }
-
-        public Deducciones Deducciones
-        {
-            get { return deducciones; }
-            set { deducciones = value; }
-        }
-
-        public Incapacidades Incapacidades
-        {
-            get { return incapacidades; }
-            set { incapacidades = value; }
-        }
-
-        public HorasExtras HorasExtras
-        {
-            get { return horasExtras; }
-            set { horasExtras = value; }
         }
     }
 
@@ -2124,25 +2119,37 @@ namespace IsaRoGaMX.CFDI
             atributos.Add("importe", Conversiones.Importe(importe));
         }
 
-        public void AgregaTraslado(TrasladoEstadoDeCuentaCombustible traslado)
-        {
-            traslados.Agregar(traslado);
-        }
-
-        public string Identificador
+        public string ClaveEstacion
         {
             get
             {
-                if (atributos.ContainsKey("identificador"))
-                    return atributos["identificador"];
-                throw new Exception("ConceptoEstadoDeCuenta::identificador. No puede estar vacio");
+                if (atributos.ContainsKey("claveEstacion"))
+                    return atributos["claveEstacion"];
+                throw new Exception("ConceptoEstadoDeCuentaCombustible::claveEstacion. No puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("identificador"))
-                    atributos["identificador"] = value;
+                if (atributos.ContainsKey("claveEstacion"))
+                    atributos["claveEstacion"] = value;
                 else
-                    atributos.Add("identificador", value);
+                    atributos.Add("claveEstacion", value);
+            }
+        }
+
+        public DateTime FechaDateTime
+        {
+            get
+            {
+                if (atributos.ContainsKey("fecha"))
+                    return Conversiones.FechaISO8601DateTime(atributos["fecha"]);
+                throw new Exception("ConceptoEstadoDeCuentaCombustible::fecha. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("fecha"))
+                    atributos["fecha"] = Conversiones.DateTimeFechaISO8601(value);
+                else
+                    atributos.Add("fecha", Conversiones.DateTimeFechaISO8601(value));
             }
         }
 
@@ -2171,54 +2178,55 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public DateTime FechaDateTime
+        public string FolioOperacion
         {
             get
             {
-                if (atributos.ContainsKey("fecha"))
-                    return Conversiones.FechaISO8601DateTime(atributos["fecha"]);
-                throw new Exception("ConceptoEstadoDeCuentaCombustible::fecha. No puede estar vacio");
+                if (atributos.ContainsKey("folioOperacion"))
+                    return atributos["folioOperacion"];
+                throw new Exception("ConceptoEstadoDeCuentaCombustible::folioOperacion. No puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("fecha"))
-                    atributos["fecha"] = Conversiones.DateTimeFechaISO8601(value);
+                if (atributos.ContainsKey("folioOperacion"))
+                    atributos["folioOperacion"] = value;
                 else
-                    atributos.Add("fecha", Conversiones.DateTimeFechaISO8601(value));
+                    atributos.Add("folioOperacion", value);
             }
         }
 
-        public string RFC
+        public string Identificador
         {
             get
             {
-                if (atributos.ContainsKey("rfc"))
-                    return atributos["rfc"];
-                throw new Exception("ConceptoEstadoDeCuentaCombustible::rfc. No puede estar vacio");
+                if (atributos.ContainsKey("identificador"))
+                    return atributos["identificador"];
+                throw new Exception("ConceptoEstadoDeCuenta::identificador. No puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("rfc"))
-                    atributos["rfc"] = value;
+                if (atributos.ContainsKey("identificador"))
+                    atributos["identificador"] = value;
                 else
-                    atributos.Add("rfc", value);
+                    atributos.Add("identificador", value);
             }
         }
 
-        public string ClaveEstacion
+        public double Importe
         {
             get
             {
-                if (atributos.ContainsKey("claveEstacion"))
-                    return atributos["claveEstacion"];
-                throw new Exception("ConceptoEstadoDeCuentaCombustible::claveEstacion. No puede estar vacio");
+                if (atributos.ContainsKey("importe"))
+                    return Convert.ToDouble(atributos["importe"]);
+                else
+                    throw new Exception("Concepto::importe no puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("claveEstacion"))
-                    atributos["claveEstacion"] = value;
+                if (atributos.ContainsKey("importe"))
+                    atributos["importe"] = Conversiones.Importe(value);
                 else
-                    atributos.Add("claveEstacion", value);
+                    atributos.Add("importe", Conversiones.Importe(value));
             }
         }
 
@@ -2239,20 +2247,20 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public string FolioOperacion
+        public string RFC
         {
             get
             {
-                if (atributos.ContainsKey("folioOperacion"))
-                    return atributos["folioOperacion"];
-                throw new Exception("ConceptoEstadoDeCuentaCombustible::folioOperacion. No puede estar vacio");
+                if (atributos.ContainsKey("rfc"))
+                    return atributos["rfc"];
+                throw new Exception("ConceptoEstadoDeCuentaCombustible::rfc. No puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("folioOperacion"))
-                    atributos["folioOperacion"] = value;
+                if (atributos.ContainsKey("rfc"))
+                    atributos["rfc"] = value;
                 else
-                    atributos.Add("folioOperacion", value);
+                    atributos.Add("rfc", value);
             }
         }
 
@@ -2274,22 +2282,9 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public double Importe
+        public void AgregaTraslado(TrasladoEstadoDeCuentaCombustible traslado)
         {
-            get
-            {
-                if (atributos.ContainsKey("importe"))
-                    return Convert.ToDouble(atributos["importe"]);
-                else
-                    throw new Exception("Concepto::importe no puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("importe"))
-                    atributos["importe"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("importe", Conversiones.Importe(value));
-            }
+            traslados.Agregar(traslado);
         }
     }
 
@@ -2305,24 +2300,6 @@ namespace IsaRoGaMX.CFDI
             atributos.Add("impuesto", impuesto);
             atributos.Add("tasa", Conversiones.Importe(tasa));
             atributos.Add("importe", Conversiones.Importe(importe));
-        }
-
-        public string Impuesto
-        {
-            get
-            {
-                if (atributos.ContainsKey("impuesto"))
-                    return atributos["impuesto"];
-                else
-                    throw new Exception("TrasladoEstadoDeCuentaCombustible::impuesto no puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("impuesto"))
-                    atributos["impuesto"] = value;
-                else
-                    atributos.Add("impuesto", value);
-            }
         }
 
         public double Importe
@@ -2343,6 +2320,23 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
+        public string Impuesto
+        {
+            get
+            {
+                if (atributos.ContainsKey("impuesto"))
+                    return atributos["impuesto"];
+                else
+                    throw new Exception("TrasladoEstadoDeCuentaCombustible::impuesto no puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("impuesto"))
+                    atributos["impuesto"] = value;
+                else
+                    atributos.Add("impuesto", value);
+            }
+        }
         public double Tasa
         {
             get
@@ -2376,6 +2370,14 @@ namespace IsaRoGaMX.CFDI
         public ConceptosEstadoDeCuentaCombustibles()
         {
             conceptos = new List<ConceptoEstadoDeCuenta>();
+        }
+
+        /// <summary>
+        /// Devuelve el número de conceptos en la lista
+        /// </summary>
+        public int Elementos
+        {
+            get { return conceptos.Count; }
         }
 
         /// <summary>
@@ -2419,14 +2421,6 @@ namespace IsaRoGaMX.CFDI
         {
             conceptos = new List<ConceptoEstadoDeCuenta>();
         }
-
-        /// <summary>
-        /// Devuelve el número de conceptos en la lista
-        /// </summary>
-        public int Elementos
-        {
-            get { return conceptos.Count; }
-        }
     }
 
     #endregion ConceptosEstadoDeCuentaCombustibles
@@ -2440,6 +2434,11 @@ namespace IsaRoGaMX.CFDI
         public TrasladosConceptosEstadoDeCuentaCombustible()
         {
             traslados = new List<TrasladoEstadoDeCuentaCombustible>();
+        }
+
+        public int Elementos
+        {
+            get { return traslados.Count; }
         }
 
         public TrasladoEstadoDeCuentaCombustible this[int indice]
@@ -2461,11 +2460,6 @@ namespace IsaRoGaMX.CFDI
         public void Elimina(int indice)
         {
             traslados.RemoveAt(indice);
-        }
-
-        public int Elementos
-        {
-            get { return traslados.Count; }
         }
     }
 
@@ -2496,38 +2490,6 @@ namespace IsaRoGaMX.CFDI
             atributos.Add("numeroDeCuenta", numeroDeCuenta);
             atributos.Add("subTotal", Conversiones.Importe(subTotal));
             atributos.Add("total", Conversiones.Importe(total));
-        }
-
-        public ConceptoEstadoDeCuenta this[int indice]
-        {
-            get
-            {
-                if (indice >= 0 && indice < conceptos.Elementos)
-                    return conceptos[indice];
-                throw new Exception("EstadoDeCuentaCombustible::[indice]. Indice fuera de rango");
-            }
-        }
-
-        public void Agregar(ConceptoEstadoDeCuenta concepto)
-        {
-            conceptos.Agregar(concepto);
-        }
-
-        public string TipoOperacion
-        {
-            get
-            {
-                if (atributos.ContainsKey("tipoOperacion"))
-                    return atributos["tipoOperacion"];
-                throw new Exception("EstadoDeCuentaCombustible::tipoOperacion. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("tipoOperacion"))
-                    atributos["tipoOperacion"] = value;
-                else
-                    atributos.Add("tipoOperacion", value);
-            }
         }
 
         public string NumeroDeCuenta
@@ -2565,6 +2527,23 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
+        public string TipoOperacion
+        {
+            get
+            {
+                if (atributos.ContainsKey("tipoOperacion"))
+                    return atributos["tipoOperacion"];
+                throw new Exception("EstadoDeCuentaCombustible::tipoOperacion. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("tipoOperacion"))
+                    atributos["tipoOperacion"] = value;
+                else
+                    atributos.Add("tipoOperacion", value);
+            }
+        }
+
         public double Total
         {
             get
@@ -2580,6 +2559,21 @@ namespace IsaRoGaMX.CFDI
                 else
                     atributos.Add("total", Conversiones.Importe(value));
             }
+        }
+
+        public ConceptoEstadoDeCuenta this[int indice]
+        {
+            get
+            {
+                if (indice >= 0 && indice < conceptos.Elementos)
+                    return conceptos[indice];
+                throw new Exception("EstadoDeCuentaCombustible::[indice]. Indice fuera de rango");
+            }
+        }
+
+        public void Agregar(ConceptoEstadoDeCuenta concepto)
+        {
+            conceptos.Agregar(concepto);
         }
     }
 

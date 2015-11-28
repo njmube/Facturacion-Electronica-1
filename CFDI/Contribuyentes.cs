@@ -11,32 +11,6 @@ using System.Xml;
 
 namespace IsaRoGaMX.CFDI
 {
-    public class RegimenFiscal : baseObject
-    {
-        public RegimenFiscal(string regimenFiscal)
-           : base("http://www.sat.gob.mx/cfd/3", "cfdi")
-        {
-            atributos.Add("Regimen", regimenFiscal);
-        }
-
-        public string Regimen
-        {
-            get
-            {
-                if (atributos.ContainsKey("Regimen"))
-                    return atributos["Regimen"];
-                throw new Exception("RegimenFiscal::Regimen. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("Regimen"))
-                    atributos["Regimen"] = value;
-                else
-                    atributos.Add("Regmien", value);
-            }
-        }
-    }
-
     public class Emisor : baseObject
     {
         private DomicilioFiscal domicilioFiscal;
@@ -73,22 +47,16 @@ namespace IsaRoGaMX.CFDI
             regimenFiscal = new RegimenFiscal(regimen);
         }
 
-        public string RFC
+        public DomicilioFiscal DomicilioFiscal
         {
-            get
-            {
-                if (atributos.ContainsKey("rfc"))
-                    return atributos["rfc"];
-                else
-                    throw new Exception("Emisor::rfc. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("rfc"))
-                    atributos["rfc"] = value;
-                else
-                    atributos.Add("rfc", value);
-            }
+            get { return domicilioFiscal; }
+            set { domicilioFiscal = value; }
+        }
+
+        public ExpedidoEn ExpedidoEn
+        {
+            get { return expedidoEn; }
+            set { expedidoEn = value; }
         }
 
         public string Nombre
@@ -126,18 +94,23 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public DomicilioFiscal DomicilioFiscal
+        public string RFC
         {
-            get { return domicilioFiscal; }
-            set { domicilioFiscal = value; }
+            get
+            {
+                if (atributos.ContainsKey("rfc"))
+                    return atributos["rfc"];
+                else
+                    throw new Exception("Emisor::rfc. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("rfc"))
+                    atributos["rfc"] = value;
+                else
+                    atributos.Add("rfc", value);
+            }
         }
-
-        public ExpedidoEn ExpedidoEn
-        {
-            get { return expedidoEn; }
-            set { expedidoEn = value; }
-        }
-
         public override XmlElement NodoXML(string prefijo, string namespaceURI, XmlDocument documento)
         {
             // Nodo Emisor
@@ -198,22 +171,10 @@ namespace IsaRoGaMX.CFDI
             this.domicilio = domicilio;
         }
 
-        public string RFC
+        public Domicilio Domicilio
         {
-            get
-            {
-                if (atributos.ContainsKey("rfc"))
-                    return atributos["rfc"];
-                else
-                    throw new Exception("Emisor::rfc. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("rfc"))
-                    atributos["rfc"] = value;
-                else
-                    atributos.Add("rfc", value);
-            }
+            get { return domicilio; }
+            set { domicilio = value; }
         }
 
         public string Nombre
@@ -234,12 +195,23 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public Domicilio Domicilio
+        public string RFC
         {
-            get { return domicilio; }
-            set { domicilio = value; }
+            get
+            {
+                if (atributos.ContainsKey("rfc"))
+                    return atributos["rfc"];
+                else
+                    throw new Exception("Emisor::rfc. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("rfc"))
+                    atributos["rfc"] = value;
+                else
+                    atributos.Add("rfc", value);
+            }
         }
-
         public override XmlElement NodoXML(string prefijo, string namespaceURI, XmlDocument documento)
         {
             // Nodo Emisor
@@ -254,6 +226,32 @@ namespace IsaRoGaMX.CFDI
 
             // Regresamos el nodo emisor
             return receptor;
+        }
+    }
+
+    public class RegimenFiscal : baseObject
+    {
+        public RegimenFiscal(string regimenFiscal)
+           : base("http://www.sat.gob.mx/cfd/3", "cfdi")
+        {
+            atributos.Add("Regimen", regimenFiscal);
+        }
+
+        public string Regimen
+        {
+            get
+            {
+                if (atributos.ContainsKey("Regimen"))
+                    return atributos["Regimen"];
+                throw new Exception("RegimenFiscal::Regimen. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("Regimen"))
+                    atributos["Regimen"] = value;
+                else
+                    atributos.Add("Regmien", value);
+            }
         }
     }
 }

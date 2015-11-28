@@ -30,40 +30,6 @@ namespace IsaRoGaMX.CFDI
 {
     internal class opensslkey
     {
-        public string SignString(string pKeyFile, string pPassword, string OriginalString)
-        {
-            string SignedString = "";
-            string filename = pKeyFile;
-            if (!File.Exists(filename))
-            {
-                return ".key file does not exist " + pKeyFile;
-            }
-
-            RSACryptoServiceProvider rsa = OpenKeyFile(filename, pPassword);
-            if (rsa != null)
-            {
-                byte[] CO = Encoding.UTF8.GetBytes(OriginalString);
-                byte[] SignedBytes = rsa.SignData(CO, new SHA1CryptoServiceProvider());
-                SignedString = Convert.ToBase64String(SignedBytes);
-            }
-            return SignedString;
-        }
-
-        public RSACryptoServiceProvider OpenKeyFile(String filename, string pPassword)
-        {
-            RSACryptoServiceProvider rsa = null;
-            byte[] keyblob = GetFileBytes(filename);
-            if (keyblob == null)
-                return null;
-
-            rsa = DecodePrivateKeyInfo(keyblob, pPassword);	//PKCS #8 encrypted
-            if (rsa != null)
-            {
-                return rsa;
-            }
-            return null;
-        }
-
         public static RSACryptoServiceProvider
                   DecodePrivateKeyInfo(byte[] encpkcs8, string pPassword)
         {
@@ -196,83 +162,6 @@ namespace IsaRoGaMX.CFDI
                 return null;
             }
             finally { binr.Close(); }
-        }
-
-        public void CertificateData(string pCerFile, out string Certificate, out string CertificateNumber)
-        {
-            X509Certificate cert = new X509Certificate(pCerFile);
-            byte[] strcert = cert.GetRawCertData();
-            Certificate = Convert.ToBase64String(strcert);
-
-            strcert = cert.GetSerialNumber();
-            CertificateNumber = Reverse(System.Text.Encoding.UTF8.GetString(strcert));
-        }
-
-        public string Reverse(string Original)
-        {
-            string Reverse = "";
-            for (int i = Original.Length - 1; i >= 0; i--)
-                Reverse += Original.Substring(i, 1);
-            return Reverse;
-        }
-
-        private static byte[] GetFileBytes(String filename)
-        {
-            if (!File.Exists(filename))
-                return null;
-            Stream stream = new FileStream(filename, FileMode.Open);
-            int datalen = (int)stream.Length;
-            byte[] filebytes = new byte[datalen];
-            stream.Seek(0, SeekOrigin.Begin);
-            stream.Read(filebytes, 0, datalen);
-            stream.Close();
-            return filebytes;
-        }
-
-        private static bool CompareBytearrays(byte[] a, byte[] b)
-        {
-            if (a.Length != b.Length)
-                return false;
-            int i = 0;
-            foreach (byte c in a)
-            {
-                if (c != b[i])
-                    return false;
-                i++;
-            }
-            return true;
-        }
-
-        public static byte[] DecryptPBDK2(byte[] edata, byte[] salt,
-                  byte[] IV, SecureString secpswd, int iterations)
-        {
-            CryptoStream decrypt = null;
-
-            IntPtr unmanagedPswd = IntPtr.Zero;
-            byte[] psbytes = new byte[secpswd.Length];
-            unmanagedPswd = Marshal.SecureStringToGlobalAllocAnsi(secpswd);
-            Marshal.Copy(unmanagedPswd, psbytes, 0, psbytes.Length);
-            Marshal.ZeroFreeGlobalAllocAnsi(unmanagedPswd);
-
-            try
-            {
-                Rfc2898DeriveBytes kd = new Rfc2898DeriveBytes(psbytes, salt, iterations);
-                TripleDES decAlg = TripleDES.Create();
-                decAlg.Key = kd.GetBytes(24);
-                decAlg.IV = IV;
-                MemoryStream memstr = new MemoryStream();
-                decrypt = new CryptoStream(memstr, decAlg.CreateDecryptor(), CryptoStreamMode.Write);
-                decrypt.Write(edata, 0, edata.Length);
-                decrypt.Flush();
-                decrypt.Close();	// this is REQUIRED.
-                byte[] cleartext = memstr.ToArray();
-                return cleartext;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Problem decrypting: {0}", e.Message);
-                return null;
-            }
         }
 
         public static RSACryptoServiceProvider DecodePrivateKeyInfo(byte[] pkcs8)
@@ -409,6 +298,115 @@ namespace IsaRoGaMX.CFDI
             finally { binr.Close(); }
         }
 
+        public static byte[] DecryptPBDK2(byte[] edata, byte[] salt,
+                  byte[] IV, SecureString secpswd, int iterations)
+        {
+            CryptoStream decrypt = null;
+
+            IntPtr unmanagedPswd = IntPtr.Zero;
+            byte[] psbytes = new byte[secpswd.Length];
+            unmanagedPswd = Marshal.SecureStringToGlobalAllocAnsi(secpswd);
+            Marshal.Copy(unmanagedPswd, psbytes, 0, psbytes.Length);
+            Marshal.ZeroFreeGlobalAllocAnsi(unmanagedPswd);
+
+            try
+            {
+                Rfc2898DeriveBytes kd = new Rfc2898DeriveBytes(psbytes, salt, iterations);
+                TripleDES decAlg = TripleDES.Create();
+                decAlg.Key = kd.GetBytes(24);
+                decAlg.IV = IV;
+                MemoryStream memstr = new MemoryStream();
+                decrypt = new CryptoStream(memstr, decAlg.CreateDecryptor(), CryptoStreamMode.Write);
+                decrypt.Write(edata, 0, edata.Length);
+                decrypt.Flush();
+                decrypt.Close();	// this is REQUIRED.
+                byte[] cleartext = memstr.ToArray();
+                return cleartext;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Problem decrypting: {0}", e.Message);
+                return null;
+            }
+        }
+
+        public void CertificateData(string pCerFile, out string Certificate, out string CertificateNumber)
+        {
+            X509Certificate cert = new X509Certificate(pCerFile);
+            byte[] strcert = cert.GetRawCertData();
+            Certificate = Convert.ToBase64String(strcert);
+
+            strcert = cert.GetSerialNumber();
+            CertificateNumber = Reverse(System.Text.Encoding.UTF8.GetString(strcert));
+        }
+
+        public RSACryptoServiceProvider OpenKeyFile(String filename, string pPassword)
+        {
+            RSACryptoServiceProvider rsa = null;
+            byte[] keyblob = GetFileBytes(filename);
+            if (keyblob == null)
+                return null;
+
+            rsa = DecodePrivateKeyInfo(keyblob, pPassword);	//PKCS #8 encrypted
+            if (rsa != null)
+            {
+                return rsa;
+            }
+            return null;
+        }
+
+        public string Reverse(string Original)
+        {
+            string Reverse = "";
+            for (int i = Original.Length - 1; i >= 0; i--)
+                Reverse += Original.Substring(i, 1);
+            return Reverse;
+        }
+
+        public string SignString(string pKeyFile, string pPassword, string OriginalString)
+        {
+            string SignedString = "";
+            string filename = pKeyFile;
+            if (!File.Exists(filename))
+            {
+                return ".key file does not exist " + pKeyFile;
+            }
+
+            RSACryptoServiceProvider rsa = OpenKeyFile(filename, pPassword);
+            if (rsa != null)
+            {
+                byte[] CO = Encoding.UTF8.GetBytes(OriginalString);
+                byte[] SignedBytes = rsa.SignData(CO, new SHA1CryptoServiceProvider());
+                SignedString = Convert.ToBase64String(SignedBytes);
+            }
+            return SignedString;
+        }
+        private static bool CompareBytearrays(byte[] a, byte[] b)
+        {
+            if (a.Length != b.Length)
+                return false;
+            int i = 0;
+            foreach (byte c in a)
+            {
+                if (c != b[i])
+                    return false;
+                i++;
+            }
+            return true;
+        }
+
+        private static byte[] GetFileBytes(String filename)
+        {
+            if (!File.Exists(filename))
+                return null;
+            Stream stream = new FileStream(filename, FileMode.Open);
+            int datalen = (int)stream.Length;
+            byte[] filebytes = new byte[datalen];
+            stream.Seek(0, SeekOrigin.Begin);
+            stream.Read(filebytes, 0, datalen);
+            stream.Close();
+            return filebytes;
+        }
         private static int GetIntegerSize(BinaryReader binr)
         {
             byte bt = 0;

@@ -16,13 +16,13 @@ namespace IsaRoGaMX.CFDI
            : base("http://www.sat.gob.mx/cfd/3", "cfdi")
         { }
 
-        public abstract string Numero
+        public abstract string Aduana
         { get; set; }
 
         public abstract string Fecha
         { get; set; }
 
-        public abstract string Aduana
+        public abstract string Numero
         { get; set; }
     }
 
@@ -47,21 +47,21 @@ namespace IsaRoGaMX.CFDI
             atributos.Add("aduana", aduana);
         }
 
-        public override string Numero
+        public override string Aduana
         {
             get
             {
-                if (atributos.ContainsKey("numero"))
-                    return atributos["numero"];
+                if (atributos.ContainsKey("aduana"))
+                    return atributos["aduana"];
                 else
-                    throw new Exception("InformacionAduanera::numero no puede estar vacio");
+                    return string.Empty;
             }
             set
             {
-                if (atributos.ContainsKey("numero"))
-                    atributos["numero"] = value;
+                if (atributos.ContainsKey("aduana"))
+                    atributos["aduana"] = value;
                 else
-                    atributos.Add("numero", value);
+                    atributos.Add("aduana", value);
             }
         }
 
@@ -83,21 +83,21 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        public override string Aduana
+        public override string Numero
         {
             get
             {
-                if (atributos.ContainsKey("aduana"))
-                    return atributos["aduana"];
+                if (atributos.ContainsKey("numero"))
+                    return atributos["numero"];
                 else
-                    return string.Empty;
+                    throw new Exception("InformacionAduanera::numero no puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("aduana"))
-                    atributos["aduana"] = value;
+                if (atributos.ContainsKey("numero"))
+                    atributos["numero"] = value;
                 else
-                    atributos.Add("aduana", value);
+                    atributos.Add("numero", value);
             }
         }
     }

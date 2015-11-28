@@ -18,133 +18,15 @@ namespace IsaRoGaMX.CFDI
 
     public class Comprobante : baseObject
     {
-        internal static string nspace = "http://www.sat.gob.mx/cfd/3";
-        private Emisor emisor;
-        private Receptor receptor;
-        private Conceptos conceptos = new Conceptos();
-        private Impuestos impuestos = new Impuestos();
+        private const string DEFAULT_VERSION = "3.2";
+        private Addenda addenda;
         private string cadenaOriginal = string.Empty;
         private Complemento complementos;
-        private Addenda addenda;
+        private Conceptos conceptos = new Conceptos();
         private XmlDocument documento;
-        private const string DEFAULT_VERSION = "3.2";
-
-        /// <summary>
-        /// Agrega un complemento al CFDI actual
-        /// </summary>
-        /// <param name="complemento">Complemento a agregar</param>
-        public void AgregarComplemento(ComplementoComprobante complemento)
-        {
-            if (complementos == null)
-                complementos = new Complemento();
-            complementos.Agregar(complemento);
-        }
-
-        /// <summary>
-        /// Devuelve la representación XML del Comprobante actual
-        /// </summary>
-        internal XmlDocument Documento
-        {
-            get
-            {
-                // Documento XML
-                documento = new XmlDocument();
-
-                // Declaracion del Documento XML
-                XmlDeclaration declaracion = documento.CreateXmlDeclaration("1.0", "utf-8", "");
-                documento.AppendChild(declaracion);
-
-                // Comprobante
-                XmlElement comprobante = this.NodoXML("cfdi", "http://www.sat.gob.mx/cfd/3", documento);
-
-                // Emisor
-                XmlElement nodoEmisor = this.Emisor.NodoXML(comprobante.Prefix, comprobante.NamespaceURI, documento);
-                comprobante.AppendChild(nodoEmisor);
-
-                // Receptor
-                XmlElement nodoReceptor = this.Receptor.NodoXML(comprobante.Prefix, comprobante.NamespaceURI, documento);
-                comprobante.AppendChild(nodoReceptor);
-
-                // Conceptos
-                XmlElement nodoConceptos = documento.CreateElement(comprobante.Prefix, this.Conceptos.GetType().Name, comprobante.NamespaceURI);
-                for (int i = 0; i < this.Conceptos.Elementos; i++)
-                {
-                    XmlElement nodoConcepto = this.Conceptos[i].NodoXML(comprobante.Prefix, comprobante.NamespaceURI, documento);
-                    nodoConceptos.AppendChild(nodoConcepto);
-                }
-                comprobante.AppendChild(nodoConceptos);
-
-                // Impuestos
-                XmlElement nodoImpuestos = documento.CreateElement(comprobante.Prefix, this.Impuestos.GetType().Name, comprobante.NamespaceURI);
-
-                // Retenciones
-                if (this.Impuestos.Retenciones.Elementos > 0)
-                {
-                    XmlElement nodoRetenciones = documento.CreateElement(comprobante.Prefix, this.Impuestos.Retenciones.GetType().Name, comprobante.NamespaceURI);
-                    for (int r = 0; r < Impuestos.Retenciones.Elementos; r++)
-                    {
-                        XmlElement nodoRetencion = Impuestos.Retenciones[r].NodoXML(comprobante.Prefix, comprobante.NamespaceURI, documento);
-                        nodoRetenciones.AppendChild(nodoRetencion);
-                    }
-                    nodoImpuestos.AppendChild(nodoRetenciones);
-                }
-
-                // Traslados
-                if (this.Impuestos.Traslados.Elementos > 0)
-                {
-                    XmlElement nodoTraslados = documento.CreateElement(comprobante.Prefix, this.Impuestos.Traslados.GetType().Name, comprobante.NamespaceURI);
-                    for (int t = 0; t < Impuestos.Traslados.Elementos; t++)
-                    {
-                        XmlElement nodoTraslado = Impuestos.Traslados[t].NodoXML(comprobante.Prefix, comprobante.NamespaceURI, documento);
-                        nodoTraslados.AppendChild(nodoTraslado);
-                    }
-                    nodoImpuestos.AppendChild(nodoTraslados);
-                }
-
-                // Se agrega el nodo de impuestos
-                comprobante.AppendChild(nodoImpuestos);
-
-                // Agregar el nodo de Complementos
-                XmlElement nodoComplementos = documento.CreateElement(comprobante.Prefix, complementos.GetType().Name, comprobante.NamespaceURI);
-
-                // Se agregan los complementos
-                foreach (KeyValuePair<string, ComplementoComprobante> x in complementos.complementos)
-                {
-                    XmlElement comp = complementos.complementos[x.Key].NodoXML(x.Value.prefijo, x.Value.nspace, documento);
-                    nodoComplementos.AppendChild(comp);
-                }
-                comprobante.AppendChild(nodoComplementos);
-
-                //Se agrega el nodo de Addenda
-                //XmlElement nodoAddenda = documento.CreateElement(comprobante.Prefix, addenda.GetType().Name);
-                //comprobante.AppendChild(nodoAddenda);
-
-                // Se agrega el comprobante al documetno
-                documento.AppendChild(comprobante);
-
-                // Regreso el documento XML
-                return documento;
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece la Información del contribuyente emisor del comprobante.
-        /// </summary>
-        public Emisor Emisor
-        {
-            get { return emisor; }
-            set { emisor = value; }
-        }
-
-        /// <summary>
-        /// Información del contribuyente receptor del comprobante.
-        /// </summary>
-        public Receptor Receptor
-        {
-            get { return receptor; }
-            set { receptor = value; }
-        }
-
+        private Emisor emisor;
+        private Impuestos impuestos = new Impuestos();
+        private Receptor receptor;
         /// <summary>
         /// Crea una instancia de un Comprobante vacio
         /// </summary>
@@ -239,6 +121,42 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
+        /// Devuelve la cadena original para el Comprobante Fiscal Digital actual
+        /// </summary>
+        public string CadenaOriginal
+        {
+            get { return cadenaOriginal; }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece el certificado de sello digital que ampara al Comprobante Fiscal Digital actual
+        /// </summary>
+        public string Certificado
+        {
+            get
+            {
+                if (atributos.ContainsKey("certificado"))
+                    return atributos["certificado"];
+                throw new Exception("Comprobante::certificado. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("certificado"))
+                    atributos["certificado"] = value;
+                else
+                    atributos.Add("certificado", value);
+            }
+        }
+
+        /// <summary>
+        /// Devuelve los complementos contenidos en el Comprobante Fiscal actual
+        /// </summary>
+        public Complemento Complementos
+        {
+            get { return complementos; }
+        }
+
+        /// <summary>
         /// Devuelve o Establece los <see cref="Conceptos"/> del Comprobante Fiscal Digital actual
         /// </summary>
         public Conceptos Conceptos
@@ -247,60 +165,104 @@ namespace IsaRoGaMX.CFDI
             set { conceptos = value; }
         }
 
-        public Impuestos Impuestos
-        {
-            get { return impuestos; }
-            set { impuestos = value; }
-        }
-
         /// <summary>
-        /// Devuelve la versión del Comprobante Fiscal Digital actual.
+        /// Devuelve o Establece las condiciones comerciales aplicables para el pago del Comprobante Fiscal Digital actual
         /// </summary>
-        public string Version
+        public string CondicionesDePago
         {
             get
             {
-                if (atributos.ContainsKey("version"))
-                    return atributos["version"];
-                return DEFAULT_VERSION;
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece la serie para control interno del contribuyente.
-        /// </summary>
-        public string Serie
-        {
-            get
-            {
-                if (atributos.ContainsKey("serie"))
-                    return atributos["serie"];
-                return string.Empty;
+                return atributos.ContainsKey("condicionesDePago") ? atributos["condicionesDePago"] : string.Empty;
             }
             set
             {
-                if (atributos.ContainsKey("serie"))
-                    atributos["serie"] = value;
+                if (atributos.ContainsKey("condicionesDePago"))
+                    atributos["condicionesDePago"] = value;
                 else
-                    atributos.Add("serie", value);
+                    atributos.Add("condicionesDePago", value);
             }
         }
 
         /// <summary>
-        /// Devuelve o establece el folio del Comprobante Fiscal Digital actual.
+        /// Devuelve o Establece el importe total de los descuentos aplicables antes de impuestos.
         /// </summary>
-        public string Folio
+        public double Descuento
         {
             get
             {
-                return atributos.ContainsKey("folio") ? atributos["folio"] : string.Empty;
+                return atributos.ContainsKey("descuento") ? Convert.ToDouble(atributos["descuento"]) : 0.0;
             }
             set
             {
-                if (atributos.ContainsKey("folio"))
-                    atributos["folio"] = value;
+                if (atributos.ContainsKey("descuento"))
+                    atributos["descuento"] = Conversiones.Importe(value);
                 else
-                    atributos.Add("folio", value);
+                    atributos.Add("descuento", Conversiones.Importe(value));
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece la Información del contribuyente emisor del comprobante.
+        /// </summary>
+        public Emisor Emisor
+        {
+            get { return emisor; }
+            set { emisor = value; }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece fecha y hora de expedicón del Comprobante Fiscal Digital
+        /// </summary>
+        public DateTime FechaDateTime
+        {
+            get
+            {
+                if (atributos.ContainsKey("fecha"))
+                    return Conversiones.FechaISO8601DateTime(atributos["fecha"]);
+                throw new Exception("Comprobante::fecha. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("fecha"))
+                    atributos["fecha"] = value.ToString("yyyy-MM-ddTHH:mm:ss");
+                else
+                    atributos.Add("fecha", value.ToString("yyyy-MM-ddTHH:mm:ss"));
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece la fecha de expedición del comprobante que se hubiese emitido por el valor total del comprobante, tratándose del pago en parcialidades.
+        /// </summary>
+        public DateTime FechaFolioFiscalOrigDateTime
+        {
+            get
+            {
+                return atributos.ContainsKey("FechaFolioFiscalOrig") ? Conversiones.FechaISO8601DateTime(atributos["FechaFolioFiscalOrig"]) : DateTime.MinValue;
+            }
+            set
+            {
+                if (atributos.ContainsKey("FechaFolioFiscalOrig"))
+                    atributos["FechaFolioFiscalOrig"] = Conversiones.DateTimeFechaISO8601(value);
+                else
+                    atributos.Add("FechaFolioFiscalOrig", Conversiones.DateTimeFechaISO8601(value));
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece la fecha de expedición del comprobante que se hubiese emitido por el valor total del comprobante, tratándose del pago en parcialidades.
+        /// </summary>
+        public string FechaFolioFiscalOrigString
+        {
+            get
+            {
+                return atributos.ContainsKey("FechaFolioFiscalOrig") ? atributos["FechaFolioFiscalOrig"] : string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("FechaFolioFiscalOrig"))
+                    atributos["FechaFolioFiscalOrig"] = value;
+                else
+                    atributos.Add("FechaFolioFiscalOrig", value);
             }
         }
 
@@ -325,42 +287,38 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Devuelve o Establece fecha y hora de expedicón del Comprobante Fiscal Digital
+        /// Devuelve o establece el folio del Comprobante Fiscal Digital actual.
         /// </summary>
-        public DateTime FechaDateTime
+        public string Folio
         {
             get
             {
-                if (atributos.ContainsKey("fecha"))
-                    return Conversiones.FechaISO8601DateTime(atributos["fecha"]);
-                throw new Exception("Comprobante::fecha. No puede estar vacio");
+                return atributos.ContainsKey("folio") ? atributos["folio"] : string.Empty;
             }
             set
             {
-                if (atributos.ContainsKey("fecha"))
-                    atributos["fecha"] = value.ToString("yyyy-MM-ddTHH:mm:ss");
+                if (atributos.ContainsKey("folio"))
+                    atributos["folio"] = value;
                 else
-                    atributos.Add("fecha", value.ToString("yyyy-MM-ddTHH:mm:ss"));
+                    atributos.Add("folio", value);
             }
         }
 
         /// <summary>
-        /// Devuelve o Establece el Sello del Comprobante Fiscal Digital actual.
+        /// Devuelve o Establece el número de folio fiscal del comprobante que se hubiese expedido por el valor total del Comprobante, tratándose del pago en parcialidades.
         /// </summary>
-        public string Sello
+        public string FolioFiscalOrig
         {
             get
             {
-                if (atributos.ContainsKey("sello"))
-                    return atributos["sello"];
-                throw new Exception("Comprobante::sello. No puede estar vacio");
+                return atributos.ContainsKey("FolioFiscalOrig") ? atributos["FolioFiscalOrig"] : string.Empty;
             }
             set
             {
-                if (atributos.ContainsKey("sello"))
-                    atributos["sello"] = value;
+                if (atributos.ContainsKey("FolioFiscalOrig"))
+                    atributos["FolioFiscalOrig"] = value;
                 else
-                    atributos.Add("sello", value);
+                    atributos.Add("FolioFiscalOrig", value);
             }
         }
 
@@ -384,194 +342,30 @@ namespace IsaRoGaMX.CFDI
             }
         }
 
-        /// <summary>
-        /// Devuelve o Establece el número de serie del certificado de Sello digital que ampara al Comprobante Fiscal Digital actual
-        /// </summary>
-        public string NoCertificado
+        public Impuestos Impuestos
         {
-            get
-            {
-                if (atributos.ContainsKey("noCertificado"))
-                    return atributos["noCertificado"];
-                throw new Exception("Comprobante::noCertificado. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("noCertificado"))
-                    atributos["noCertificado"] = value;
-                else
-                    atributos.Add("noCertificado", value);
-            }
+            get { return impuestos; }
+            set { impuestos = value; }
         }
 
         /// <summary>
-        /// Devuelve o Establece el certificado de sello digital que ampara al Comprobante Fiscal Digital actual
+        /// Devuelve o Establece el lugar de expedición del Comprobante Fiscal Digital actual
         /// </summary>
-        public string Certificado
+        public string LugarExpedicion
         {
             get
             {
-                if (atributos.ContainsKey("certificado"))
-                    return atributos["certificado"];
-                throw new Exception("Comprobante::certificado. No puede estar vacio");
+                if (atributos.ContainsKey("LugarExpedicion"))
+                    return atributos["LugarExpedicion"];
+                else
+                    throw new Exception("Comprobante::LugarExpedicion. No puede estar vacio");
             }
             set
             {
-                if (atributos.ContainsKey("certificado"))
-                    atributos["certificado"] = value;
+                if (atributos.ContainsKey("LugarExpedicion"))
+                    atributos["LugarExpedicion"] = value;
                 else
-                    atributos.Add("certificado", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece las condiciones comerciales aplicables para el pago del Comprobante Fiscal Digital actual
-        /// </summary>
-        public string CondicionesDePago
-        {
-            get
-            {
-                return atributos.ContainsKey("condicionesDePago") ? atributos["condicionesDePago"] : string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("condicionesDePago"))
-                    atributos["condicionesDePago"] = value;
-                else
-                    atributos.Add("condicionesDePago", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece la suma de los importes antes de descuentos e impuestos para el Comprobante Fiscal Digital actual
-        /// </summary>
-        public double SubTotal
-        {
-            get
-            {
-                if (atributos.ContainsKey("subTotal"))
-                    return Convert.ToDouble(atributos["subTotal"]);
-                else
-                    throw new Exception("Comprobante::subTotal. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("subTotal"))
-                    atributos["subTotal"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("subTotal", Conversiones.Importe(value));
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece el importe total de los descuentos aplicables antes de impuestos.
-        /// </summary>
-        public double Descuento
-        {
-            get
-            {
-                return atributos.ContainsKey("descuento") ? Convert.ToDouble(atributos["descuento"]) : 0.0;
-            }
-            set
-            {
-                if (atributos.ContainsKey("descuento"))
-                    atributos["descuento"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("descuento", Conversiones.Importe(value));
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece el motivo del descuento aplicable.
-        /// </summary>
-        public string MotivoDescuento
-        {
-            get
-            {
-                return atributos.ContainsKey("motivoDescuento") ? atributos["motivoDescuento"] : string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("motivoDescuento"))
-                    atributos["motivoDescuento"] = value;
-                else
-                    atributos.Add("motivoDescuento", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece el tipo de cambio conforme a la moneda usada
-        /// </summary>
-        public string TipoCambio
-        {
-            get
-            {
-                return atributos.ContainsKey("TipoCambio") ? atributos["TipoCambio"] : string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("TipoCambio"))
-                    atributos["TipoCambio"] = value;
-                else
-                    atributos.Add("TipoCambio", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece la moneda utilizada para expresar los montos
-        /// </summary>
-        public string Moneda
-        {
-            get
-            {
-                return atributos.ContainsKey("Moneda") ? atributos["Moneda"] : string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("Moneda"))
-                    atributos["Moneda"] = value;
-                else
-                    atributos.Add("Moneda", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece  la suma del subtotal, menos los descuentos aplicables, más los impuestos trasladados, menos los impuestos retenidos.
-        /// </summary>
-        public double Total
-        {
-            get
-            {
-                if (atributos.ContainsKey("total"))
-                    return Convert.ToDouble(atributos["total"]);
-                throw new Exception("Comprobante::total. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("total"))
-                    atributos["total"] = Conversiones.Importe(value);
-                else
-                    atributos.Add("total", Conversiones.Importe(value));
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece el efecto del comprobante fiscal para el contribuyente emisor.
-        /// </summary>
-        public TipoDeComprobante TipoDeComprobante
-        {
-            get
-            {
-                if (atributos.ContainsKey("tipoDeComprobante"))
-                    return (TipoDeComprobante)Enum.Parse(typeof(TipoDeComprobante), atributos["tipoDeComprobante"].ToUpper(), true);
-                throw new Exception("Comprobante::tipoDeComprobante. No puede estar vacio");
-            }
-            set
-            {
-                if (atributos.ContainsKey("tipoDeComprobante"))
-                    atributos["tipoDeComprobante"] = value.ToString().ToLower();
-                else
-                    atributos.Add("tipoDeComprobante", value.ToString().ToLower());
+                    atributos.Add("LugarExpedicion", value);
             }
         }
 
@@ -597,113 +391,20 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Devuelve o Establece el lugar de expedición del Comprobante Fiscal Digital actual
+        /// Devuelve o Establece la moneda utilizada para expresar los montos
         /// </summary>
-        public string LugarExpedicion
+        public string Moneda
         {
             get
             {
-                if (atributos.ContainsKey("LugarExpedicion"))
-                    return atributos["LugarExpedicion"];
-                else
-                    throw new Exception("Comprobante::LugarExpedicion. No puede estar vacio");
+                return atributos.ContainsKey("Moneda") ? atributos["Moneda"] : string.Empty;
             }
             set
             {
-                if (atributos.ContainsKey("LugarExpedicion"))
-                    atributos["LugarExpedicion"] = value;
+                if (atributos.ContainsKey("Moneda"))
+                    atributos["Moneda"] = value;
                 else
-                    atributos.Add("LugarExpedicion", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece el número de cuenta con la que se realizó el pago.
-        /// </summary>
-        public string NumCtaPago
-        {
-            get
-            {
-                return atributos.ContainsKey("NumCtaPago") ? atributos["NumCtaPago"] : string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("NumCtaPago"))
-                    atributos["NumCtaPago"] = value;
-                else
-                    atributos.Add("NumCtaPago", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece el número de folio fiscal del comprobante que se hubiese expedido por el valor total del Comprobante, tratándose del pago en parcialidades.
-        /// </summary>
-        public string FolioFiscalOrig
-        {
-            get
-            {
-                return atributos.ContainsKey("FolioFiscalOrig") ? atributos["FolioFiscalOrig"] : string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("FolioFiscalOrig"))
-                    atributos["FolioFiscalOrig"] = value;
-                else
-                    atributos.Add("FolioFiscalOrig", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece la serie del folio del comprobante que se hubiese expedido por el valor total del comprobante, tratándose del pago en parcialidades.
-        /// </summary>
-        public string SerieFolioFiscalOrig
-        {
-            get
-            {
-                return atributos.ContainsKey("SerieFolioFiscalOrig") ? atributos["SerieFolioFiscalOrig"] : string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("SerieFolioFiscalOrig"))
-                    atributos["SerieFolioFiscalOrig"] = value;
-                else
-                    atributos.Add("SerieFolioFiscalOrig", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece la fecha de expedición del comprobante que se hubiese emitido por el valor total del comprobante, tratándose del pago en parcialidades.
-        /// </summary>
-        public string FechaFolioFiscalOrigString
-        {
-            get
-            {
-                return atributos.ContainsKey("FechaFolioFiscalOrig") ? atributos["FechaFolioFiscalOrig"] : string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("FechaFolioFiscalOrig"))
-                    atributos["FechaFolioFiscalOrig"] = value;
-                else
-                    atributos.Add("FechaFolioFiscalOrig", value);
-            }
-        }
-
-        /// <summary>
-        /// Devuelve o Establece la fecha de expedición del comprobante que se hubiese emitido por el valor total del comprobante, tratándose del pago en parcialidades.
-        /// </summary>
-        public DateTime FechaFolioFiscalOrigDateTime
-        {
-            get
-            {
-                return atributos.ContainsKey("FechaFolioFiscalOrig") ? Conversiones.FechaISO8601DateTime(atributos["FechaFolioFiscalOrig"]) : DateTime.MinValue;
-            }
-            set
-            {
-                if (atributos.ContainsKey("FechaFolioFiscalOrig"))
-                    atributos["FechaFolioFiscalOrig"] = Conversiones.DateTimeFechaISO8601(value);
-                else
-                    atributos.Add("FechaFolioFiscalOrig", Conversiones.DateTimeFechaISO8601(value));
+                    atributos.Add("Moneda", value);
             }
         }
 
@@ -726,19 +427,334 @@ namespace IsaRoGaMX.CFDI
         }
 
         /// <summary>
-        /// Devuelve la cadena original para el Comprobante Fiscal Digital actual
+        /// Devuelve o Establece el motivo del descuento aplicable.
         /// </summary>
-        public string CadenaOriginal
+        public string MotivoDescuento
         {
-            get { return cadenaOriginal; }
+            get
+            {
+                return atributos.ContainsKey("motivoDescuento") ? atributos["motivoDescuento"] : string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("motivoDescuento"))
+                    atributos["motivoDescuento"] = value;
+                else
+                    atributos.Add("motivoDescuento", value);
+            }
         }
 
         /// <summary>
-        /// Devuelve los complementos contenidos en el Comprobante Fiscal actual
+        /// Devuelve o Establece el número de serie del certificado de Sello digital que ampara al Comprobante Fiscal Digital actual
         /// </summary>
-        public Complemento Complementos
+        public string NoCertificado
         {
-            get { return complementos; }
+            get
+            {
+                if (atributos.ContainsKey("noCertificado"))
+                    return atributos["noCertificado"];
+                throw new Exception("Comprobante::noCertificado. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("noCertificado"))
+                    atributos["noCertificado"] = value;
+                else
+                    atributos.Add("noCertificado", value);
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece el número de cuenta con la que se realizó el pago.
+        /// </summary>
+        public string NumCtaPago
+        {
+            get
+            {
+                return atributos.ContainsKey("NumCtaPago") ? atributos["NumCtaPago"] : string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("NumCtaPago"))
+                    atributos["NumCtaPago"] = value;
+                else
+                    atributos.Add("NumCtaPago", value);
+            }
+        }
+
+        /// <summary>
+        /// Información del contribuyente receptor del comprobante.
+        /// </summary>
+        public Receptor Receptor
+        {
+            get { return receptor; }
+            set { receptor = value; }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece el Sello del Comprobante Fiscal Digital actual.
+        /// </summary>
+        public string Sello
+        {
+            get
+            {
+                if (atributos.ContainsKey("sello"))
+                    return atributos["sello"];
+                throw new Exception("Comprobante::sello. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("sello"))
+                    atributos["sello"] = value;
+                else
+                    atributos.Add("sello", value);
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece la serie para control interno del contribuyente.
+        /// </summary>
+        public string Serie
+        {
+            get
+            {
+                if (atributos.ContainsKey("serie"))
+                    return atributos["serie"];
+                return string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("serie"))
+                    atributos["serie"] = value;
+                else
+                    atributos.Add("serie", value);
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece la serie del folio del comprobante que se hubiese expedido por el valor total del comprobante, tratándose del pago en parcialidades.
+        /// </summary>
+        public string SerieFolioFiscalOrig
+        {
+            get
+            {
+                return atributos.ContainsKey("SerieFolioFiscalOrig") ? atributos["SerieFolioFiscalOrig"] : string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("SerieFolioFiscalOrig"))
+                    atributos["SerieFolioFiscalOrig"] = value;
+                else
+                    atributos.Add("SerieFolioFiscalOrig", value);
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece la suma de los importes antes de descuentos e impuestos para el Comprobante Fiscal Digital actual
+        /// </summary>
+        public double SubTotal
+        {
+            get
+            {
+                if (atributos.ContainsKey("subTotal"))
+                    return Convert.ToDouble(atributos["subTotal"]);
+                else
+                    throw new Exception("Comprobante::subTotal. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("subTotal"))
+                    atributos["subTotal"] = Conversiones.Importe(value);
+                else
+                    atributos.Add("subTotal", Conversiones.Importe(value));
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece el tipo de cambio conforme a la moneda usada
+        /// </summary>
+        public string TipoCambio
+        {
+            get
+            {
+                return atributos.ContainsKey("TipoCambio") ? atributos["TipoCambio"] : string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("TipoCambio"))
+                    atributos["TipoCambio"] = value;
+                else
+                    atributos.Add("TipoCambio", value);
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece el efecto del comprobante fiscal para el contribuyente emisor.
+        /// </summary>
+        public TipoDeComprobante TipoDeComprobante
+        {
+            get
+            {
+                if (atributos.ContainsKey("tipoDeComprobante"))
+                    return (TipoDeComprobante)Enum.Parse(typeof(TipoDeComprobante), atributos["tipoDeComprobante"].ToUpper(), true);
+                throw new Exception("Comprobante::tipoDeComprobante. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("tipoDeComprobante"))
+                    atributos["tipoDeComprobante"] = value.ToString().ToLower();
+                else
+                    atributos.Add("tipoDeComprobante", value.ToString().ToLower());
+            }
+        }
+
+        /// <summary>
+        /// Devuelve o Establece  la suma del subtotal, menos los descuentos aplicables, más los impuestos trasladados, menos los impuestos retenidos.
+        /// </summary>
+        public double Total
+        {
+            get
+            {
+                if (atributos.ContainsKey("total"))
+                    return Convert.ToDouble(atributos["total"]);
+                throw new Exception("Comprobante::total. No puede estar vacio");
+            }
+            set
+            {
+                if (atributos.ContainsKey("total"))
+                    atributos["total"] = Conversiones.Importe(value);
+                else
+                    atributos.Add("total", Conversiones.Importe(value));
+            }
+        }
+
+        /// <summary>
+        /// Devuelve la versión del Comprobante Fiscal Digital actual.
+        /// </summary>
+        public string Version
+        {
+            get
+            {
+                if (atributos.ContainsKey("version"))
+                    return atributos["version"];
+                return DEFAULT_VERSION;
+            }
+        }
+
+        /// <summary>
+        /// Devuelve la representación XML del Comprobante actual
+        /// </summary>
+        internal XmlDocument Documento
+        {
+            get
+            {
+                // Documento XML
+                documento = new XmlDocument();
+
+                // Declaracion del Documento XML
+                XmlDeclaration declaracion = documento.CreateXmlDeclaration("1.0", "utf-8", "");
+                documento.AppendChild(declaracion);
+
+                // Comprobante
+                XmlElement comprobante = this.NodoXML("cfdi", "http://www.sat.gob.mx/cfd/3", documento);
+
+                // Emisor
+                XmlElement nodoEmisor = this.Emisor.NodoXML(comprobante.Prefix, comprobante.NamespaceURI, documento);
+                comprobante.AppendChild(nodoEmisor);
+
+                // Receptor
+                XmlElement nodoReceptor = this.Receptor.NodoXML(comprobante.Prefix, comprobante.NamespaceURI, documento);
+                comprobante.AppendChild(nodoReceptor);
+
+                // Conceptos
+                XmlElement nodoConceptos = documento.CreateElement(comprobante.Prefix, this.Conceptos.GetType().Name, comprobante.NamespaceURI);
+                for (int i = 0; i < this.Conceptos.Elementos; i++)
+                {
+                    XmlElement nodoConcepto = this.Conceptos[i].NodoXML(comprobante.Prefix, comprobante.NamespaceURI, documento);
+                    nodoConceptos.AppendChild(nodoConcepto);
+                }
+                comprobante.AppendChild(nodoConceptos);
+
+                // Impuestos
+                XmlElement nodoImpuestos = documento.CreateElement(comprobante.Prefix, this.Impuestos.GetType().Name, comprobante.NamespaceURI);
+
+                // Retenciones
+                if (this.Impuestos.Retenciones.Elementos > 0)
+                {
+                    XmlElement nodoRetenciones = documento.CreateElement(comprobante.Prefix, this.Impuestos.Retenciones.GetType().Name, comprobante.NamespaceURI);
+                    for (int r = 0; r < Impuestos.Retenciones.Elementos; r++)
+                    {
+                        XmlElement nodoRetencion = Impuestos.Retenciones[r].NodoXML(comprobante.Prefix, comprobante.NamespaceURI, documento);
+                        nodoRetenciones.AppendChild(nodoRetencion);
+                    }
+                    nodoImpuestos.AppendChild(nodoRetenciones);
+                }
+
+                // Traslados
+                if (this.Impuestos.Traslados.Elementos > 0)
+                {
+                    XmlElement nodoTraslados = documento.CreateElement(comprobante.Prefix, this.Impuestos.Traslados.GetType().Name, comprobante.NamespaceURI);
+                    for (int t = 0; t < Impuestos.Traslados.Elementos; t++)
+                    {
+                        XmlElement nodoTraslado = Impuestos.Traslados[t].NodoXML(comprobante.Prefix, comprobante.NamespaceURI, documento);
+                        nodoTraslados.AppendChild(nodoTraslado);
+                    }
+                    nodoImpuestos.AppendChild(nodoTraslados);
+                }
+
+                // Se agrega el nodo de impuestos
+                comprobante.AppendChild(nodoImpuestos);
+
+                // Agregar el nodo de Complementos
+                XmlElement nodoComplementos = documento.CreateElement(comprobante.Prefix, complementos.GetType().Name, comprobante.NamespaceURI);
+
+                // Se agregan los complementos
+                foreach (KeyValuePair<string, ComplementoComprobante> x in complementos.complementos)
+                {
+                    XmlElement comp = complementos.complementos[x.Key].NodoXML(x.Value.prefijo, x.Value.nspace, documento);
+                    nodoComplementos.AppendChild(comp);
+                }
+                comprobante.AppendChild(nodoComplementos);
+
+                //Se agrega el nodo de Addenda
+                //XmlElement nodoAddenda = documento.CreateElement(comprobante.Prefix, addenda.GetType().Name);
+                //comprobante.AppendChild(nodoAddenda);
+
+                // Se agrega el comprobante al documetno
+                documento.AppendChild(comprobante);
+
+                // Regreso el documento XML
+                return documento;
+            }
+        }
+
+        /// <summary>
+        /// Agrega un complemento al CFDI actual
+        /// </summary>
+        /// <param name="complemento">Complemento a agregar</param>
+        public void AgregarComplemento(ComplementoComprobante complemento)
+        {
+            if (complementos == null)
+                complementos = new Complemento();
+            complementos.Agregar(complemento);
+        }
+        /// <see cref="http://solucionfactible.com/sfic/capitulos/timbrado/cadena_original.jsp"/>
+        /// <seealso cref="http://stackoverflow.com/questions/2384306/how-to-transform-xml-as-a-string-w-o-using-files-in-net/2389628#2389628"/>
+        public string generaCadenaOriginal(string rutaXSLT)
+        {
+            // Fuente:
+            StringReader sri = new StringReader(Documento.OuterXml);
+            XmlReader xri = XmlReader.Create(sri);
+            XslCompiledTransform xslt = new XslCompiledTransform();
+            xslt.Load(rutaXSLT);
+            StringWriter sw = new StringWriter();
+            XmlTextWriter myWriter = new XmlTextWriter(sw);
+
+            //Aplicando transformacion
+            xslt.Transform(xri, myWriter);
+
+            //Resultado
+            return sw.ToString();
         }
 
         /// <summary>
@@ -788,25 +804,6 @@ namespace IsaRoGaMX.CFDI
             this.Sello = ossl.SignString(key, passwrd, cadenaOriginal);
             this.Certificado = certificado;
             this.NoCertificado = noCertificado;
-        }
-
-        /// <see cref="http://solucionfactible.com/sfic/capitulos/timbrado/cadena_original.jsp"/>
-        /// <seealso cref="http://stackoverflow.com/questions/2384306/how-to-transform-xml-as-a-string-w-o-using-files-in-net/2389628#2389628"/>
-        public string generaCadenaOriginal(string rutaXSLT)
-        {
-            // Fuente:
-            StringReader sri = new StringReader(Documento.OuterXml);
-            XmlReader xri = XmlReader.Create(sri);
-            XslCompiledTransform xslt = new XslCompiledTransform();
-            xslt.Load(rutaXSLT);
-            StringWriter sw = new StringWriter();
-            XmlTextWriter myWriter = new XmlTextWriter(sw);
-
-            //Aplicando transformacion
-            xslt.Transform(xri, myWriter);
-
-            //Resultado
-            return sw.ToString();
         }
     }
 }

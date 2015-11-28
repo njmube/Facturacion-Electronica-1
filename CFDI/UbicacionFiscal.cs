@@ -19,32 +19,64 @@ namespace IsaRoGaMX.CFDI
         public abstract string Calle
         { get; set; }
 
-        public abstract string NoExterior
-        { get; set; }
-
-        public abstract string NoInterior
+        public abstract string CodigoPostal
         { get; set; }
 
         public abstract string Colonia
         { get; set; }
 
-        public abstract string Localidad
+        public abstract string Estado
         { get; set; }
 
-        public abstract string Referencia
+        public abstract string Localidad
         { get; set; }
 
         public abstract string Municipio
         { get; set; }
 
-        public abstract string Estado
+        public abstract string NoExterior
         { get; set; }
 
+        public abstract string NoInterior
+        { get; set; }
         public abstract string Pais
         { get; set; }
 
-        public abstract string CodigoPostal
+        public abstract string Referencia
         { get; set; }
+    }
+
+    public class Domicilio : UbicacionFiscal
+    {
+        public Domicilio() : base()
+        {
+        }
+
+        public Domicilio(string calle, string municipio, string estado, string pais, string codigoPostal)
+           : base(calle, municipio, estado, pais, codigoPostal)
+        { }
+    }
+
+    public class DomicilioFiscal : UbicacionFiscal
+    {
+        public DomicilioFiscal() : base()
+        {
+        }
+
+        public DomicilioFiscal(string calle, string municipio, string estado, string pais, string codigoPostal)
+           : base(calle, municipio, estado, pais, codigoPostal)
+        { }
+    }
+
+    public class ExpedidoEn : UbicacionFiscal
+    {
+        public ExpedidoEn() : base()
+        {
+        }
+
+        public ExpedidoEn(string calle, string municipio, string estado, string pais, string codigoPostal)
+           : base(calle, municipio, estado, pais, codigoPostal)
+        { }
     }
 
     public class UbicacionFiscal : AbstractUbicacion
@@ -78,6 +110,96 @@ namespace IsaRoGaMX.CFDI
                     atributos["calle"] = value;
                 else
                     atributos.Add("calle", value);
+            }
+        }
+
+        public override string CodigoPostal
+        {
+            get
+            {
+                if (atributos.ContainsKey("codigoPostal"))
+                    return atributos["codigoPostal"];
+                else
+                    throw new Exception("Ubicacion::codigoPostal no puede estar vacio.");
+            }
+            set
+            {
+                if (atributos.ContainsKey("codigoPostal"))
+                    atributos["codigoPostal"] = value;
+                else
+                    atributos.Add("codigoPostal", value);
+            }
+        }
+
+        public override string Colonia
+        {
+            get
+            {
+                if (atributos.ContainsKey("colonia"))
+                    return atributos["colonia"];
+                else
+                    return string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("colonia"))
+                    atributos["colonia"] = value;
+                else
+                    atributos.Add("colonia", value);
+            }
+        }
+
+        public override string Estado
+        {
+            get
+            {
+                if (atributos.ContainsKey("estado"))
+                    return atributos["estado"];
+                else
+                    throw new Exception("Ubicacion::estado no puede estar vacio.");
+            }
+            set
+            {
+                if (atributos.ContainsKey("estado"))
+                    atributos["estado"] = value;
+                else
+                    atributos.Add("estado", value);
+            }
+        }
+
+        public override string Localidad
+        {
+            get
+            {
+                if (atributos.ContainsKey("localidad"))
+                    return atributos["localidad"];
+                else
+                    return string.Empty;
+            }
+            set
+            {
+                if (atributos.ContainsKey("localidad"))
+                    atributos["localidad"] = value;
+                else
+                    atributos.Add("localidad", value);
+            }
+        }
+
+        public override string Municipio
+        {
+            get
+            {
+                if (atributos.ContainsKey("municipio"))
+                    return atributos["municipio"];
+                else
+                    throw new Exception("Ubicacion::municipio no puede estar vacio.");
+            }
+            set
+            {
+                if (atributos.ContainsKey("municipio"))
+                    atributos["municipio"] = value;
+                else
+                    atributos.Add("municipio", value);
             }
         }
 
@@ -116,40 +238,21 @@ namespace IsaRoGaMX.CFDI
                     atributos.Add("noInterior", value);
             }
         }
-
-        public override string Colonia
+        public override string Pais
         {
             get
             {
-                if (atributos.ContainsKey("colonia"))
-                    return atributos["colonia"];
+                if (atributos.ContainsKey("pais"))
+                    return atributos["pais"];
                 else
-                    return string.Empty;
+                    throw new Exception("Ubicacion::pais no puede estar vacio.");
             }
             set
             {
-                if (atributos.ContainsKey("colonia"))
-                    atributos["colonia"] = value;
+                if (atributos.ContainsKey("pais"))
+                    atributos["pais"] = value;
                 else
-                    atributos.Add("colonia", value);
-            }
-        }
-
-        public override string Localidad
-        {
-            get
-            {
-                if (atributos.ContainsKey("localidad"))
-                    return atributos["localidad"];
-                else
-                    return string.Empty;
-            }
-            set
-            {
-                if (atributos.ContainsKey("localidad"))
-                    atributos["localidad"] = value;
-                else
-                    atributos.Add("localidad", value);
+                    atributos.Add("pais", value);
             }
         }
 
@@ -170,110 +273,5 @@ namespace IsaRoGaMX.CFDI
                     atributos.Add("referencia", value);
             }
         }
-
-        public override string Municipio
-        {
-            get
-            {
-                if (atributos.ContainsKey("municipio"))
-                    return atributos["municipio"];
-                else
-                    throw new Exception("Ubicacion::municipio no puede estar vacio.");
-            }
-            set
-            {
-                if (atributos.ContainsKey("municipio"))
-                    atributos["municipio"] = value;
-                else
-                    atributos.Add("municipio", value);
-            }
-        }
-
-        public override string Estado
-        {
-            get
-            {
-                if (atributos.ContainsKey("estado"))
-                    return atributos["estado"];
-                else
-                    throw new Exception("Ubicacion::estado no puede estar vacio.");
-            }
-            set
-            {
-                if (atributos.ContainsKey("estado"))
-                    atributos["estado"] = value;
-                else
-                    atributos.Add("estado", value);
-            }
-        }
-
-        public override string Pais
-        {
-            get
-            {
-                if (atributos.ContainsKey("pais"))
-                    return atributos["pais"];
-                else
-                    throw new Exception("Ubicacion::pais no puede estar vacio.");
-            }
-            set
-            {
-                if (atributos.ContainsKey("pais"))
-                    atributos["pais"] = value;
-                else
-                    atributos.Add("pais", value);
-            }
-        }
-
-        public override string CodigoPostal
-        {
-            get
-            {
-                if (atributos.ContainsKey("codigoPostal"))
-                    return atributos["codigoPostal"];
-                else
-                    throw new Exception("Ubicacion::codigoPostal no puede estar vacio.");
-            }
-            set
-            {
-                if (atributos.ContainsKey("codigoPostal"))
-                    atributos["codigoPostal"] = value;
-                else
-                    atributos.Add("codigoPostal", value);
-            }
-        }
-    }
-
-    public class Domicilio : UbicacionFiscal
-    {
-        public Domicilio() : base()
-        {
-        }
-
-        public Domicilio(string calle, string municipio, string estado, string pais, string codigoPostal)
-           : base(calle, municipio, estado, pais, codigoPostal)
-        { }
-    }
-
-    public class DomicilioFiscal : UbicacionFiscal
-    {
-        public DomicilioFiscal() : base()
-        {
-        }
-
-        public DomicilioFiscal(string calle, string municipio, string estado, string pais, string codigoPostal)
-           : base(calle, municipio, estado, pais, codigoPostal)
-        { }
-    }
-
-    public class ExpedidoEn : UbicacionFiscal
-    {
-        public ExpedidoEn() : base()
-        {
-        }
-
-        public ExpedidoEn(string calle, string municipio, string estado, string pais, string codigoPostal)
-           : base(calle, municipio, estado, pais, codigoPostal)
-        { }
     }
 }

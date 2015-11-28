@@ -16,24 +16,25 @@ namespace IsaRoGaMX.IO
 {
     public class CFDIReader
     {
-        // Esquemas del documento XML
-        private XmlSchemaSet esquemas;
+        // Nodos
+        private Comprobante cfdi;
+
+        private Divisas divisas;
 
         // Documento XML
         private XmlDocument documento;
 
-        // Nodos
-        private Comprobante cfdi;
-
-        private TimbreFiscalDigital timbre;
-        private Nomina nomina;
-        private EstadoDeCuentaCombustible edoCta;
-        private ImpuestosLocales implocal;
         private Donatorias donat;
-        private Divisas divisas;
-        private LeyendasFiscales leyendas;
-        private InstEducativas instEducativas;
 
+        private EstadoDeCuentaCombustible edoCta;
+
+        // Esquemas del documento XML
+        private XmlSchemaSet esquemas;
+        private ImpuestosLocales implocal;
+        private InstEducativas instEducativas;
+        private LeyendasFiscales leyendas;
+        private Nomina nomina;
+        private TimbreFiscalDigital timbre;
         // Referencias
         private Concepto ultimoConcepto;
 
@@ -47,20 +48,64 @@ namespace IsaRoGaMX.IO
         }
 
         /// <summary>
-        /// Lee un archivo XML para generar un objeto Comprobante
+        /// Valida un documento XML de un CFDI
+        /// </summary>
+        /// <param name="cfdi">Documento XML de CFDI</param>
+        /// <param name="xsd">Documento XSD</param>
+        /// <returns></returns>
+        public static bool Validar(string cfdi, string xsd)
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                XmlSchemaSet esq = new XmlSchemaSet();
+                doc.LoadXml(cfdi);
+                esq.Add(XmlSchema.Read(XmlReader.Create(xsd), ValidationCallback));
+                doc.Schemas = esq;
+                doc.Validate((o, e) =>
+                {
+                    throw new Exception("ERROR: " + e.Message);
+                });
+                // Si no ocurre ninguna excepcion es válido
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public virtual void LeerAddenda(XmlNode padre)
+        {
+        }
+
+        /// <summary>
+        /// Valida un Comprobante XML con el XSD especificado
         /// </summary>
         /// <param name="rutaXML">Ruta del archivo XML</param>
-        /// <returns></returns>
-        private Comprobante LeerXML(string rutaXML)
+        /// <param name="rutaXSD">Ruta del archivo XSD</param>
+        public Comprobante LeerXML(string rutaXML, string rutaXSD)
         {
-            // Se crea el documento XML
+            documento = new XmlDocument();
             documento.Load(rutaXML);
+            Validar(rutaXSD);
+            return LeerXML(rutaXML);
+        }
 
-            // Se obtiene el nodo raiz
-            LeerNodos(documento.DocumentElement);
-
-            // Regresamos el objeto comprobante
-            return cfdi;
+        /// <summary>
+        /// Evento que atrapa los errores encontrados en el XML encontrados por el XSD
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private static void ValidationCallback(object sender, ValidationEventArgs args)
+        {
+            switch (args.Severity)
+            {
+                case XmlSeverityType.Warning:
+                    throw new Exception("ADVERTENCIA: " + args.Message);
+                case XmlSeverityType.Error:
+                    throw new Exception("ERROR: " + args.Message);
+            }
         }
 
         /// <summary>
@@ -361,18 +406,21 @@ namespace IsaRoGaMX.IO
         }
 
         /// <summary>
-        /// Valida un Comprobante XML con el XSD especificado
+        /// Lee un archivo XML para generar un objeto Comprobante
         /// </summary>
         /// <param name="rutaXML">Ruta del archivo XML</param>
-        /// <param name="rutaXSD">Ruta del archivo XSD</param>
-        public Comprobante LeerXML(string rutaXML, string rutaXSD)
+        /// <returns></returns>
+        private Comprobante LeerXML(string rutaXML)
         {
-            documento = new XmlDocument();
+            // Se crea el documento XML
             documento.Load(rutaXML);
-            Validar(rutaXSD);
-            return LeerXML(rutaXML);
-        }
 
+            // Se obtiene el nodo raiz
+            LeerNodos(documento.DocumentElement);
+
+            // Regresamos el objeto comprobante
+            return cfdi;
+        }
         /// <summary>
         /// Valida un Comprobante con su respectivo XSD
         /// </summary>
@@ -385,54 +433,6 @@ namespace IsaRoGaMX.IO
             {
                 throw new Exception("ERROR: " + e.Message);
             });
-        }
-
-        /// <summary>
-        /// Valida un documento XML de un CFDI
-        /// </summary>
-        /// <param name="cfdi">Documento XML de CFDI</param>
-        /// <param name="xsd">Documento XSD</param>
-        /// <returns></returns>
-        public static bool Validar(string cfdi, string xsd)
-        {
-            try
-            {
-                XmlDocument doc = new XmlDocument();
-                XmlSchemaSet esq = new XmlSchemaSet();
-                doc.LoadXml(cfdi);
-                esq.Add(XmlSchema.Read(XmlReader.Create(xsd), ValidationCallback));
-                doc.Schemas = esq;
-                doc.Validate((o, e) =>
-                {
-                    throw new Exception("ERROR: " + e.Message);
-                });
-                // Si no ocurre ninguna excepcion es válido
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Evento que atrapa los errores encontrados en el XML encontrados por el XSD
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        private static void ValidationCallback(object sender, ValidationEventArgs args)
-        {
-            switch (args.Severity)
-            {
-                case XmlSeverityType.Warning:
-                    throw new Exception("ADVERTENCIA: " + args.Message);
-                case XmlSeverityType.Error:
-                    throw new Exception("ERROR: " + args.Message);
-            }
-        }
-
-        public virtual void LeerAddenda(XmlNode padre)
-        {
         }
     }
 }

@@ -17,15 +17,14 @@ namespace IsaRoGaMX.CFDI
     public abstract class baseObject
     {
         /// <summary>
-        /// Diccionario de atributos del Nodo XML
-        /// </summary>
-        protected Dictionary<string, string> atributos;
-
-        /// <summary>
         /// Espacio de nombres al que pertenece el Nodo XML
         /// </summary>
         protected string @namespace = string.Empty;
 
+        /// <summary>
+        /// Diccionario de atributos del Nodo XML
+        /// </summary>
+        protected Dictionary<string, string> atributos;
         /// <summary>
         /// Prefijo del espacio de nombres al que pertence el Nodo XML
         /// </summary>
@@ -36,6 +35,25 @@ namespace IsaRoGaMX.CFDI
             atributos = new Dictionary<string, string>();
             this.@namespace = ns;
             this.prefix = prfx;
+        }
+
+        /// <summary>
+        /// Devuelve el conjunto de atributos utilizados por el elemento actual
+        /// </summary>
+        public Dictionary<string, string> Atributos
+        {
+            get { return this.atributos; }
+            set { this.atributos = value; }
+        }
+
+        public string Namespace
+        {
+            get { return this.@namespace; }
+        }
+
+        public string Prefijo
+        {
+            get { return this.prefix; }
         }
 
         /// <summary>
@@ -58,25 +76,6 @@ namespace IsaRoGaMX.CFDI
 
             // Se retorna el elemento
             return elemento;
-        }
-
-        /// <summary>
-        /// Devuelve el conjunto de atributos utilizados por el elemento actual
-        /// </summary>
-        public Dictionary<string, string> Atributos
-        {
-            get { return this.atributos; }
-            set { this.atributos = value; }
-        }
-
-        public string Prefijo
-        {
-            get { return this.prefix; }
-        }
-
-        public string Namespace
-        {
-            get { return this.@namespace; }
         }
     }
 }
