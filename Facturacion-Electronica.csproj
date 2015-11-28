@@ -66,6 +66,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="XML\cfdi-cc_iedu.xml" />
+    <Content Include="XML\cfdi-cc_terceros.xml" />
+    <Content Include="XML\cfdi-cc_vehiculosNuevos.xml" />
+    <Content Include="XML\cfdi-c_aerolineas.xml" />
+    <Content Include="XML\cfdi-c_consumoCombustibles.xml" />
+    <Content Include="XML\cfdi-c_detallista.xml" />
+    <Content Include="XML\cfdi-c_divisas.xml" />
+    <Content Include="XML\cfdi-c_donatarias.xml" />
+    <Content Include="XML\cfdi-c_ecc.xml" />
+    <Content Include="XML\cfdi-c_impuestosLocales.xml" />
+    <Content Include="XML\cfdi-c_leyendasFiscales.xml" />
+    <Content Include="XML\cfdi-c_nomina.xml" />
+    <Content Include="XML\cfdi-c_notarios.xml" />
+    <Content Include="XML\cfdi-c_pagoEnEspecie.xml" />
+    <Content Include="XML\cfdi-c_pfic.xml" />
+    <Content Include="XML\cfdi-c_spei.xml" />
+    <Content Include="XML\cfdi-c_turistaPasajeroExtranjero.xml" />
+    <Content Include="XML\cfdi-c_valesDeDespensa.xml" />
+    <Content Include="XML\cfdi-c_vehiculosUsados.xml" />
     <Content Include="XSLT\AcreditamientoIEPS10.xslt" />
     <Content Include="XSLT\aerolineas.xslt" />
     <Content Include="XSLT\cadenaoriginal_TFD_1_0.xslt" />
@@ -177,5 +196,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
