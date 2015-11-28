@@ -65,6 +65,117 @@
     <Compile Include="IO\CFDIWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="XSLT\AcreditamientoIEPS10.xslt" />
+    <Content Include="XSLT\aerolineas.xslt" />
+    <Content Include="XSLT\cadenaoriginal_TFD_1_0.xslt" />
+    <Content Include="XSLT\certificadodedestruccion.xslt" />
+    <Content Include="XSLT\cfdiregistrofiscal.xslt" />
+    <Content Include="XSLT\consumodecombustibles.xslt" />
+    <Content Include="XSLT\detallista.xslt" />
+    <Content Include="XSLT\Divisas.xslt" />
+    <Content Include="XSLT\donat11.xslt" />
+    <Content Include="XSLT\ecc11.xslt" />
+    <Content Include="XSLT\iedu.xslt" />
+    <Content Include="XSLT\implocal.xslt" />
+    <Content Include="XSLT\leyendasFisc.xslt" />
+    <Content Include="XSLT\nomina11.xslt" />
+    <Content Include="XSLT\notariospublicos.xslt" />
+    <Content Include="XSLT\obrasarteantiguedades.xslt" />
+    <Content Include="XSLT\pagoenespecie.xslt" />
+    <Content Include="XSLT\pfic.xslt" />
+    <Content Include="XSLT\renovacionysustitucionvehiculos.xslt" />
+    <Content Include="XSLT\servicioparcialconstruccion.xslt" />
+    <Content Include="XSLT\spei.xslt" />
+    <Content Include="XSLT\terceros11.xslt" />
+    <Content Include="XSLT\TuristaPasajeroExtranjero.xslt" />
+    <Content Include="XSLT\valesdedespensa.xslt" />
+    <Content Include="XSLT\vehiculousado.xslt" />
+    <Content Include="XSLT\ventavehiculos.xslt" />
+    <Content Include="XSLT\ventavehiculos11.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="XSD\AcreditamientoIEPS10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\aerolineas.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\certificadodedestruccion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\cfdiregistrofiscal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\consumodecombustibles.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\detallista.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Divisas.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\donat11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\ecc11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\iedu.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\implocal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\leyendasFisc.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\nomina11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\notariospublicos.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\obrasarteantiguedades.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\pagoenespecie.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\pfic.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\renovacionysustitucionvehiculos.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\servicioparcialconstruccion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\spei.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\terceros11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\TimbreFiscalDigital.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\TuristaPasajeroExtranjero.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\valesdedespensa.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\vehiculousado.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\ventavehiculos.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\ventavehiculos11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

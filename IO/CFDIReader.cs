@@ -145,6 +145,9 @@ namespace IsaRoGaMX.IO
                                 retencion.Atributos = leerAtributos(padre);
                                 cfdi.Impuestos.Retenciones.Agregar(retencion);
                                 break;
+                            case "Addenda":
+                                LeerAddenda(padre);
+                                break;
                         }
                         break;
                     }
@@ -365,19 +368,26 @@ namespace IsaRoGaMX.IO
             return false;
          }
       }
-      
-      /// <summary>
-      /// Evento que atrapa los errores encontrados en el XML encontrados por el XSD
-      /// </summary>
-      /// <param name="sender"></param>
-      /// <param name="args"></param>
-      static void ValidationCallback(object sender, ValidationEventArgs args) {
-         switch(args.Severity) {
-            case XmlSeverityType.Warning:
-               throw new Exception("ADVERTENCIA: " + args.Message);
-            case XmlSeverityType.Error:
-               throw new Exception("ERROR: " + args.Message);
-         }
-      }
+
+        /// <summary>
+        /// Evento que atrapa los errores encontrados en el XML encontrados por el XSD
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        static void ValidationCallback(object sender, ValidationEventArgs args)
+        {
+            switch (args.Severity)
+            {
+                case XmlSeverityType.Warning:
+                    throw new Exception("ADVERTENCIA: " + args.Message);
+                case XmlSeverityType.Error:
+                    throw new Exception("ERROR: " + args.Message);
+            }
+        }
+
+        public virtual void LeerAddenda(XmlNode padre)
+        {
+
+        }
    }
 }
